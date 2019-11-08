@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/08 15:35:10 by cormund          ###   ########.fr       */
+/*   Created: 2019/11/08 14:37:03 by cormund           #+#    #+#             */
+/*   Updated: 2019/11/08 15:40:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "lem_in.h"
 
-# include "libft.h"
-
-# define LI_STDIN 0
-# define LI_NEXT_LINE ""
-
-typedef struct		s_input
+void		read_input(t_input **first_input)
 {
-	char			*line;
-	struct s_input	*next;
-}					t_input;
+	t_input	*input;
 
-typedef struct		s_lem_in
-{
-	t_input			*firs_line;
-}					t_lem_in;
-
-void				read_input(t_input **beg_input);
-
-# endif
+	*first_input = (t_input *)ft_memalloc(sizeof(t_input));
+	if (!*first_input)
+		error(strerror(errno));
+	input = *first_input;
+	while ((input->line = gnl(LI_STDIN)))
+	{
+		input->next = (t_input *)ft_memalloc(sizeof(t_input));
+		if (!input->next)
+			error(strerror(errno));
+		input = input->next;
+	}
+}

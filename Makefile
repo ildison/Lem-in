@@ -6,15 +6,15 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/08 12:55:01 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/08 15:25:42 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lem-in
 LIBFT := libft.a
-HEADERS := libft.h
+HEADERS := libft.h lem_in.h
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror -O3 -g
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
@@ -27,11 +27,12 @@ DIR_SRC := src/$(NAME)
 # SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2 -framework SDL2_ttf
 
 vpath %.c $(DIR_SRC)
-vpath %.o $(DIR_BIN) $(DIR_BIN)/$(NAME)
+vpath %.o $(DIR_BIN)/$(NAME)
 vpath %.h $(DIR_INCLUDE)
 vpath %.a $(DIR_LIBFT)
 
-SRC_NAME := 
+SRC_NAME := lem-in.c\
+			read_input.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\
@@ -45,7 +46,7 @@ OBJ_NAME := $(SRC_NAME:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_NAME)
-	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/, $(addprefix $(NAME)/, $(OBJ_NAME))) -lft -L $(DIR_LIBFT)-o $@
+	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/, $(addprefix $(NAME)/, $(OBJ_NAME))) -lft -L $(DIR_LIBFT) -o $@
 	@printf "\r\e[J\e[32m$@\e[0m done!\n\e[?25h"
 
 $(OBJ_NAME): %.o: %.c $(HEADERS)
