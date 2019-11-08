@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:17:44 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/11/08 12:46:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/08 13:22:56 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ void				ft_ustrdel(unsigned char **str);
 char				*ft_skipfirst(char *str, int sym);
 void				ft_free_2x_mas(void **mas);
 char				*gnl(int fd);
+void				error(const char *error_msg);
 
 #endif
