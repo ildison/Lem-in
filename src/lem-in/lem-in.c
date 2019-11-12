@@ -28,7 +28,8 @@ int   			main()
 	li = (t_lem_in *)ft_memalloc(sizeof(t_lem_in));
 	if (!li)
 		error(strerror(errno));
-	read_input(&li->firs_line);
-	print_input(li->firs_line);
+	read_input(&li->first_line);
+	print_input(li->first_line);
+	parsing(li);
 	return (0);
 }

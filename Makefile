@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/08 15:25:42 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/12 16:02:23 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ vpath %.h $(DIR_INCLUDE)
 vpath %.a $(DIR_LIBFT)
 
 SRC_NAME := lem-in.c\
-			read_input.c
+			read_input.c\
+			parsing.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\
