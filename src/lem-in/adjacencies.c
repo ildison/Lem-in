@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/13 15:26:14 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/13 16:06:36 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static t_vertex		**hash_table(t_vertex *vertex, int count_vertex)
 		vertex = vertex->next;
 		++i;
 	}
+	return (hash_table);
 }
 
 static char			**matrix_adj(t_link *link, int count_vertex)
@@ -59,43 +60,58 @@ static char			**matrix_adj(t_link *link, int count_vertex)
 	return (matrix_adj);
 }
 
-static int			get_count_links(char *links)
+static int			get_count_links(char *links, int count_vertexs)
 {
 	int				count_links;
+	int				i;
 
 	count_links = 0;
-	while (*links)
+	i = 0;
+	while (i < count_vertexs)
 	{
-		count_links += *links;
-		++links;
+		count_links += links[i];
+		++i;
+	}
+	return (count_links);
+}
+
+static void			get_adjacencies(t_lem_in *li, t_vertex **vertex, char *links)
+{
+	int				i;
+
+	i = 0;
+	while (i < li->count_vertexs)
+	{
+		if (links[i] == LI_TRUE)
+		{
+			*vertex = li->hash_table[i];
+			++vertex;
+		}
+		++i;
 	}
 }
 
-static void			get_adjacencies(t_vertex **vertex, char *links)
-{
-	
-}
-
-static t_link_adj	*list_adj(t_lem_in *li, char **matrix_adj)
+static t_link_adj	*list_adj(t_lem_in *li)
 {
 	t_link_adj		*link_adj;
-	int				count_liks;
+	int				count_links;
 	int				i;
 
-	link_adj = (t_link_adj *)malloc(sizeof(t_link_adj) * (li->count_vertexs + 1));
+	link_adj = (t_link_adj *)malloc(sizeof(t_link_adj) * (li->count_vertexs));
 	if (!link_adj)
 		error(strerror(errno));
 	i = 0;
 	while (i < li->count_vertexs)
 	{
-		count_liks = get_count_links(li->matrix_adj[i]);
+		count_links = get_count_links(li->matrix_adj[i], li->count_vertexs);
 		link_adj[i].vertex = li->hash_table[i];
-		link_adj[i].adj = ft_memalloc(sizeof(t_vertex *) * (count_liks + 1));
+		link_adj[i].adj = ft_memalloc(sizeof(t_vertex *) * (count_links + 1));
 		if (!link_adj[i].adj)
 			error(strerror(errno));
-		get_adjacencies(link_adj[i].adj, li->matrix_adj[i]);
+		get_adjacencies(li, link_adj[i].adj, li->matrix_adj[i]);
 		++i;
 	}
+	return (link_adj);
 }
 
 void 				adjacencies(t_lem_in *li)
@@ -103,5 +119,5 @@ void 				adjacencies(t_lem_in *li)
 	li->count_vertexs = id_increment(li->start);
 	li->hash_table = hash_table(li->start, li->count_vertexs);
 	li->matrix_adj = matrix_adj(li->first_link, li->count_vertexs);
-	li->link_adj = 
+	li->link_adj = list_adj(li);
 }

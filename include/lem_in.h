@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/13 11:42:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/13 14:14:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,19 @@ typedef struct		s_link
 	struct s_link	*next;
 }					t_link;
 
+typedef struct		s_link_adj
+{
+	t_vertex		*vertex;
+	t_vertex		**adj;
+}					t_link_adj;
+
 typedef struct		s_lem_in
 {
 	t_input			*first_line;
 	t_vertex		*start;
 	t_link			*first_link;
+	t_vertex		**hash_table;
+	t_link_adj		*link_adj;
 	char			**matrix_adj;
 	int				count_ants;
 	int				count_vertexs;

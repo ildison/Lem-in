@@ -23,20 +23,64 @@ static void		print_input(t_input *in)
 
 static void		print_vertex(t_vertex *vertex)
 {
+	printf("vertexs:\n\nname => id\n");
 	while (vertex)
 	{
-		ft_putendl(vertex->name);
+		printf("%s => %d\n", vertex->name, vertex->id);
 		vertex = vertex->next;
 	}
 }
 
 static void		print_links(t_link *link)
 {
+	printf("\nlinks:\n\n");
 	while (link)
 	{
-		ft_printf("%s - %s\n", link->vertex_a->name, link->vertex_b->name);
+		ft_printf("%d - %d\n", link->vertex_a->id, link->vertex_b->id);
 		link = link->next;
 	}
+}
+
+static void		print_matrix_adj(char **matrix, int count_vertexs)
+{
+	int			i;
+	int			j;
+
+	printf("\nmatrix_adj:\n\n ");
+	i = 0;
+	while (i < count_vertexs)
+		printf("  %d", i++);
+	j = 0;
+	while (j < count_vertexs)
+	{
+		printf("\n%d", j);
+		i = 0;
+		while (i < count_vertexs)
+			printf("  %d", matrix[j][i++]);
+		++j;
+	}
+	printf("\n");
+}
+
+static void		print_link_adj(t_link_adj *link_adj, int count_vertexs)
+{
+	int			i;
+	t_vertex	**linked;
+
+	printf("\nlink_adj:\n ");
+	i = 0;
+	while (i < count_vertexs)
+	{
+		printf("\n%d ", link_adj[i].vertex->id);
+		linked = link_adj[i].adj;
+		while (*linked)
+		{
+			printf("%d-", (*linked)->id);
+			++linked;
+		}
+		++i;
+	}
+	printf("\n");
 }
 
 int   			main()
@@ -49,8 +93,13 @@ int   			main()
 	read_input(&li->first_line);
 	print_input(li->first_line);
 	parsing(li);
+	adjacencies(li);
+
+	//? TEST PRINTS
 	print_vertex(li->start);
 	print_links(li->first_link);
+	print_matrix_adj(li->matrix_adj, li->count_vertexs);
+	print_link_adj(li->link_adj, li->count_vertexs);
 
 	return (0);
 }
