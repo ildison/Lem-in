@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/12 17:39:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/13 11:42:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 
 # define LI_STDIN 0
-# define LI_NEXT_LINE ""
 # define LI_TRUE 1
 # define LI_START 1
 # define LI_END 2
@@ -40,6 +39,7 @@ typedef struct		s_pnt
 typedef struct		s_vertex
 {
 	char			*name;
+	int				id;
 	t_pnt			coord;
 	char			start;
 	char			end;
@@ -58,10 +58,13 @@ typedef struct		s_lem_in
 	t_input			*first_line;
 	t_vertex		*start;
 	t_link			*first_link;
+	char			**matrix_adj;
 	int				count_ants;
+	int				count_vertexs;
 }					t_lem_in;
 
 void				read_input(t_input **beg_input);
 void				parsing(t_lem_in *li);
+void 				adjacencies(t_lem_in *li);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/13 11:38:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/13 11:41:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static char	**matrix_adj(t_link *link, int count_vertex)
 		error(strerror(errno));
 	while (link)
 	{
-		
+		matrix_adj[link->vertex_a->id][link->vertex_b->id] = LI_TRUE;
+		matrix_adj[link->vertex_b->id][link->vertex_a->id] = LI_TRUE;
+		link = link->next;
 	}
 }
 
