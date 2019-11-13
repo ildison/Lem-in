@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/06 14:32:05 by ksharlen          #+#    #+#              #
-#    Updated: 2019/11/08 13:24:02 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/13 11:36:52 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,8 @@ SRC_LIBFT := ft_arrfind.c\
 				ft_skipfirst.c\
 				ft_free2xmas.c\
 				ft_gnl.c\
-				error.c
+				error.c\
+				ft_memalloc_char_2xmas.c
 
 SRCS := $(SRC_LIBFT) $(SRCS_FT_PRINTF)
 
