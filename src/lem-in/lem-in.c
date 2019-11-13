@@ -21,6 +21,24 @@ static void		print_input(t_input *in)
 	}
 }
 
+static void		print_vertex(t_vertex *vertex)
+{
+	while (vertex)
+	{
+		ft_putendl(vertex->name);
+		vertex = vertex->next;
+	}
+}
+
+static void		print_links(t_link *link)
+{
+	while (link)
+	{
+		ft_printf("%s - %s\n", link->vertex_a->name, link->vertex_b->name);
+		link = link->next;
+	}
+}
+
 int   			main()
 {
 	t_lem_in	*li;
@@ -31,5 +49,8 @@ int   			main()
 	read_input(&li->first_line);
 	print_input(li->first_line);
 	parsing(li);
+	print_vertex(li->start);
+	print_links(li->first_link);
+
 	return (0);
 }
