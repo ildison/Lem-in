@@ -1,0 +1,47 @@
+1
+##start
+start 0 0
+A 1 1
+B 2 2
+C 3 3
+D 4 4
+E 5 5
+F 6 6
+G 7 7
+##end
+end 9 9
+start-A
+start-B
+start-C
+start-D
+start-E
+start-F
+start-G
+A-B
+A-C
+A-D
+A-E
+A-F
+A-G
+A-end
+B-C
+B-D
+B-E
+B-F
+B-G
+B-end
+C-D
+C-E
+C-F
+C-G
+C-end
+D-E
+D-F
+D-G
+D-end
+E-F
+E-G
+E-end
+F-G
+F-end
+G-end

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/13 16:06:36 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/14 12:32:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ static t_link_adj	*list_adj(t_lem_in *li)
 
 void 				adjacencies(t_lem_in *li)
 {
+	// printf("HERE\n");
 	li->count_vertexs = id_increment(li->start);
 	li->hash_table = hash_table(li->start, li->count_vertexs);
 	li->matrix_adj = matrix_adj(li->first_link, li->count_vertexs);

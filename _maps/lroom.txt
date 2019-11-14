@@ -1,0 +1,10 @@
+13
+##start
+start 0 0
+roomLLL 1 1
+Lroom 2 2
+##end
+end 3 3
+roomLLL-Lroom
+start-roomLLL
+Lroom-end

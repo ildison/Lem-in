@@ -91,9 +91,9 @@ int   			main()
 	if (!li)
 		error(strerror(errno));
 	read_input(&li->first_line);
-	print_input(li->first_line);
 	parsing(li);
 	adjacencies(li);
+	print_input(li->first_line);
 
 	//? TEST PRINTS
 	print_vertex(li->start);
