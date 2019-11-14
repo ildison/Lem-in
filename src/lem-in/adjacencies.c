@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/14 21:17:51 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/14 21:35:55 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static t_link_adj	*list_adj(t_lem_in *li)
 	{
 		count_links = get_count_links(li->matrix_adj[i], li->count_vertexs);
 		link_adj[i].vertex = li->hash_table[i];
-		link_adj[i].vertex->count_edges = count_links;
+		link_adj[i].count_edges = count_links;
 		link_adj[i].adj = ft_memalloc(sizeof(t_vertex *) * (count_links + 1));
 		if (!link_adj[i].adj)
 			error(strerror(errno));
