@@ -83,7 +83,12 @@ static void		print_link_adj(t_link_adj *link_adj, int count_vertexs)
 	printf("\n");
 }
 
-int   			main()
+// static void		free_lem_in(t_lem_in **li)
+// {
+
+// }
+
+int   			main(void)
 {
 	t_lem_in	*li;
 
@@ -95,11 +100,13 @@ int   			main()
 	parsing(li);
 	adjacencies(li);
 
-	//? TEST PRINTS
+	/*
+	** TEST PRINTS
+	*/
 	print_vertex(li->start);
 	print_links(li->first_link);
 	print_matrix_adj(li->matrix_adj, li->count_vertexs);
 	print_link_adj(li->link_adj, li->count_vertexs);
-
+	// free_lem_in(&li);
 	return (0);
 }

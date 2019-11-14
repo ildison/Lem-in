@@ -13,7 +13,7 @@
 NAME := lem-in
 LIBFT := libft.a
 HEADERS := libft.h lem_in.h
-CC := gcc
+CC := clang
 CFLAGS := -Wall -Wextra -Werror -O3 -g
 REMOVE := /bin/rm -rf
 DIR_BIN := bin

@@ -1,0 +1,7 @@
+*.o
+.vscode
+.DS_Store
+.idea
+*.swp
+bin
+lem-in.dSYM/
