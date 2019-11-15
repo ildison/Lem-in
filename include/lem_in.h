@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/15 15:58:02 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/15 18:31:33 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct						s_vertex
 	int						dist;
 	bool					marked;
 	bool					visited;
+	bool					duplicate;
 	t_link					*link;
 	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
@@ -87,6 +88,7 @@ struct						s_lem_in
 {
 	t_input					*first_line;
 	t_vertex				*start;
+	t_vertex				*end;
 	t_link					*first_link;
 	t_vertex				**hash_table;
 	t_link_adj				*link_adj;
@@ -111,7 +113,7 @@ struct						s_path
 	t_queue					*endlist;
 	t_path					*next;
 	int						index;
-	int						steps;
+	int						step;
 	int						size;
 	bool					checked;
 };

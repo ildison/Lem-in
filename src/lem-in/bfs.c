@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/15 17:07:46 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/15 19:00:11 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 **	Эта функция удаляет вершину из очереди
 */
 
-static void		pop_queue(t_queue **queue)
+void			pop_queue(t_queue **queue)
 {
 	t_queue		*head;
 
@@ -34,14 +34,35 @@ static void		pop_queue(t_queue **queue)
 */
 
 
-static void		enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
+void			begin_enqueue(t_queue **queue, t_vertex *vertex)
 {
 	t_queue		*new;
 
 	if (!*queue)
 	{
 		if (!(*queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			exit(0);
+			error(strerror(errno));
+		(*queue)->vertex = vertex;
+	}
+	else
+	{
+		if (!(new = (t_queue *)ft_memalloc(sizeof(t_queue))))
+			error(strerror(errno));
+		(*queue)->prev = new;
+		new->vertex = vertex;
+		new->next = *queue;
+		*queue = new;
+	}
+}
+
+void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
+{
+	t_queue		*new;
+
+	if (!*queue)
+	{
+		if (!(*queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
+			error(strerror(errno));
 		(*queue)->vertex = vertex;
 		*last = *queue;
 	}
@@ -55,7 +76,7 @@ static void		enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 			new = new->next;
 		}
 		if (!(new = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			exit(0);
+			error(strerror(errno));
 		new->prev = *last;
 		new->vertex = vertex;
 		(*last)->next = new;
@@ -67,7 +88,7 @@ static void		enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 **	Эта функция будет высчитывать вес вершины (пути)
 */
 
-static int		calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
+int				calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
 {
 	t_link		*link;
 	t_link_adj	adj;
@@ -92,6 +113,8 @@ static int		calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
 				adj.adj[i]->dist = adj.vertex->dist + 1;
 				adj.adj[i]->neighbor = adj.vertex->start != LI_TRUE ? adj.vertex : NULL;
 			}
+			else if (adj.adj[i]->marked)
+				adj.adj[i]->duplicate = true;
 			++i;
 		}
 	}
@@ -109,7 +132,7 @@ int				bfs(t_lem_in *lem_in, t_path **path)
 	enqueue(&queue, lem_in->link_adj[0].vertex, last);
 	lem_in->start->dist = 0;
 	if (!calc_dist(queue, lem_in->link_adj, last))
-		error(strerror(errno));
-	
-	
+		error(strerror(errno)); // ????
+	create_path(lem_in, path);
+	return (0); // ?????
 }
