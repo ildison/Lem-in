@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/14 22:38:57 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/15 17:07:46 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,25 @@
 #define COUNT_END lem_in->link_adj[lem_in->count_vertexs - 1].count_edges
 
 /*
+**	Эта функция удаляет вершину из очереди
+*/
+
+static void		pop_queue(t_queue **queue)
+{
+	t_queue		*head;
+
+	head = *queue;
+	*queue = (*queue)->next;
+	free(head);
+	head = NULL;
+}
+
+/*
 **	Эта функция добавляют вершину в очередь
 */
 
 
-void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
+static void		enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 {
 	t_queue		*new;
 
@@ -53,22 +67,35 @@ void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 **	Эта функция будет высчитывать вес вершины (пути)
 */
 
-int				calc_dist(t_queue *queue, t_vertex *vertex, t_queue *last)
+static int		calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
 {
 	t_link		*link;
+	t_link_adj	adj;
 	int			weight;
 	int			i;
-	i = 0;
-	weight = 0;
+
 	while (queue)
 	{
-		link = vertex->link;
-		while (link)
+		adj = link_adj[queue->vertex->id]; 
+		pop_queue(&queue);
+		i = 0;
+		while (i < adj.count_edges)
 		{
-			weight = vertex->start == LI_TRUE ? 1 : weight;
-			
+			if (adj.adj[i]->end == LI_TRUE)
+			{
+				// add_neighbor(adj.vertex, ...);
+			}
+			else if (adj.adj[i] && !adj.adj[i]->marked)
+			{
+				enqueue(&queue, adj.adj[i], last);
+				adj.adj[i]->marked = true;
+				adj.adj[i]->dist = adj.vertex->dist + 1;
+				adj.adj[i]->neighbor = adj.vertex->start != LI_TRUE ? adj.vertex : NULL;
+			}
+			++i;
 		}
 	}
+	return (1);
 }
 
 int				bfs(t_lem_in *lem_in, t_path **path)
@@ -80,7 +107,8 @@ int				bfs(t_lem_in *lem_in, t_path **path)
 	last = NULL;
 	lem_in->count_path = COUNT_START < COUNT_END ? COUNT_START : COUNT_END;
 	enqueue(&queue, lem_in->link_adj[0].vertex, last);
-	if (!calc_dist(queue, lem_in->link_adj[0].adj, last))
+	lem_in->start->dist = 0;
+	if (!calc_dist(queue, lem_in->link_adj, last))
 		error(strerror(errno));
 	
 	

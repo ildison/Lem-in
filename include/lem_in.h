@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/14 22:32:30 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/15 15:58:02 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ struct						s_vertex
 	bool					marked;
 	bool					visited;
 	t_link					*link;
+	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
 };
 
