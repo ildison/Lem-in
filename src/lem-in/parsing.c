@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/14 12:44:17 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/14 13:18:08 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 	if (!link || !split_line)
 		error(strerror(errno));
 	link->vertex_a = get_vertex(vertex, split_line[0]);
-				printf("HERE\n");
 	link->vertex_b = get_vertex(vertex, split_line[1]);
 	ft_free_2x_mas((void **)split_line);
 	if (*first_link)
@@ -109,9 +108,7 @@ void			parsing(t_lem_in *li)
 				add_vertex(&li->start, vertex, LI_VERTEX);
 			}
 			else if (input->type == LI_LINK)
-			{
 				add_new_link(&li->first_link, li->start, input->line);
-			}
 			input = input->next;
 		}
 }
