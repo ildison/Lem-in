@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/15 19:00:11 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/17 02:33:59 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			pop_queue(t_queue **queue)
 }
 
 /*
-**	Эта функция добавляют вершину в очередь
+**	Эта функция добавляют вершину в начало очереди
 */
 
 
@@ -54,6 +54,10 @@ void			begin_enqueue(t_queue **queue, t_vertex *vertex)
 		*queue = new;
 	}
 }
+
+/*
+**	Эта функция добавляют вершину в конец очереди
+*/
 
 void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 {
@@ -132,7 +136,7 @@ int				bfs(t_lem_in *lem_in, t_path **path)
 	enqueue(&queue, lem_in->link_adj[0].vertex, last);
 	lem_in->start->dist = 0;
 	if (!calc_dist(queue, lem_in->link_adj, last))
-		error(strerror(errno)); // ????
+		error(strerror(errno));
 	create_path(lem_in, path);
-	return (0); // ?????
+	return (0);
 }

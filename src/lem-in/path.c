@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:10:51 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/17 02:25:25 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/17 02:39:31 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,16 @@ void			new_path(t_lem_in *lem_in, t_path **path)
 	}
 }
 
+void			pop_vertex_links(t_vertex *vertex)
+{
+	
+}
+
 void			pop_dup(t_vertex *vertex)
 {
 	t_link		*link;
+
+	pop_vertex_links(vertex);
 
 	
 }
@@ -71,11 +78,11 @@ int				create_path(t_lem_in *lem_in, t_path **path)
 	{
 		if (!(*path = (t_path *)ft_memalloc(sizeof(t_path))))
 			error(strerror(errno));
-		new_path(lem_in, path);
 		(*path)->size = 1;
+		new_path(lem_in, path);
 		vertex_links(*path);
 		pop_duplicates(*path);
-		if (lem_in->count_path == 1 || lem_in->count_path == 1)
+		if (lem_in->count_path == 1 || lem_in->count_ants == 1)
 			return (0);
 		return (1);
 	}
