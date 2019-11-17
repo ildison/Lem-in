@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 02:27:47 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/18 01:53:57 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/18 01:58:49 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,9 @@ static int		valid_vertexs(t_input **input)
 	return (vertexs);
 }
 
-
-int             get_links(t_lem_in *lem_in, int count_vertexs)
-{
-    lem_in->hash_table = hash_table(lem_in->start, count_vertexs);
-    
-}
-
 int             validation(t_lem_in *lem_in)
 {
     if (!(lem_in->count_vertexs = valid_vertexs(&lem_in->input))
-        || !get_links(lem_in, lem_in->count_vertexs)
-        || !valid_links()
         || !breadth_search(lem_in, &lem_in->paths))
         return (free_lem_in(&lem_in));
     return (1);
