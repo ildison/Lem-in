@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/18 01:57:25 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/18 02:00:44 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ int							hash(char *name, int count_vertexs);
 int							add_new_link(char *n1, char *n2,  t_hash_table *hash_table, int count_vertexs);
 void						link_vertexs(t_vertex *v1, t_vertex *v2);
 t_link						*make_link(t_vertex *v1, char *n2);
+
+int             			validation(t_lem_in *lem_in);
 
 int							breadth_search(t_lem_in *lem_in, t_path **path);
 int							count_paths(t_lem_in *li);
