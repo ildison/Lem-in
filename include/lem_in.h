@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/17 01:26:31 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/17 02:46:58 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ struct						s_vertex
 
 struct						s_link
 {
-	t_vertex				*vertex_a;
-	t_vertex				*vertex_b;
+	t_vertex				*vertex;
 	bool					block;
 	int						weight;
 	struct s_link			*next;
@@ -123,6 +122,8 @@ struct						s_path
 	int						size;
 	bool					checked;
 };
+
+int							create_path(t_lem_in *lem_in, t_path **path);
 
 int							bfs(t_lem_in *lem_in, t_path **path);
 

@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:10:51 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/17 02:39:31 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/17 03:07:08 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,50 @@ void			new_path(t_lem_in *lem_in, t_path **path)
 
 void			pop_vertex_links(t_vertex *vertex)
 {
-	
+	t_link		*new;
+	t_link		*old;
+	t_link		*tmp;
+
+	new = vertex->link;
+	tmp = NULL;
+	if (new->vertex->id == vertex->id)
+	{
+		tmp = vertex->link;
+		vertex->link = vertex->link->next;
+	}
+	else
+		while (new)
+		{
+			old = new;
+			if (new->next->vertex->id == vertex->id)
+			{
+				tmp = new->next;
+				old->next = tmp->next;
+				break ;
+			}
+			new = new->next;
+		}
+	free(tmp);
+}
+
+void			new_links(t_vertex *vertex)
+{
+	t_link		*new;
+	t_link		*old;
+
+	old = vertex->link;
+	while (old)
+	{
+		new = old->vertex->link;
+		while (new)
+		{
+			if (new->vertex->id == vertex->id &&
+				new->vertex != vertex)
+				new->vertex = vertex;
+			new = new->next;
+		}
+		old = old->next;
+	}
 }
 
 void			pop_dup(t_vertex *vertex)
@@ -43,8 +86,10 @@ void			pop_dup(t_vertex *vertex)
 	t_link		*link;
 
 	pop_vertex_links(vertex);
-
-	
+	link = vertex->link;
+	while (link && link->next)
+		link = link->next;
+	new_links(vertex);
 }
 
 void			pop_duplicates(t_path *path)

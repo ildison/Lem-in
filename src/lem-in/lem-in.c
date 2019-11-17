@@ -31,15 +31,6 @@ static void		print_vertex(t_vertex *vertex)
 	}
 }
 
-static void		print_links(t_link *link)
-{
-	printf("\nlinks:\n\n");
-	while (link)
-	{
-		ft_printf("%d - %d\n", link->vertex_a->id, link->vertex_b->id);
-		link = link->next;
-	}
-}
 
 static void		print_matrix_adj(char **matrix, int count_vertexs)
 {
@@ -99,12 +90,11 @@ int   			main(void)
 	print_input(li->first_line);
 	parsing(li);
 	adjacencies(li);
-
+	validation(li);
 	/*
 	** TEST PRINTS
 	*/
 	print_vertex(li->start);
-	print_links(li->first_link);
 	print_matrix_adj(li->matrix_adj, li->count_vertexs);
 	print_link_adj(li->link_adj, li->count_vertexs);
 	// free_lem_in(&li);
