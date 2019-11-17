@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:37:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/12 17:08:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/18 01:20:44 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int             check_line(char *line)
+static int		get_type(char *line)
 {
     if (*line == '#')
     {
@@ -33,20 +33,22 @@ int             check_line(char *line)
 	return (6);
 }
 
-void		read_input(t_input **first_input)
+void			read_input(t_input **input)
 {
-	t_input	*input;
+	t_input		*new;
+	t_input		*tmp;
 
-	*first_input = (t_input *)ft_memalloc(sizeof(t_input));
-	if (!*first_input)
+	*input = (t_input *)ft_memalloc(sizeof(t_input));
+	if (!*input)
 		error(strerror(errno));
-	input = *first_input;
-	while ((input->line = gnl(LI_STDIN)))
+	new = *input;
+	while ((new->line = gnl(LI_STDIN)))
 	{
-		input->type = check_line(input->line);
-		input->next = (t_input *)ft_memalloc(sizeof(t_input));
-		if (!input->next)
+		tmp = new;
+		new->type = get_type(new->line);
+		if (!(new->next = (t_input *)ft_memalloc(sizeof(t_input))))
 			error(strerror(errno));
-		input = input->next;
+		new = new->next;
+		new->back = tmp;
 	}
 }
