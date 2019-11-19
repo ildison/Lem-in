@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/15 18:31:33 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/18 15:29:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_link_adj	t_link_adj;
 typedef struct s_lem_in		t_lem_in;
 typedef struct s_queue		t_queue;
 typedef struct s_path		t_path;
+typedef struct s_path		t_paths;
 
 struct						s_input
 {
@@ -61,6 +62,7 @@ struct						s_vertex
 	int						id;
 	int						dist;
 	bool					marked;
+	bool					path;
 	bool					visited;
 	bool					duplicate;
 	t_link					*link;
@@ -116,6 +118,12 @@ struct						s_path
 	int						step;
 	int						size;
 	bool					checked;
+};
+
+struct						s_paths
+{
+	t_vertex				*vertex;
+	t_paths					*next;
 };
 
 void						read_input(t_input **beg_input);

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/15 11:24:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/18 14:06:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		add_vertex(t_vertex **start, t_vertex *vertex, int vertex_type)
 
 static t_vertex	*get_vertex(t_vertex *vertex, char *name)
 {
-	while (!ft_strequ(vertex->name, name))
+	while (vertex && !ft_strequ(vertex->name, name))
 	{
 		vertex = vertex->next;
 		while (vertex && *vertex->name != *name)
