@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/20 16:55:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/20 17:05:20 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static void			list_adj(t_lem_in *li)
 			error(strerror(errno));
 		adj->count_edges = count_links;
 		get_adjacencies(li, adj->adj, li->matrix_adj[i]);
-		li->list_adj[i] = adj;
+		li->list_adj[i]->adj = adj;
 		++i;
 	}
 }

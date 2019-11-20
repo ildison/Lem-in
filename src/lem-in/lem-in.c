@@ -62,18 +62,20 @@ static void		print_matrix_adj(char **matrix, int count_vertexs)
 	printf("\n");
 }
 
-static void		print_link_adj(t_link_adj *link_adj, int count_vertexs)
+static void		print_link_adj(t_vertex **link_adj, int count_vertexs)
 {
 	int			i;
+	int			j;
 	t_vertex	**linked;
 
 	printf("\nlink_adj:\n ");
 	i = 0;
 	while (i < count_vertexs)
 	{
-		printf("\n%d ", link_adj[i].vertex->id);
-		linked = link_adj[i].adj;
-		while (*linked)
+		printf("\n%d ", link_adj[i]->id);
+		linked = link_adj[i]->adj->adj;
+		j =  link_adj[i]->adj->count_edges;
+		while (j--)
 		{
 			printf("%d-", (*linked)->id);
 			++linked;
@@ -106,7 +108,7 @@ int   			main(void)
 	print_vertex(li->start);
 	print_links(li->first_link);
 	print_matrix_adj(li->matrix_adj, li->count_vertexs);
-	print_link_adj(li->link_adj, li->count_vertexs);
+	print_link_adj(li->list_adj, li->count_vertexs);
 	// free_lem_in(&li);
 	return (0);
 }
