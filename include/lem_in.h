@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/18 15:29:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/20 16:50:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ struct						s_pnt
 
 struct						s_vertex
 {
+	t_link_adj				*adj;
 	t_pnt					coord;
+	int						id;
+	int						dist;
 	char					*name;
 	char					start;
 	char					end;
-	int						id;
-	int						dist;
 	bool					marked;
 	bool					path;
 	bool					visited;
 	bool					duplicate;
-	t_link					*link;
 	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
 };
@@ -74,15 +74,14 @@ struct						s_link
 {
 	t_vertex				*vertex_a;
 	t_vertex				*vertex_b;
-	bool					block;
-	int						weight;
 	struct s_link			*next;
 };
 
 struct						s_link_adj
 {
-	t_vertex				*vertex;
 	t_vertex				**adj;
+	bool					*inverse_edges;
+	int						weight;
 	int						count_edges;
 };
 
@@ -91,8 +90,9 @@ struct						s_lem_in
 	t_input					*first_line;
 	t_vertex				*start;
 	t_vertex				*end;
-	t_link					*first_link;
 	t_vertex				**hash_table;
+	t_vertex				**list_adj;
+	t_link					*first_link;
 	t_link_adj				*link_adj;
 	char					**matrix_adj;
 	int						count_ants;
