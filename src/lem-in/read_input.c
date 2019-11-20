@@ -12,26 +12,22 @@
 
 #include "lem_in.h"
 
-/*
-**	1 - start, 2 - end, 3 - comment, 4 - vertex, 5 - edges, 6 - ants or trash
-*/
-
 int             check_line(char *line)
 {
     if (*line == '#')
     {
        if (ft_strequ(line, "##start"))
-			return (1);
+			return (LI_START);
 		if (ft_strequ(line, "##end"))
-			return (2);
-		return (3);
+			return (LI_END);
+		return (LI_COMMENT);
     }
 	while (*line)
 	{
 		if (*line == ' ')
-			return (4);
+			return (LI_VERTEX);
 		if (*line == '-')
-			return (5);
+			return (LI_LINK);
 		++line;
 	}
 	return (6);

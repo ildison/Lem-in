@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
+#    By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/13 11:44:41 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/15 18:46:50 by vmormont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lem-in
 LIBFT := libft.a
 HEADERS := libft.h lem_in.h
-CC := gcc
+CC := clang
 CFLAGS := -Wall -Wextra -Werror -O3 -g
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
@@ -34,7 +34,7 @@ vpath %.a $(DIR_LIBFT)
 SRC_NAME := lem-in.c\
 			read_input.c\
 			parsing.c\
-			adjacencies.c
+			adjacencies.c # bfs.c path.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\
