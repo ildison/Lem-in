@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   suurballe.c                                        :+:      :+:    :+:   */
+/*   suurballe->c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <cormund@student->42->fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 16:10:06 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 15:29:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/21 15:36:09 by cormund          ###   ########->fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 {
-	t_list_adj	adj;
+	t_vertex	*adj;
 	int			i;
 
 	while (queue)
@@ -22,19 +22,20 @@ int				bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 		adj = list_adj[queue->vertex->id];
 		pop_queue(&queue);
 		i = 0;
-		while (i < adj.count_edges)
+		while (i < adj->count_edges)
 		{
-			if (adj.adj[i]->end == LI_TRUE)
-				return (adj.vertex);
-			else if (adj.adj[i] && !adj.adj[i]->marked)
+			if (adj->adj[i].vrtx->type == LI_END)
 			{
-				enqueue(&queue, adj.adj[i], &last);
-				adj.adj[i]->marked = true;
-				adj.adj[i]->dist = adj.vertex->dist + 1;
-				adj.adj[i]->neighbor = adj.vertex->start != LI_TRUE ? adj.vertex : NULL;
+				//clean_queue(&queue);
+				return (adj);
 			}
-			// else if (adj.adj[i]->marked)
-			// 	adj.adj[i]->duplicate = true; //дубликат?
+			else if (!adj->adj[i].vrtx->marked)
+			{
+				enqueue(&queue, adj->adj[i].vrtx, &last);
+				adj->adj[i].vrtx->marked = true;
+				adj->adj[i].vrtx->dist = adj->dist + 1;
+				adj->adj[i].vrtx->neighbor = adj->type != LI_START ? adj : NULL;
+			}
 			++i;
 		}
 	}
@@ -48,8 +49,8 @@ void			suurballe(t_lem_in *li)
 
 	queue = NULL;
 	last = NULL;
-	enqueue(&queue, lem_in->list_adj[0].vertex, &last);
-	lem_in->start->dist = 0;
-	lem_in->start->marked = 0;
+	enqueue(&queue, li->list_adj[0], &last);
+	li->start->dist = 0;
+	li->start->marked = true;
 	bfs(queue, li->list_adj, last);
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 15:29:50 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/21 15:31:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ struct						s_lem_in
 	t_vertex				**hash_table;
 	t_vertex				**list_adj;
 	t_link					*first_link;
-	t_list_adj				*list_adj; //? delete
+	t_list_adj				*list_adj_old; //? delete
 	char					**matrix_adj;
 	int						count_ants;
 	int						count_vertexs;
