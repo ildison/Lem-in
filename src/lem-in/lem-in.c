@@ -66,18 +66,18 @@ static void		print_link_adj(t_vertex **link_adj, int count_vertexs)
 {
 	int			i;
 	int			j;
-	t_vertex	**linked;
+	t_link_adj	*linked;
 
 	printf("\nlink_adj:\n ");
 	i = 0;
 	while (i < count_vertexs)
 	{
 		printf("\n%d ", link_adj[i]->id);
-		linked = link_adj[i]->adj->adj;
-		j =  link_adj[i]->adj->count_edges;
+		linked = link_adj[i]->adj;
+		j =  link_adj[i]->count_edges;
 		while (j--)
 		{
-			printf("%d-", (*linked)->id);
+			printf("%d-", linked->vrtx->id);
 			++linked;
 		}
 		++i;

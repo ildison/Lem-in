@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/20 16:50:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/21 11:57:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ struct						s_vertex
 	t_pnt					coord;
 	int						id;
 	int						dist;
+	int						count_edges;
 	char					*name;
 	char					start;
 	char					end;
@@ -79,10 +80,9 @@ struct						s_link
 
 struct						s_link_adj
 {
-	t_vertex				**adj;
-	bool					*inverse_edges;
+	t_vertex				*vrtx;
+	bool					inverse_edges;
 	int						weight;
-	int						count_edges;
 };
 
 struct						s_lem_in
