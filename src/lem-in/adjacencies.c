@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 11:58:46 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/21 12:28:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void			list_adj(t_lem_in *li)
 	while (i < li->count_vertexs)
 	{
 		count_links = get_count_links(li->matrix_adj[i], li->count_vertexs);
-		adj = (t_link_adj *)malloc(sizeof(t_link_adj) * count_links);
+		adj = (t_link_adj *)ft_memalloc(sizeof(t_link_adj) * count_links);
 		if (!adj)
 			error(strerror(errno));
 		get_adjacencies(li, adj, li->matrix_adj[i]);

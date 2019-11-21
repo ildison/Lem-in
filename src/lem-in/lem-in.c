@@ -77,7 +77,7 @@ static void		print_link_adj(t_vertex **link_adj, int count_vertexs)
 		j =  link_adj[i]->count_edges;
 		while (j--)
 		{
-			printf("%d-", linked->vrtx->id);
+			printf("%d(%d)-", linked->vrtx->id, linked->inverse_edges);
 			++linked;
 		}
 		++i;

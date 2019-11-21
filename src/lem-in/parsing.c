@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/20 16:02:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/21 12:38:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,20 @@ static t_vertex	*new_vertex(char *line, int vertex_type)
 	vertex->coord.x = ft_atoi(split_line[1]);
 	vertex->coord.y = ft_atoi(split_line[2]);
 	ft_free_2x_mas((void **)split_line);
-	if (vertex_type == LI_START)
-		vertex->start = LI_TRUE;
-	else if (vertex_type == LI_END)
-		vertex->end = LI_TRUE;
+	vertex->type = vertex_type;
 	return (vertex);
 }
 
-static void		add_vertex(t_vertex **start, t_vertex *vertex, int vertex_type)
+static void		add_vertex(t_vertex **start, t_vertex *vertex)
 {
 	t_vertex	*tmp;
 
 	if (!(tmp = *start))
 		*start = vertex;
 	else
-		if (vertex_type == LI_VERTEX || vertex_type == LI_END)
+		if (vertex->type == LI_VERTEX || vertex->type == LI_END)
 		{
-			while (tmp->next && !tmp->next->end)
+			while (tmp->next && tmp->next->type != LI_END)
 				tmp = tmp->next;
 			if (!tmp->next)
 				tmp->next = vertex;
@@ -51,7 +48,7 @@ static void		add_vertex(t_vertex **start, t_vertex *vertex, int vertex_type)
 				tmp->next = vertex;
 			}
 		}
-		else if (vertex_type == LI_START)
+		else if (vertex->type == LI_START)
 		{
 			vertex->next = tmp;
 			*start = vertex;
@@ -99,13 +96,13 @@ void			parsing(t_lem_in *li)
 			if (input->type == LI_START || input->type == LI_END)
 			{
 				vertex = new_vertex(input->next->line, input->type);
-				add_vertex(&li->start, vertex, input->type);
+				add_vertex(&li->start, vertex);
 				input = input->next;
 			}
 			else if (input->type == LI_VERTEX)
 			{
 				vertex = new_vertex(input->line, LI_VERTEX);
-				add_vertex(&li->start, vertex, LI_VERTEX);
+				add_vertex(&li->start, vertex);
 			}
 			else if (input->type == LI_LINK)
 				add_new_link(&li->first_link, li->start, input->line);
