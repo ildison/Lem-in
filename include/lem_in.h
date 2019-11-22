@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/22 10:48:09 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/22 13:19:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ struct						s_vertex
 	int						count_edges;
 	int						dist;
 	int						adj_index;
+	int						path_index;
 	char					*name;
 	char					type;
 	bool					marked;
 	bool					splited;
-	bool					path;
 	bool					visited;
 	bool					duplicate;
 	struct s_vertex			*neighbor;
@@ -86,7 +86,7 @@ struct						s_list_adj
 {
 	t_vertex				*vrtx;
 	bool					status;
-	int						weight;
+	int						index;
 };
 
 struct						s_lem_in
