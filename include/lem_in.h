@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/22 09:54:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/22 10:48:09 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ struct						s_vertex
 	int						id;
 	int						count_edges;
 	int						dist;
+	int						adj_index;
 	char					*name;
 	char					type;
 	bool					marked;
