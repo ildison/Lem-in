@@ -12,14 +12,15 @@
 
 #include "lem_in.h"
 
-int				bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
+t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 {
 	t_vertex	*adj;
 	int			i;
 
+	enqueue(&queue, list_adj[0], &last);
 	while (queue)
 	{
-		adj = list_adj[queue->vertex->id];
+		adj = list_adj[queue->vertex->id]; //! если попал на разделенную вершину, то надо идти в сторону родителя и выйти в сторону неразделенной
 		pop_queue(&queue);
 		i = 0;
 		while (i < adj->count_edges)
@@ -27,9 +28,10 @@ int				bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 			if (adj->adj[i].vrtx->type == LI_END)
 			{
 				//clean_queue(&queue);
-				return (adj);
+				adj->adj[i].vrtx->neighbor = adj;
+				return (adj->adj[i].vrtx);
 			}
-			else if (!adj->adj[i].vrtx->marked)
+			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_OPEN)
 			{
 				enqueue(&queue, adj->adj[i].vrtx, &last);
 				adj->adj[i].vrtx->marked = true;
@@ -39,18 +41,45 @@ int				bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 			++i;
 		}
 	}
-	return (0);
+	return (NULL);
+}
+
+void			close_link(t_vertex *vrtx)
+{
+	t_vertex	*neighbor;
+	int			i;
+
+	neighbor = vrtx->neighbor;
+	i = 0;
+	while (i < neighbor->count_edges)
+	{
+		if (neighbor->adj[i].vrtx == vrtx)
+		{
+			neighbor->adj[i].status == LI_CLOSE;
+			break ;
+		}
+	}
+}
+
+void			split_vertex(t_vertex *path)
+{
+	while (path->type != LI_START)
+	{
+		close_link(path);
+		path->splited = path->type != LI_END ? true : false;
+		path = path->neighbor;
+	}
 }
 
 void			suurballe(t_lem_in *li)
 {
 	t_queue		*queue;
 	t_queue		*last;
+	t_vertex	*path;
 
 	queue = NULL;
 	last = NULL;
-	enqueue(&queue, li->list_adj[0], &last);
-	li->start->dist = 0;
 	li->start->marked = true;
-	bfs(queue, li->list_adj, last);
+	path = bfs(queue, li->list_adj, last);
+	split_vertex(path);
 }

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 15:31:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/22 09:54:42 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 
 # define CH_START '1'
 # define CH_END '0'
+
+# define LI_OPEN 0
+# define LI_CLOSE 1
 
 typedef struct s_input		t_input;
 typedef struct s_pnt		t_pnt;
@@ -63,6 +66,7 @@ struct						s_vertex
 	char					*name;
 	char					type;
 	bool					marked;
+	bool					splited;
 	bool					path;
 	bool					visited;
 	bool					duplicate;
@@ -80,7 +84,7 @@ struct						s_link
 struct						s_list_adj
 {
 	t_vertex				*vrtx;
-	bool					inverse_edges;
+	bool					status;
 	int						weight;
 };
 
