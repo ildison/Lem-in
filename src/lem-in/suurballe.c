@@ -91,11 +91,11 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 		pop_queue(&queue);
 		if (adj->splited == true && adj->neighbor->splited == false)
 		{
-			if (!adj->adj[adj->adj_index].vrtx->marked)
+			if (!adj->adj[adj->path_index].vrtx->marked)
 			{
-				adj->adj[adj->adj_index].vrtx->marked = true;
-				adj->adj[adj->adj_index].vrtx->neighbor = adj;
-				enqueue(&queue, adj->adj[i].vrtx, &last);
+				adj->adj[adj->path_index].vrtx->marked = true;
+				adj->adj[adj->path_index].vrtx->neighbor = adj;
+				enqueue(&queue, adj->adj[adj->path_index].vrtx, &last);
 			}
 			continue ;
 		}
@@ -115,7 +115,7 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 				adj->adj[i].vrtx->marked = true;
 				// adj->adj[i].vrtx->dist = adj->dist + 1;
 				adj->adj[i].vrtx->neighbor = adj;
-				adj->adj_index = i;
+				adj->adj[i].vrtx->adj_index = i;
 			}
 			++i;
 		}
@@ -129,8 +129,18 @@ void			split_vertex(t_vertex *path)
 	{
 		// close_link(path);
 		path->neighbor->adj[path->adj_index].status = LI_CLOSE;
+		path->path_index = path->adj_index;
 		path->splited = path->type != LI_END ? true : false;
 		path = path->neighbor;
+	}
+}
+
+void			clean_marked(t_vertex **list_adj)
+{
+	while (*list_adj)
+	{
+		(*list_adj)->marked = false;
+		++list_adj;
 	}
 }
 
@@ -139,13 +149,16 @@ void			suurballe(t_lem_in *li)
 	t_queue		*queue;
 	t_queue		*last;
 	t_vertex	*path;
+	int			count_path;
 
 	queue = NULL;
 	last = NULL;
 	li->start->marked = true;
-	while ((path = bfs(queue, li->list_adj, last)))
+	count_path = 0;
+	while (count_path < 2 && (path = bfs(queue, li->list_adj, last))) //? count_path < 2 only for test
 	{
-		
 		split_vertex(path);
+		clean_marked(li->list_adj);
+		++count_path;
 	}
 }
