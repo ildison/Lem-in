@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/22 13:19:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/22 18:13:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,20 @@ struct						s_queue
 
 struct						s_path
 {
-	t_queue					*list;
-	t_queue					*endlist;
+	t_vertex				**vrtx;
+	int						dist;
 	t_path					*next;
-	int						index;
-	int						step;
-	int						size;
-	bool					checked;
 };
 
 struct						s_paths
 {
-	t_vertex				*vertex;
-	t_paths					*next;
+	t_path					*path;
+	int						count_path;
 };
 
 void						read_input(t_input **beg_input);
 void						parsing(t_lem_in *li);
 void 						adjacencies(t_lem_in *li);
+void						suurballe(t_lem_in *li);
 
 # endif

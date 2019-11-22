@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/18 15:42:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/22 17:04:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ int				calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
 		while (i < adj.count_edges)
 		{
 			if (adj.adj[i]->end == LI_TRUE)
-				return (adj.vertex);
+			{
+				// add_path();
+			}
 			else if (adj.adj[i] && !adj.adj[i]->marked)
 			{
 				enqueue(&queue, adj.adj[i], &last);
@@ -109,8 +111,6 @@ int				calc_dist(t_queue *queue, t_link_adj *link_adj, t_queue *last)
 				adj.adj[i]->dist = adj.vertex->dist + 1;
 				adj.adj[i]->neighbor = adj.vertex->start != LI_TRUE ? adj.vertex : NULL;
 			}
-			// else if (adj.adj[i]->marked)
-			// 	adj.adj[i]->duplicate = true; //дубликат?
 			++i;
 		}
 	}

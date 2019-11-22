@@ -77,7 +77,7 @@ static void		print_list_adj(t_vertex **list_adj, int count_vertexs)
 		j =  list_adj[i]->count_edges;
 		while (j--)
 		{
-			printf("%d(%d)-", linked->vrtx->id, linked->inverse_edges);
+			printf("%d-", linked->vrtx->id);
 			++linked;
 		}
 		++i;
@@ -101,6 +101,7 @@ int   			main(void)
 	parsing(li);
 	adjacencies(li);
 	print_input(li->first_line);
+	suurballe(li);
 
 	/*
 	** TEST PRINTS

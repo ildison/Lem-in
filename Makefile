@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+         #
+#    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/15 18:46:50 by vmormont         ###   ########.fr        #
+#    Updated: 2019/11/22 14:51:02 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ vpath %.a $(DIR_LIBFT)
 SRC_NAME := lem-in.c\
 			read_input.c\
 			parsing.c\
-			adjacencies.c # bfs.c path.c
+			adjacencies.c\
+			suurballe.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\
