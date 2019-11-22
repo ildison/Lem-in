@@ -12,6 +12,38 @@
 
 #include "lem_in.h"
 
+void			pop_queue(t_queue **queue)
+{
+	t_queue		*head;
+
+	head = *queue;
+	*queue = (*queue)->next;
+	free(head);
+	head = NULL;
+}
+
+void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
+{
+	t_queue		*new;
+
+	if (!*queue)
+	{
+		if (!(*queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
+			error(strerror(errno));
+		(*queue)->vertex = vertex;
+		*last = *queue;
+	}
+	else
+	{
+		if (!(new = (t_queue *)ft_memalloc(sizeof(t_queue))))
+			error(strerror(errno));
+		new->prev = *last;
+		new->vertex = vertex;
+		(*last)->next = new;
+		*last = new;
+	}
+}
+
 t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 {
 	t_vertex	*adj;
@@ -25,7 +57,7 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 		i = 0;
 		while (i < adj->count_edges)
 		{
-			if (adj->adj[i].vrtx->type == LI_END)
+			if (adj->adj[i].vrtx->type == LI_END && adj->adj[i].status == LI_OPEN)
 			{
 				//clean_queue(&queue);
 				adj->adj[i].vrtx->neighbor = adj;
