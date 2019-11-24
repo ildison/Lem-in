@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/24 13:49:11 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/24 16:38:21 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC_NAME := lem-in.c\
 			adjacencies.c\
 			suurballe.c\
 			bfs.c\
-			queue.c
+			queue.c\
+			check_paths.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\

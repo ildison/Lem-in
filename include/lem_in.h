@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/24 13:46:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/24 16:38:36 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 # define LI_OPEN 0
 # define LI_CLOSE 1
+
+# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end"
 
 typedef struct s_input		t_input;
 typedef struct s_pnt		t_pnt;
@@ -123,17 +125,19 @@ struct						s_paths
 {
 	t_path					*path;
 	int						count_path;
+	int						count_steps;
 };
 
 void						read_input(t_input **beg_input);
 void						parsing(t_lem_in *li);
 void 						adjacencies(t_lem_in *li);
-void						suurballe(t_lem_in *li);
+t_paths						suurballe(t_lem_in *li, int count_required_paths);
 void						enqueue(t_queue **queue, t_vertex *vertex,\
 														t_queue **last);
 void						pop_queue(t_queue **queue);
 void						clean_queue(t_queue **queue, t_queue **last);
 t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
 														t_queue *last);
+t_paths						check_paths(t_lem_in *li);
 
 # endif

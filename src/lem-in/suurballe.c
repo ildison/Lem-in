@@ -160,7 +160,7 @@ void			open_links(t_vertex **list_adj)
 	}
 }
 
-void			suurballe(t_lem_in *li)
+t_paths			suurballe(t_lem_in *li, int count_required_paths)
 {
 	t_queue		*queue;
 	t_queue		*last;
@@ -172,15 +172,17 @@ void			suurballe(t_lem_in *li)
 	last = NULL;
 	li->start->marked = true;
 	count_path = 0;
-	while (count_path < 2 && (path = bfs(queue, li->list_adj, last))) //? count_path < 2 only for test
+	while (count_path < count_required_paths &&\
+		(path = bfs(queue, li->list_adj, last)))
 	{
 		split_vertex(path);
 		clean_queue(&queue, &last);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
-	finding = find_paths(queue, li->list_adj, last, 2); //? 2 is count_path
+	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
 	open_links(li->list_adj);
 	print_finding(finding); //? for bonus mb
+	return(finding);
 }

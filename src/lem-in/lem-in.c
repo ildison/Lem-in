@@ -101,8 +101,7 @@ int   			main(void)
 	parsing(li);
 	adjacencies(li);
 	print_input(li->first_line);
-	suurballe(li);
-
+	check_paths(li);
 	/*
 	** TEST PRINTS
 	*/
