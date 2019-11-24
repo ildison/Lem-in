@@ -12,116 +12,6 @@
 
 #include "lem_in.h"
 
-// void			close_link(t_vertex *vrtx)
-// {
-// 	t_vertex	*neighbor;
-// 	int			i;
-
-// 	neighbor = vrtx->neighbor;
-// 	i = 0;
-// 	while (i < neighbor->count_edges)
-// 	{
-// 		if (neighbor->adj[i].vrtx == vrtx)
-// 		{
-// 			neighbor->adj[i].status == LI_CLOSE;
-// 			break ;
-// 		}
-// 		++i;
-// 	}
-// }
-
-void			pop_queue(t_queue **queue)
-{
-	t_queue		*head;
-
-	head = *queue;
-	*queue = (*queue)->next;
-	free(head);
-	head = NULL;
-}
-
-void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
-{
-	t_queue		*new;
-
-	if (!*queue)
-	{
-		if (!(*queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			error(strerror(errno));
-		(*queue)->vertex = vertex;
-		*last = *queue;
-	}
-	else
-	{
-		if (!(new = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			error(strerror(errno));
-		new->prev = *last;
-		new->vertex = vertex;
-		(*last)->next = new;
-		*last = new;
-	}
-}
-
-void			clean_queue(t_queue **queue, t_queue **last)
-{
-	t_queue		*tmp;
-	t_queue		*free_tmp;
-
-	tmp = *queue;
-	if (tmp)
-		while (tmp)
-		{
-			free_tmp = tmp;
-			tmp = tmp->next;
-			free(free_tmp);
-		}
-	*queue = NULL;
-	*last = NULL;
-}
-
-t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
-{
-	t_vertex	*adj;
-	int			i;
-
-	enqueue(&queue, list_adj[0], &last);
-	while (queue)
-	{
-		adj = queue->vertex; //! если попал на разделенную вершину, то надо идти в сторону родителя
-		pop_queue(&queue);
-		if (adj->splited == true && adj->neighbor->splited == false)
-		{
-			if (!adj->adj[adj->path_index].vrtx->marked)
-			{
-				adj->adj[adj->path_index].vrtx->marked = true;
-				adj->adj[adj->path_index].vrtx->neighbor = adj;
-				enqueue(&queue, adj->adj[adj->path_index].vrtx, &last);
-			}
-			continue ;
-		}
-		i = 0;
-		while (i < adj->count_edges)
-		{
-			if (adj->adj[i].vrtx->type == LI_END && adj->adj[i].status == LI_OPEN)
-			{
-				adj->adj[i].vrtx->neighbor = adj;
-				adj->adj[i].vrtx->adj_index = i;
-				return (adj->adj[i].vrtx);
-			}
-			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_OPEN)
-			{
-				enqueue(&queue, adj->adj[i].vrtx, &last);
-				adj->adj[i].vrtx->marked = true;
-				// adj->adj[i].vrtx->dist = adj->dist + 1;
-				adj->adj[i].vrtx->neighbor = adj;
-				adj->adj[i].vrtx->adj_index = i;
-			}
-			++i;
-		}
-	}
-	return (NULL);
-}
-
 t_path			*new_path(t_vertex *adj)
 {
 	t_path		*new;
@@ -130,12 +20,12 @@ t_path			*new_path(t_vertex *adj)
 	new = ft_memalloc(sizeof(t_path));
 	if (!new)
 		error(strerror(errno));
-	new->dist = adj->dist + 1;
+	new->dist = adj->dist;
 	new->vrtx = (t_vertex **)malloc(sizeof(t_vertex *) * new->dist);
 	if (!new->vrtx)
 		error(strerror(errno));
 	i = adj->dist - 1;
-	printf("\ndist = %d\n", i);
+	printf("\ndist = %d\n", new->dist);
 	while (adj->type != LI_START)
 	{
 		new->vrtx[i] = adj;
@@ -177,9 +67,10 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 		{
 			if (adj->adj[i].vrtx->type == LI_END && adj->adj[i].status == LI_CLOSE)
 			{
-				--n_path;
-				add_new_path(&path, adj, &last_path);
-				if (!n_path)
+				adj->adj[i].vrtx->dist = adj->dist + 1;
+				adj->adj[i].vrtx->neighbor = adj;
+				add_new_path(&path, adj->adj[i].vrtx, &last_path);
+				if (!--n_path)
 					return (path);
 			}
 			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_CLOSE)
@@ -244,13 +135,28 @@ void			print_finding(t_paths finding)
 	while (path)
 	{
 		i = 0;
-		while (i < path->dist - 1)
+		while (i < path->dist)
 		{
 			printf("%s ", path->vrtx[i]->name);
 			++i;
 		}
 		printf("\n");
 		path = path->next;
+	}
+}
+
+void			open_links(t_vertex **list_adj)
+{
+	int			i;
+	while (*list_adj)
+	{
+		i = (*list_adj)->count_edges;
+		while (i)
+		{
+			--i;
+			(*list_adj)->adj[i].status = LI_OPEN;
+		}
+		++list_adj;
 	}
 }
 
@@ -266,14 +172,15 @@ void			suurballe(t_lem_in *li)
 	last = NULL;
 	li->start->marked = true;
 	count_path = 0;
-	while (count_path < 1 && (path = bfs(queue, li->list_adj, last))) //? count_path < 2 only for test
+	while (count_path < 2 && (path = bfs(queue, li->list_adj, last))) //? count_path < 2 only for test
 	{
 		split_vertex(path);
 		clean_queue(&queue, &last);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
-	finding = find_paths(queue, li->list_adj, last, 1); //? 2 is count_path
+	finding = find_paths(queue, li->list_adj, last, 2); //? 2 is count_path
 	clean_marked(&li->list_adj[1]);
+	open_links(li->list_adj);
 	print_finding(finding); //? for bonus mb
 }
