@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/22 18:13:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/24 13:46:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ struct						s_list_adj
 {
 	t_vertex				*vrtx;
 	bool					status;
-	int						index;
 };
 
 struct						s_lem_in
@@ -130,5 +129,11 @@ void						read_input(t_input **beg_input);
 void						parsing(t_lem_in *li);
 void 						adjacencies(t_lem_in *li);
 void						suurballe(t_lem_in *li);
+void						enqueue(t_queue **queue, t_vertex *vertex,\
+														t_queue **last);
+void						pop_queue(t_queue **queue);
+void						clean_queue(t_queue **queue, t_queue **last);
+t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
+														t_queue *last);
 
 # endif
