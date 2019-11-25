@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/24 16:38:36 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 12:19:46 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@
 # define LI_OPEN 0
 # define LI_CLOSE 1
 
-# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end"
+# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end\n"
+# define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
+# define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
 
 typedef struct s_input		t_input;
 typedef struct s_pnt		t_pnt;
@@ -103,6 +105,7 @@ struct						s_lem_in
 	int						count_ants;
 	int						count_vertexs;
 	int						count_path;
+	bool					flag_link;
 };
 
 struct						s_queue
@@ -140,4 +143,5 @@ t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
 														t_queue *last);
 t_paths						check_paths(t_lem_in *li);
 
+int				validation(t_lem_in *li, char *line);
 # endif

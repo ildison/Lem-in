@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 12:38:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 12:16:15 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void			parsing(t_lem_in *li)
 	t_input		*input;
 	t_vertex	*vertex;
 
-	li->count_ants = ft_atoi(li->first_line->line);
-	input = li->first_line->next;
-	if (input)
+	if ((input = li->first_line->next))
 		while (input->line)
 		{
 			if (input->type == LI_START || input->type == LI_END)
@@ -105,7 +103,11 @@ void			parsing(t_lem_in *li)
 				add_vertex(&li->start, vertex);
 			}
 			else if (input->type == LI_LINK)
+			{
 				add_new_link(&li->first_link, li->start, input->line);
+				li->flag_link = true;
+			}
 			input = input->next;
 		}
+	li->count_ants = validation(li, li->first_line->line);
 }
