@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 16:46:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 17:03:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ t_paths		check_paths(t_lem_in *li)
 	{
 		new_paths = suurballe(li, count_required_paths);
 		count_steps = count_steps_for_paths(new_paths, li->count_ants);
-		printf("count_steps = %d\n", count_steps);
 		if (new_paths.count_path < count_required_paths ||\
 						count_steps > best_paths.count_steps)
 		{

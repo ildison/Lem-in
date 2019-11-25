@@ -93,6 +93,7 @@ static void		print_input(t_input *in)
 int   			main(void)
 {
 	t_lem_in	*li;
+	t_paths		paths;
 
 	li = (t_lem_in *)ft_memalloc(sizeof(t_lem_in));
 	if (!li)
@@ -101,7 +102,8 @@ int   			main(void)
 	parsing(li);
 	adjacencies(li);
 	print_input(li->first_line);
-	check_paths(li);
+	paths = check_paths(li);
+	push_ants(li, paths);
 	/*
 	** TEST PRINTS
 	*/

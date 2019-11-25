@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 13:33:41 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 16:51:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_lem_in		t_lem_in;
 typedef struct s_queue		t_queue;
 typedef struct s_path		t_path;
 typedef struct s_paths		t_paths;
+typedef struct s_ant		t_ant;
 
 struct						s_input
 {
@@ -74,6 +75,7 @@ struct						s_vertex
 	bool					marked;
 	bool					splited;
 	bool					duplicate;
+	bool					vizited;
 	int						count_ants;
 	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
@@ -132,6 +134,16 @@ struct						s_paths
 	int						count_steps;
 };
 
+struct						s_ant
+{
+	int						number;
+	bool					move;
+	bool					end;
+	t_vertex				**room;
+	t_ant					*next;
+};
+
+
 void						read_input(t_input **beg_input);
 void						parsing(t_lem_in *li);
 void 						adjacencies(t_lem_in *li);
@@ -146,4 +158,5 @@ t_paths						check_paths(t_lem_in *li);
 
 int							validation(t_lem_in *li, char *line);
 void						init_dist(int *dist, t_paths finding);
+void						push_ants(t_lem_in *li, t_paths paths);
 # endif

@@ -107,7 +107,10 @@ void			split_vertex(t_vertex *path)
 	while (path->type != LI_START)
 	{
 		// close_link(path);
-		path->neighbor->adj[path->adj_index].status = LI_CLOSE;
+		if (path->splited == false || path->neighbor->splited == false)
+			path->neighbor->adj[path->adj_index].status = LI_CLOSE;
+		// if (path->splited == true && path->neighbor->splited == true)
+		// 	path->neighbor->adj[path->adj_index].status = LI_OPEN;
 		path->path_index = path->adj_index;
 		open_link(path);
 		path->splited = path->type != LI_END ? true : false;
@@ -148,16 +151,27 @@ void			print_finding(t_paths finding)
 void			open_links(t_vertex **list_adj)
 {
 	int			i;
+
 	while (*list_adj)
 	{
-		i = (*list_adj)->count_edges;
-		while (i)
+		i = 0;
+		while (i < (*list_adj)->count_edges)
 		{
-			--i;
 			(*list_adj)->adj[i].status = LI_OPEN;
+			++i;
 		}
 		++list_adj;
 	}
+}
+
+void			desplitted_vertexs(t_vertex **list_adj)
+{
+	while (*list_adj)
+	{
+		(*list_adj)->splited = false;
+		++list_adj;
+	}
+
 }
 
 t_paths			suurballe(t_lem_in *li, int count_required_paths)
@@ -180,9 +194,10 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
-	printf("count_path = %d\n", count_path);
+	printf("count_path(bfs) = %d\n", count_path);
 	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
+	desplitted_vertexs(&li->list_adj[1]);
 	open_links(li->list_adj);
 	print_finding(finding); //? for bonus mb
 	return(finding);

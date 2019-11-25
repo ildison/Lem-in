@@ -8,12 +8,12 @@ E 2 2
 F 3 4
 G 5 4
 K 9 7
-L 9 8
+O 9 8
 M 9 6
-y 9 6
-t 9 6
-u 9 6
-i 9 6
+y 9 60
+t 9 61
+u 9 62
+i 9 63
 ##end
 H 6 2
 A-B
@@ -27,8 +27,8 @@ E-F
 F-G
 G-H
 A-K
-K-L
-L-M
+K-O
+O-M
 M-H
 A-H
 A-y

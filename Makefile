@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/24 16:38:21 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/25 16:51:23 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ SRC_NAME := lem-in.c\
 			suurballe.c\
 			bfs.c\
 			queue.c\
-			check_paths.c
+			check_paths.c\
+			validation.c\
+			push_ants_cormund.c
+			# push_ants.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\
