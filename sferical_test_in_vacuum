@@ -10,6 +10,10 @@ G 5 4
 K 9 7
 L 9 8
 M 9 6
+y 9 6
+t 9 6
+u 9 6
+i 9 6
 ##end
 H 6 2
 A-B
@@ -27,3 +31,8 @@ K-L
 L-M
 M-H
 A-H
+A-y
+y-t
+t-u
+u-i
+i-H

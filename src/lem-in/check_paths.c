@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/24 16:41:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 10:05:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ int			count_steps_for_paths(t_paths paths, int count_ants)
 		while (dist_increment[max_use_index] >= dist_increment[max_use_index + 1])
 			++max_use_index;
 		i = 0;
-		while (i <= max_use_index && count_ants--)
+		while (i <= max_use_index && count_ants)
 		{
 			++dist_increment[i];
 			++i;
+			--count_ants;
 		}
 	}
 	free(dist_increment);

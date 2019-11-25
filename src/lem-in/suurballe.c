@@ -25,7 +25,7 @@ t_path			*new_path(t_vertex *adj)
 	if (!new->vrtx)
 		error(strerror(errno));
 	i = adj->dist - 1;
-	printf("\ndist = %d\n", new->dist);
+	// printf("\ndist = %d\n", new->dist);
 	while (adj->type != LI_START)
 	{
 		new->vrtx[i] = adj;
@@ -70,7 +70,7 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 				adj->adj[i].vrtx->dist = adj->dist + 1;
 				adj->adj[i].vrtx->neighbor = adj;
 				add_new_path(&path, adj->adj[i].vrtx, &last_path);
-				if (!--n_path)
+				if (!(--n_path))
 					return (path);
 			}
 			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_CLOSE)
@@ -180,6 +180,7 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
+	printf("count_path = %d\n", count_path);
 	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
 	open_links(li->list_adj);

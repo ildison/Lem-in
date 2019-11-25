@@ -21,69 +21,69 @@ static void		print_input(t_input *in)
 	}
 }
 
-static void		print_vertex(t_vertex *vertex)
-{
-	printf("vertexs:\n\nname => id\n");
-	while (vertex)
-	{
-		printf("%s => %d\n", vertex->name, vertex->id);
-		vertex = vertex->next;
-	}
-}
+// static void		print_vertex(t_vertex *vertex)
+// {
+// 	printf("vertexs:\n\nname => id\n");
+// 	while (vertex)
+// 	{
+// 		printf("%s => %d\n", vertex->name, vertex->id);
+// 		vertex = vertex->next;
+// 	}
+// }
 
-static void		print_links(t_link *link)
-{
-	printf("\nlinks:\n\n");
-	while (link)
-	{
-		ft_printf("%d - %d\n", link->vertex_a->id, link->vertex_b->id);
-		link = link->next;
-	}
-}
+// static void		print_links(t_link *link)
+// {
+// 	printf("\nlinks:\n\n");
+// 	while (link)
+// 	{
+// 		ft_printf("%d - %d\n", link->vertex_a->id, link->vertex_b->id);
+// 		link = link->next;
+// 	}
+// }
 
-static void		print_matrix_adj(char **matrix, int count_vertexs)
-{
-	int			i;
-	int			j;
+// static void		print_matrix_adj(char **matrix, int count_vertexs)
+// {
+// 	int			i;
+// 	int			j;
 
-	printf("\nmatrix_adj:\n\n ");
-	i = 0;
-	while (i < count_vertexs)
-		printf("  %d", i++);
-	j = 0;
-	while (j < count_vertexs)
-	{
-		printf("\n%d", j);
-		i = 0;
-		while (i < count_vertexs)
-			printf("  %d", matrix[j][i++]);
-		++j;
-	}
-	printf("\n");
-}
+// 	printf("\nmatrix_adj:\n\n ");
+// 	i = 0;
+// 	while (i < count_vertexs)
+// 		printf("  %d", i++);
+// 	j = 0;
+// 	while (j < count_vertexs)
+// 	{
+// 		printf("\n%d", j);
+// 		i = 0;
+// 		while (i < count_vertexs)
+// 			printf("  %d", matrix[j][i++]);
+// 		++j;
+// 	}
+// 	printf("\n");
+// }
 
-static void		print_list_adj(t_vertex **list_adj, int count_vertexs)
-{
-	int			i;
-	int			j;
-	t_list_adj	*linked;
+// static void		print_list_adj(t_vertex **list_adj, int count_vertexs)
+// {
+// 	int			i;
+// 	int			j;
+// 	t_list_adj	*linked;
 
-	printf("\nlist_adj:\n ");
-	i = 0;
-	while (i < count_vertexs)
-	{
-		printf("\n%d ", list_adj[i]->id);
-		linked = list_adj[i]->adj;
-		j =  list_adj[i]->count_edges;
-		while (j--)
-		{
-			printf("%d-", linked->vrtx->id);
-			++linked;
-		}
-		++i;
-	}
-	printf("\n");
-}
+// 	printf("\nlist_adj:\n ");
+// 	i = 0;
+// 	while (i < count_vertexs)
+// 	{
+// 		printf("\n%d ", list_adj[i]->id);
+// 		linked = list_adj[i]->adj;
+// 		j =  list_adj[i]->count_edges;
+// 		while (j--)
+// 		{
+// 			printf("%d-", linked->vrtx->id);
+// 			++linked;
+// 		}
+// 		++i;
+// 	}
+// 	printf("\n");
+// }
 
 // static void		free_lem_in(t_lem_in **li)
 // {
@@ -105,10 +105,10 @@ int   			main(void)
 	/*
 	** TEST PRINTS
 	*/
-	print_vertex(li->start);
-	print_links(li->first_link);
-	print_matrix_adj(li->matrix_adj, li->count_vertexs);
-	print_list_adj(li->list_adj, li->count_vertexs);
+	// print_vertex(li->start);
+	// print_links(li->first_link);
+	// print_matrix_adj(li->matrix_adj, li->count_vertexs);
+	// print_list_adj(li->list_adj, li->count_vertexs);
 	// free_lem_in(&li);
 	return (0);
 }
