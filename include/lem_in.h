@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 12:19:46 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:12:24 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ struct						s_vertex
 	char					type;
 	bool					marked;
 	bool					splited;
-	bool					visited;
 	bool					duplicate;
+	int						count_ants;
 	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
 };
@@ -143,5 +143,6 @@ t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
 														t_queue *last);
 t_paths						check_paths(t_lem_in *li);
 
-int				validation(t_lem_in *li, char *line);
+int							validation(t_lem_in *li, char *line);
+void						init_dist(int **dist, t_paths finding);
 # endif
