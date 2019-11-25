@@ -6,28 +6,48 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 10:05:05 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 13:37:15 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+void			init_dist(int *dist, t_paths finding)
+{
+	t_path		*path;
+	int			i;
+
+	path = finding.path;
+	i = 0;
+	while (i != finding.count_path)
+	{
+		dist[i] = path->dist;
+		path = path->next;
+		i++;
+	}
+}
+
+void		count_ants_for_paths(int *dist, t_path *path)
+{
+	int		i;
+
+	i = 0;
+	while (path)
+	{
+		path->ants = dist[i] - path->dist;
+		++i;
+		path = path->next;
+	}
+}
+
 int			count_steps_for_paths(t_paths paths, int count_ants)
 {
-	int		*dist_increment;
+	int		dist_increment[paths.count_path + 1];
 	int		max_use_index;
 	int		i;
 
-	if (!(dist_increment = ft_memalloc(sizeof(int) * paths.count_path + 1)))
-		error(strerror(errno));
+	init_dist(dist_increment, paths);
 	dist_increment[paths.count_path] = INT_MAX;
-	i = 0;
-	while (paths.path)
-	{
-		dist_increment[i] = paths.path->dist;
-		paths.path = paths.path->next;
-		++i;
-	}
 	max_use_index = 0;
 	while (count_ants)
 	{
@@ -41,7 +61,6 @@ int			count_steps_for_paths(t_paths paths, int count_ants)
 			--count_ants;
 		}
 	}
-	free(dist_increment);
 	return (dist_increment[0] - 1);
 }
 

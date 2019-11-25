@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 13:12:24 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/25 13:33:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ struct						s_path
 {
 	t_vertex				**vrtx;
 	int						dist;
+	int						ants;
 	t_path					*next;
 };
 
@@ -144,5 +145,5 @@ t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
 t_paths						check_paths(t_lem_in *li);
 
 int							validation(t_lem_in *li, char *line);
-void						init_dist(int **dist, t_paths finding);
+void						init_dist(int *dist, t_paths finding);
 # endif
