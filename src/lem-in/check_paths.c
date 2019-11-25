@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 13:37:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/25 16:46:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			init_dist(int *dist, t_paths finding)
 
 	path = finding.path;
 	i = 0;
-	while (i != finding.count_path)
+	while (i < finding.count_path)
 	{
 		dist[i] = path->dist;
 		path = path->next;
@@ -35,6 +35,7 @@ void		count_ants_for_paths(int *dist, t_path *path)
 	while (path)
 	{
 		path->ants = dist[i] - path->dist;
+		printf("path->ants = %d\n", path->ants);
 		++i;
 		path = path->next;
 	}
@@ -49,6 +50,7 @@ int			count_steps_for_paths(t_paths paths, int count_ants)
 	init_dist(dist_increment, paths);
 	dist_increment[paths.count_path] = INT_MAX;
 	max_use_index = 0;
+	printf("dist_increment[1] = %d\n", dist_increment[1]);
 	while (count_ants)
 	{
 		while (dist_increment[max_use_index] >= dist_increment[max_use_index + 1])
@@ -61,6 +63,7 @@ int			count_steps_for_paths(t_paths paths, int count_ants)
 			--count_ants;
 		}
 	}
+	count_ants_for_paths(dist_increment, paths.path);
 	return (dist_increment[0] - 1);
 }
 
