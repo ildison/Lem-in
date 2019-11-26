@@ -6,20 +6,27 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 13:10:37 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/24 13:12:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 11:50:53 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void			pop_queue(t_queue **queue)
+t_vertex		*pop_queue(t_queue **queue)
 {
+	t_vertex	*vrtx;
 	t_queue		*head;
 
-	head = *queue;
-	*queue = (*queue)->next;
-	free(head);
-	head = NULL;
+	vrtx = NULL;
+	if (*queue)
+	{
+		vrtx = (*queue)->vertex;
+		head = *queue;
+		*queue = (*queue)->next;
+		free(head);
+		head = NULL;
+	}
+	return (vrtx);
 }
 
 void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
