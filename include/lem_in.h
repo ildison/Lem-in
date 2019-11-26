@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 16:51:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 10:21:12 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
+# define LI_ERROR_MALLOC "cant allocate memory\n"
 
 typedef struct s_input		t_input;
 typedef struct s_pnt		t_pnt;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 13:10:37 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/24 13:12:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:35:31 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)
 	if (!*queue)
 	{
 		if (!(*queue = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			error(strerror(errno));
+			error(LI_ERROR_MALLOC);
 		(*queue)->vertex = vertex;
 		*last = *queue;
 	}
 	else
 	{
 		if (!(new = (t_queue *)ft_memalloc(sizeof(t_queue))))
-			error(strerror(errno));
+			error(LI_ERROR_MALLOC);
 		new->prev = *last;
 		new->vertex = vertex;
 		(*last)->next = new;

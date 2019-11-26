@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:37:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/12 17:08:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:28:40 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ void		read_input(t_input **first_input)
 {
 	t_input	*input;
 
-	*first_input = (t_input *)ft_memalloc(sizeof(t_input));
-	if (!*first_input)
-		error(strerror(errno));
+	if (!(*first_input = (t_input *)ft_memalloc(sizeof(t_input))))
+		error(LI_ERROR_MALLOC);
 	input = *first_input;
 	while ((input->line = gnl(LI_STDIN)))
 	{
 		input->type = check_line(input->line);
-		input->next = (t_input *)ft_memalloc(sizeof(t_input));
-		if (!input->next)
-			error(strerror(errno));
+		if (!(input->next = (t_input *)ft_memalloc(sizeof(t_input))))
+			error(LI_ERROR_MALLOC);
 		input = input->next;
 	}
 }

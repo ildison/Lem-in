@@ -97,13 +97,14 @@ int   			main(void)
 
 	li = (t_lem_in *)ft_memalloc(sizeof(t_lem_in));
 	if (!li)
-		error(strerror(errno));
+		error(LI_ERROR_MALLOC);
 	read_input(&li->first_line);
 	parsing(li);
 	adjacencies(li);
 	print_input(li->first_line);
 	paths = check_paths(li);
 	push_ants(li, paths);
+	// free_lem_in(&li);
 	/*
 	** TEST PRINTS
 	*/

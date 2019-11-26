@@ -17,13 +17,11 @@ t_path			*new_path(t_vertex *adj)
 	t_path		*new;
 	int			i;
 
-	new = ft_memalloc(sizeof(t_path));
-	if (!new)
-		error(strerror(errno));
+	if (!(new = ft_memalloc(sizeof(t_path))))
+		error(LI_ERROR_MALLOC);
 	new->dist = adj->dist;
-	new->vrtx = (t_vertex **)malloc(sizeof(t_vertex *) * new->dist);
-	if (!new->vrtx)
-		error(strerror(errno));
+	if (!(new->vrtx = (t_vertex **)malloc(sizeof(t_vertex *) * new->dist)))
+		error(LI_ERROR_MALLOC);
 	i = adj->dist - 1;
 	// printf("\ndist = %d\n", new->dist);
 	while (adj->type != LI_START)
@@ -106,11 +104,12 @@ void			split_vertex(t_vertex *path)
 {
 	while (path->type != LI_START)
 	{
+		// ft_printf("Split vertex is working\n");
 		// close_link(path);
 		if (path->splited == false || path->neighbor->splited == false)
 			path->neighbor->adj[path->adj_index].status = LI_CLOSE;
-		// if (path->splited == true && path->neighbor->splited == true)
-		// 	path->neighbor->adj[path->adj_index].status = LI_OPEN;
+		else if (path->splited == true && path->neighbor->splited == true)
+			path->neighbor->adj[path->adj_index].status = LI_OPEN;
 		path->path_index = path->adj_index;
 		open_link(path);
 		path->splited = path->type != LI_END ? true : false;
@@ -140,10 +139,10 @@ void			clean_marked(t_vertex **list_adj)
 // 		i = 0;
 // 		while (i < path->dist)
 // 		{
-// 			// printf("%s ", path->vrtx[i]->name);
+			// printf("%s ", path->vrtx[i]->name);
 // 			++i;
 // 		}
-// 		// printf("\n");
+		// printf("\n");
 // 		path = path->next;
 // 	}
 // }
@@ -189,7 +188,9 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	while (count_path < count_required_paths &&\
 		(path = bfs(queue, li->list_adj, last)))
 	{
+		// ft_printf("Bfs is working\n");
 		split_vertex(path);
+		// ft_printf("Here\n");
 		clean_queue(&queue, &last);
 		clean_marked(&li->list_adj[1]);
 		++count_path;

@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 18:03:22 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/26 10:47:02 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void			init_dist(int *dist, t_paths finding)
 		path = path->next;
 		i++;
 	}
+	// ft_printf("Exit from init_dist\n");
 }
 
 void		count_ants_for_paths(int *dist, t_path *path)
@@ -82,6 +83,7 @@ t_paths		check_paths(t_lem_in *li)
 	count_required_paths = 2;
 	while (count_required_paths < li->count_ants)
 	{
+		// ft_printf("Check suurballe count_required_paths = %i, li->count_ants = %i\n", count_required_paths, li->count_ants);
 		new_paths = suurballe(li, count_required_paths);
 		count_steps = count_steps_for_paths(new_paths, li->count_ants);
 		if (new_paths.count_path < count_required_paths ||\
@@ -100,5 +102,6 @@ t_paths		check_paths(t_lem_in *li)
 		// free_paths(new_paths);
 		++count_required_paths;
 	}
+	// ft_printf("Exit from check_path\n");
 	return (best_paths);
 }

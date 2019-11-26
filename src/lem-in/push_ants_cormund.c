@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ants_cormund.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 17:34:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:17:15 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ t_ant		*init_ants(int count_ants)
 	t_ant	*first_ant;
 	t_ant	*ant;
 
-	first_ant = ft_memalloc(sizeof(t_ant));
-	if (!first_ant)
-		error(strerror(errno));
+	if (!(first_ant = ft_memalloc(sizeof(t_ant))))
+		error(LI_ERROR_MALLOC);
 	first_ant->number = 1;
 	ant = first_ant;
-	while (--count_ants)
+	while (count_ants)
 	{
-		ant->next = ft_memalloc(sizeof(t_ant));
-		if (!ant->next)
-			error(strerror(errno));
-		ant->next->number = ant->number + 1;
+		if (!(ant->next = ft_memalloc(sizeof(t_ant))))
+			error(LI_ERROR_MALLOC);
+		ant->next->number = ++(ant->number);
 		ant = ant->next;
+		--count_ants;
 	}
+	ant = NULL;
 	return (first_ant);
 }
 
 void		move_ant(t_ant *ant, t_path *path)
 {
-	if (ant->end)
-		return ;
+	// if (ant->end)
+	// 	return ;
 	if (ant->move && (*ant->room)->type == LI_END)
 	{
 		(*ant->room)->vizited = false;
@@ -73,11 +73,17 @@ void		push_ants(t_lem_in *li, t_paths paths)
 
 	first_ant = init_ants(li->count_ants);
 	li->end = li->list_adj[li->count_vertexs - 1];
+	// printf("Here\n");
 	while (li->end->count_ants < li->count_ants)
 	{
 		ant = first_ant;
 		while (ant)
 		{
+			if (ant->end)
+			{
+				ant = ant->next;
+				continue ;
+			}
 			move_ant(ant, paths.path);
 			ant = ant->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 12:16:15 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/11/26 13:29:37 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_vertex	*new_vertex(char *line, int vertex_type)
 	split_line = ft_strsplit(line, ' ');
 	vertex = (t_vertex *)ft_memalloc(sizeof(t_vertex));
 	if (!vertex || !split_line)
-		error(strerror(errno));
+		error(LI_ERROR_MALLOC);
 	vertex->name = ft_strdup(split_line[0]);
 	vertex->coord.x = ft_atoi(split_line[1]);
 	vertex->coord.y = ft_atoi(split_line[2]);
@@ -74,7 +74,7 @@ static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 	split_line = ft_strsplit(line, '-');
 	link = (t_link *)ft_memalloc(sizeof(t_link));
 	if (!link || !split_line)
-		error(strerror(errno));
+		error(LI_ERROR_MALLOC);
 	link->vertex_a = get_vertex(vertex, split_line[0]);
 	link->vertex_b = get_vertex(vertex, split_line[1]);
 	ft_free_2x_mas((void **)split_line);
