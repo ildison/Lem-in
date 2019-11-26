@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 17:34:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 10:06:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		move_ant(t_ant *ant, t_path *path)
 	{
 		(*ant->room)->vizited = false;
 		ant->end = true;
-		++(*ant->room)->count_ants;
 	}
 	else if (ant->move && (*ant->room + 1)->vizited)
 		return ;
@@ -50,6 +49,7 @@ void		move_ant(t_ant *ant, t_path *path)
 		(*ant->room)->vizited = false;
 		++ant->room;
 		(*ant->room)->vizited = true;
+		++(*ant->room)->count_ants;
 	}
 	else
 	{
@@ -60,6 +60,7 @@ void		move_ant(t_ant *ant, t_path *path)
 		ant->room = path->vrtx;
 		ant->move = true;
 		(*path->vrtx)->vizited = true;
+		++(*ant->room)->count_ants;
 		--path->ants;
 	}
 	if (ant->move && !ant->end)

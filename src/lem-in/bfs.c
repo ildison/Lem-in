@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/26 15:00:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 18:51:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,26 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 	enqueue(&queue, list_adj[0], &last);
 	while ((vrx = pop_queue(&queue)))
 	{
-		i = 0;
-		while (i < LI_COUNT_ADJACENTS)
+		if (vrx->is_in && vrx->out->is_out)
+			enqueue(&queue, vrx->out, &last);
+		i = LI_COUNTER;
+		while (++i < LI_COUNT_ADJACENTS)
 			if (vrx->adj[i].status == LI_OPEN && !vrx->adj[i].vrtx->marked)
 			{
-				vrx->adj[i].vrtx->marked = true;
 				vrx->adj[i].vrtx->neighbor = vrx;
-				if (vrx->adj[i].vrtx->in)
+				vrx->adj[i].vrtx->adj_index = i;
+				if (vrx->adj[i].vrtx->is_in && !vrx->is_in)
 				{
-					vrx->adj[i].vrtx->out->marked = true;
+					vrx->adj[i].vrtx->is_in = false;
+					vrx->adj[i].vrtx->out->is_out = false;
 					enqueue(&queue, vrx->adj[i].vrtx->out, &last);
 				}
 				else if (vrx->adj[i].vrtx->type == LI_END)
 					return (vrx->adj[i].vrtx);
 				else
 					enqueue(&queue, vrx->adj[i].vrtx, &last);
+				vrx->adj[i].vrtx->marked = true;
 			}
-		++i;
 	}
 	return (NULL);
 }

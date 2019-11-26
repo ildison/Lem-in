@@ -58,10 +58,8 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 	last_path = NULL;
 	ft_bzero(&path, sizeof(t_paths));
 	enqueue(&queue, list_adj[0], &last);
-	while (queue)
+	while ((adj = pop_queue(&queue)))
 	{
-		adj = queue->vertex;
-		pop_queue(&queue);
 		i = 0;
 		while (i < adj->count_edges)
 		{
@@ -106,14 +104,12 @@ void			split_vertex(t_vertex *path)
 {
 	while (path->type != LI_START)
 	{
-		// close_link(path);
-		if (path->splited == false || path->neighbor->splited == false)
+		if (!path->is_in)
 			path->neighbor->adj[path->adj_index].status = LI_CLOSE;
-		// if (path->splited == true && path->neighbor->splited == true)
-		// 	path->neighbor->adj[path->adj_index].status = LI_OPEN;
-		path->path_index = path->adj_index;
 		open_link(path);
-		path->splited = path->type != LI_END ? true : false;
+		path->out = path->neighbor;
+		path->is_in = path->type != LI_END ? true : false;
+		path->is_out = path->type != LI_END ? true : false;
 		// printf("%s ", path->name);
 		path = path->neighbor;
 	}
@@ -129,24 +125,25 @@ void			clean_marked(t_vertex **list_adj)
 	}
 }
 
-// void			print_finding(t_paths finding)
-// {
-// 	t_path		*path;
-// 	int			i;
+void			print_finding(t_paths finding)
+{
+	t_path		*path;
+	int			i;
 
-// 	path = finding.path;
-// 	while (path)
-// 	{
-// 		i = 0;
-// 		while (i < path->dist)
-// 		{
-// 			// printf("%s ", path->vrtx[i]->name);
-// 			++i;
-// 		}
-// 		// printf("\n");
-// 		path = path->next;
-// 	}
-// }
+	path = finding.path;
+	while (path)
+	{
+		i = 0;
+		while (i < path->dist)
+		{
+			printf("%s ", path->vrtx[i]->name);
+			++i;
+		}
+		printf("\n");
+		path = path->next;
+	}
+	printf("\n");
+}
 
 void			open_links(t_vertex **list_adj)
 {
@@ -168,7 +165,8 @@ void			desplitted_vertexs(t_vertex **list_adj)
 {
 	while (*list_adj)
 	{
-		(*list_adj)->splited = false;
+		(*list_adj)->is_in = false;
+		(*list_adj)->is_out = false;
 		++list_adj;
 	}
 
@@ -189,18 +187,15 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	while (count_path < count_required_paths &&\
 		(path = bfs(queue, li->list_adj, last)))
 	{
-			printf("here\n");
-		printf("HERE\n");
 		split_vertex(path);
 		clean_queue(&queue, &last);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
-	// printf("count_path(bfs) = %d\n", count_path);
 	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
 	desplitted_vertexs(&li->list_adj[1]);
 	open_links(li->list_adj);
-	// print_finding(finding); //? for bonus mb
+	print_finding(finding); //? for bonus mb
 	return(finding);
 }

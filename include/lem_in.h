@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/26 12:14:41 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 18:40:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ struct						s_vertex
 	bool					vizited;
 	int						count_ants;
 
-	bool					in;
+	bool					is_in;
+	bool					is_out;
 	t_vertex				*out;
 
 	struct s_vertex			*neighbor;

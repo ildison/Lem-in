@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/11/25 16:51:23 by cormund          ###   ########.fr        #
+#    Updated: 2019/11/26 16:26:56 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC_NAME := lem-in.c\
 			read_input.c\
 			parsing.c\
 			adjacencies.c\
-			suurballe.c\
+			suurballe_copy.c\
 			bfs.c\
 			queue.c\
 			check_paths.c\

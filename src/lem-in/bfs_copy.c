@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/26 14:32:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 15:05:09 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 			{
 				vrx->adj[i].vrtx->marked = true;
 				vrx->adj[i].vrtx->neighbor = vrx;
+				vrx->adj[i].vrtx->adj_index = i;
 				if (vrx->adj[i].vrtx->in)
 				{
 					vrx->adj[i].vrtx->out->marked = true;
