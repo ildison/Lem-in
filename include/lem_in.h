@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 16:51:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/26 12:14:41 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define LI_TRUE 1
 # define LI_FALSE 0
+
+# define LI_COUNTER -1
 
 # define LI_START 1
 # define LI_END 2
@@ -77,6 +79,10 @@ struct						s_vertex
 	bool					duplicate;
 	bool					vizited;
 	int						count_ants;
+
+	bool					in;
+	t_vertex				*out;
+
 	struct s_vertex			*neighbor;
 	struct s_vertex			*next;
 };
@@ -150,7 +156,7 @@ void 						adjacencies(t_lem_in *li);
 t_paths						suurballe(t_lem_in *li, int count_required_paths);
 void						enqueue(t_queue **queue, t_vertex *vertex,\
 														t_queue **last);
-void						pop_queue(t_queue **queue);
+t_vertex					*pop_queue(t_queue **queue);
 void						clean_queue(t_queue **queue, t_queue **last);
 t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
 														t_queue *last);
