@@ -12,14 +12,14 @@
 
 #include "lem_in.h"
 
-static void		print_input(t_input *in)
-{
-	while (in)
-	{
-		ft_putendl(in->line);
-		in = in->next;
-	}
-}
+// static void		print_input(t_input *in)
+// {
+// 	while (in)
+// 	{
+// 		ft_putendl(in->line);
+// 		in = in->next;
+// 	}
+// }
 
 // static void		print_vertex(t_vertex *vertex)
 // {
@@ -101,9 +101,9 @@ int   			main(void)
 	read_input(&li->first_line);
 	parsing(li);
 	adjacencies(li);
-	print_input(li->first_line);
+	// print_input(li->first_line);
 	paths = check_paths(li);
-	// push_ants(li, paths);
+	push_ants(li, paths);
 	/*
 	** TEST PRINTS
 	*/

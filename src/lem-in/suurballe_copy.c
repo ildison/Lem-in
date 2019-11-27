@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   suurballe->c                                        :+:      :+:    :+:   */
+/*   suurballe_copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student->42->fr>            +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/20 16:10:06 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/21 15:36:09 by cormund          ###   ########->fr       */
+/*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
+/*   Updated: 2019/11/27 17:00:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 	last_path = NULL;
 	ft_bzero(&path, sizeof(t_paths));
 	enqueue(&queue, list_adj[0], &last);
-	while ((adj = pop_queue(&queue)))
+	while (queue)
 	{
+		adj = queue->vertex;
+		pop_queue(&queue);
 		i = 0;
 		while (i < adj->count_edges)
 		{
@@ -102,18 +104,21 @@ void			open_link(t_vertex *vrtx)
 
 void			split_vertex(t_vertex *path)
 {
+	// printf("--------\n");
 	while (path->type != LI_START)
 	{
-		if (!path->is_in)
+		// if (path->splited == false || path->neighbor->splited == false)
+		if (path->neighbor->out != path)
 			path->neighbor->adj[path->adj_index].status = LI_CLOSE;
-		open_link(path);
+		else
+			open_link(path);
 		path->out = path->neighbor;
-		path->is_in = path->type != LI_END ? true : false;
-		path->is_out = path->type != LI_END ? true : false;
+		path->splited = path->type != LI_END ? true : false;
 		// printf("%s ", path->name);
 		path = path->neighbor;
 	}
 	// printf("\n");
+	// printf("--------\n\n");
 }
 
 void			clean_marked(t_vertex **list_adj)
@@ -142,7 +147,6 @@ void			print_finding(t_paths finding)
 		printf("\n");
 		path = path->next;
 	}
-	printf("\n");
 }
 
 void			open_links(t_vertex **list_adj)
@@ -165,8 +169,7 @@ void			desplitted_vertexs(t_vertex **list_adj)
 {
 	while (*list_adj)
 	{
-		(*list_adj)->is_in = false;
-		(*list_adj)->is_out = false;
+		(*list_adj)->splited = false;
 		++list_adj;
 	}
 
@@ -192,10 +195,11 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
+	// printf("count_path(bfs) = %d\n", count_path);
 	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
 	desplitted_vertexs(&li->list_adj[1]);
 	open_links(li->list_adj);
-	print_finding(finding); //? for bonus mb
+	// print_finding(finding); //? for bonus mb
 	return(finding);
 }

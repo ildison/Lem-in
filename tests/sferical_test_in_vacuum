@@ -7,13 +7,6 @@ D 4 2
 E 2 2
 F 3 4
 G 5 4
-K 9 7
-O 9 8
-M 9 6
-y 9 60
-t 9 61
-u 9 62
-i 9 63
 ##end
 H 6 2
 A-B
@@ -26,13 +19,4 @@ D-F
 E-F
 F-G
 G-H
-A-K
-K-O
-O-M
-M-H
 A-H
-A-y
-y-t
-t-u
-u-i
-i-H

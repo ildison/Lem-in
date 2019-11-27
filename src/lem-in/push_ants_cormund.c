@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/26 10:06:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/27 17:00:20 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,44 @@ t_ant		*init_ants(int count_ants)
 	return (first_ant);
 }
 
+// void		move_ant(t_ant *ant, t_path *path)
+// {
+// 	if (ant->move && (*ant->room)->type == LI_END && (ant->end = true))
+// 	{
+// 		(*ant->room)->vizited = false;
+// 		++(*ant->room)->count_ants;
+// 	}
+// 	else if (ant->move && (*ant->room + 1)->vizited)
+// 		return ;
+// 	else if (ant->move)
+// 	{
+// 		(*ant->room)->vizited = false;
+// 		++ant->room;
+// 		(*ant->room)->vizited = true;
+// 	}
+// 	else
+// 	{
+// 		while (path && (path->vrtx[0]->vizited || !path->ants))
+// 			if (!(path = path->next))
+// 				return ;
+// 		ant->room = path->vrtx;
+// 		ant->move = true;
+// 		(*path->vrtx)->vizited = true;
+// 		--path->ants;
+// 	}
+// 	if (ant->move && !ant->end)
+// 		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
+// }
+
 void		move_ant(t_ant *ant, t_path *path)
 {
-	if (ant->end)
-		return ;
 	if (ant->move && (*ant->room)->type == LI_END)
 	{
-		(*ant->room)->vizited = false;
+		ant->move = false;
 		ant->end = true;
-	}
-	else if (ant->move && (*ant->room + 1)->vizited)
-		return ;
-	else if (ant->move)
-	{
 		(*ant->room)->vizited = false;
-		++ant->room;
-		(*ant->room)->vizited = true;
-		++(*ant->room)->count_ants;
 	}
-	else
+	else if (!ant->move)
 	{
 		while (path && (path->vrtx[0]->vizited || !path->ants))
 			path = path->next;
@@ -60,10 +79,19 @@ void		move_ant(t_ant *ant, t_path *path)
 		ant->room = path->vrtx;
 		ant->move = true;
 		(*path->vrtx)->vizited = true;
-		++(*ant->room)->count_ants;
 		--path->ants;
+		if ((*path->vrtx)->type == LI_END)
+			++(*path->vrtx)->count_ants;
 	}
-	if (ant->move && !ant->end)
+	else if (ant->move)
+	{
+		(*ant->room)->vizited = false;
+		++ant->room;
+		(*ant->room)->vizited = true;
+		if ((*ant->room)->type == LI_END)
+			++(*ant->room)->count_ants;
+	}
+	if (ant->move)
 		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
 }
 
@@ -79,7 +107,8 @@ void		push_ants(t_lem_in *li, t_paths paths)
 		ant = first_ant;
 		while (ant)
 		{
-			move_ant(ant, paths.path);
+			if (!ant->end)
+				move_ant(ant, paths.path);
 			ant = ant->next;
 		}
 		ft_printf("\n");
