@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/27 15:45:08 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/27 19:13:30 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,6 @@ t_paths						check_paths(t_lem_in *li);
 int							validation(t_lem_in *li, char *line);
 void						init_dist(int *dist, t_paths finding);
 void						push_ants(t_lem_in *li, t_paths paths);
+void						print_finding(t_paths finding);
 
 # endif

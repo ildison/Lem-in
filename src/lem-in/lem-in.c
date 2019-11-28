@@ -103,7 +103,7 @@ int   			main(void)
 	adjacencies(li);
 	// print_input(li->first_line);
 	paths = check_paths(li);
-	push_ants(li, paths);
+	// push_ants(li, paths);
 	/*
 	** TEST PRINTS
 	*/

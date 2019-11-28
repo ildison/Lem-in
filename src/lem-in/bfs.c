@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/27 16:12:21 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/28 14:03:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,66 @@
 
 # define LI_COUNT_ADJACENTS vrx->count_edges
 
+t_vertex		*marked_adjacent(t_queue **queue, t_vertex *vrx, t_queue **last)
+{
+	int			i;
+
+	i = LI_COUNTER;
+	while (++i < LI_COUNT_ADJACENTS)
+		if (vrx->adj[i].status == LI_OPEN && !vrx->adj[i].vrtx->marked)
+		{
+			printf("vrx->name %s | vrx->adj[i].vrtx->name %s\n", vrx->name, vrx->adj[i].vrtx->name);
+			vrx->adj[i].vrtx->neighbor = vrx;
+			vrx->adj[i].vrtx->adj_index = i;
+			if (vrx->adj[i].vrtx->type == LI_END)
+				return (vrx->adj[i].vrtx);
+			else
+				enqueue(queue, vrx->adj[i].vrtx, last);
+			vrx->adj[i].vrtx->marked = true;
+		}
+	return (NULL);
+}
+
+int				is_open_link(t_vertex *src, t_vertex *dst)
+{
+	int			i;
+
+	i = 0;
+	while (src->adj[i].vrtx != dst)
+		++i;
+	return (!src->adj[i].status);
+}
+
+int				get_adj_index(t_vertex *haystack, t_vertex *needle)
+{
+	int			i;
+
+	i = 0;
+	while (haystack->adj[i].vrtx != needle)
+		++i;
+	return (i);
+}
+
 t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 {
 	t_vertex	*vrx;
-	int			i;
 
 	enqueue(&queue, list_adj[0], &last);
-	while ((vrx = pop_queue(&queue)))
+	while (queue)
 	{
-		i = LI_COUNTER;
-		while (++i < LI_COUNT_ADJACENTS)
-			if (vrx->adj[i].status == LI_OPEN && !vrx->adj[i].vrtx->marked)
+		vrx = pop_queue(&queue);
+		if (vrx->splited && is_open_link(vrx, vrx->neighbor))
+		{
+			if (vrx->out->type != LI_START)
 			{
-				vrx->adj[i].vrtx->neighbor = vrx;
-				vrx->adj[i].vrtx->adj_index = i;
-				if (vrx->adj[i].vrtx->splited && !vrx->splited)
-				{
-					vrx->adj[i].vrtx->out->neighbor = vrx->adj[i].vrtx;
-					vrx->adj[i].vrtx->out->marked = true;
-					enqueue(&queue, vrx->adj[i].vrtx->out, &last);
-				}
-				else if (vrx->adj[i].vrtx->type == LI_END)
-					return (vrx->adj[i].vrtx);
-				else
-					enqueue(&queue, vrx->adj[i].vrtx, &last);
-				vrx->adj[i].vrtx->marked = true;
+				vrx->out->marked = true;
+				vrx->out->neighbor = vrx;
+				vrx->out->adj_index = get_adj_index(vrx, vrx->out);
+				enqueue(&queue, vrx->out, &last);
 			}
+		}
+		else if ((vrx = marked_adjacent(&queue, vrx, &last)))
+			return (vrx);
 	}
 	return (NULL);
 }
