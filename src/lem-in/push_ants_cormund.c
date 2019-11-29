@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/27 17:57:05 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/29 09:18:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,5 @@ void		push_ants(t_lem_in *li, t_paths paths)
 		}
 		ft_printf("\n");
 	}
-	printf("count_step = %d\n", paths.count_steps);
+	// printf("count_step = %d\n", paths.count_steps);
 }

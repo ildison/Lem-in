@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/28 14:03:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/11/29 16:46:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,6 @@
 
 # define LI_COUNT_ADJACENTS vrx->count_edges
 
-t_vertex		*marked_adjacent(t_queue **queue, t_vertex *vrx, t_queue **last)
-{
-	int			i;
-
-	i = LI_COUNTER;
-	while (++i < LI_COUNT_ADJACENTS)
-		if (vrx->adj[i].status == LI_OPEN && !vrx->adj[i].vrtx->marked)
-		{
-			printf("vrx->name %s | vrx->adj[i].vrtx->name %s\n", vrx->name, vrx->adj[i].vrtx->name);
-			vrx->adj[i].vrtx->neighbor = vrx;
-			vrx->adj[i].vrtx->adj_index = i;
-			if (vrx->adj[i].vrtx->type == LI_END)
-				return (vrx->adj[i].vrtx);
-			else
-				enqueue(queue, vrx->adj[i].vrtx, last);
-			vrx->adj[i].vrtx->marked = true;
-		}
-	return (NULL);
-}
-
 int				is_open_link(t_vertex *src, t_vertex *dst)
 {
 	int			i;
@@ -96,6 +76,26 @@ int				get_adj_index(t_vertex *haystack, t_vertex *needle)
 	return (i);
 }
 
+t_vertex		*marked_adjacent(t_queue **queue, t_vertex *vrx, t_queue **last)
+{
+	int			i;
+
+	i = LI_COUNTER;
+	while (++i < LI_COUNT_ADJACENTS)
+		if (vrx->adj[i].status == LI_OPEN && !vrx->adj[i].vrtx->marked)
+		{
+			// printf("vrx->name %s | vrx->adj[i].vrtx->name %s\n", vrx->name, vrx->adj[i].vrtx->name);
+			vrx->adj[i].vrtx->neighbor = vrx;
+			vrx->adj[i].vrtx->adj_index = i;
+			if (vrx->adj[i].vrtx->type == LI_END)
+				return (vrx->adj[i].vrtx);
+			else
+				enqueue(queue, vrx->adj[i].vrtx, last);
+			vrx->adj[i].vrtx->marked = true;
+		}
+	return (NULL);
+}
+
 t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 {
 	t_vertex	*vrx;
@@ -104,15 +104,19 @@ t_vertex		*bfs(t_queue *queue, t_vertex **list_adj, t_queue *last)
 	while (queue)
 	{
 		vrx = pop_queue(&queue);
-		if (vrx->splited && is_open_link(vrx, vrx->neighbor))
+		if (vrx->splited && !vrx->out->marked)
 		{
 			if (vrx->out->type != LI_START)
 			{
 				vrx->out->marked = true;
 				vrx->out->neighbor = vrx;
+				// printf("vrx->name %s | vrx->out->name %s\n", vrx->name, vrx->out->name);
 				vrx->out->adj_index = get_adj_index(vrx, vrx->out);
 				enqueue(&queue, vrx->out, &last);
 			}
+			if (!is_open_link(vrx, vrx->neighbor))
+				if ((vrx = marked_adjacent(&queue, vrx, &last)))
+					return (vrx);
 		}
 		else if ((vrx = marked_adjacent(&queue, vrx, &last)))
 			return (vrx);
