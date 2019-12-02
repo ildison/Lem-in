@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 09:56:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 11:21:52 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_vertex		**hash_table(t_vertex *vertex, int count_vertex)
 	return (hash_table);
 }
 
-static void			matrix_adj(char **matrix_adj, t_link *link)
+void				matrix_adj(char **matrix_adj, t_link *link)
 {
 	while (link)
 	{
@@ -52,7 +52,6 @@ static void			matrix_adj(char **matrix_adj, t_link *link)
 		matrix_adj[link->vertex_b->id][link->vertex_a->id] = LI_TRUE;
 		link = link->next;
 	}
-	return (matrix_adj);
 }
 
 static int			get_count_links(char *links, int count_vertex)

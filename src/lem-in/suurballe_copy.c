@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 09:57:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 12:09:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path)
 	++paths->count_path;
 }
 
-t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_path)
+t_paths			find_paths(t_queue *queue, t_lem_in *li, t_queue *last, int n_path)
 {
 	t_vertex	*adj;
 	t_paths		path;
@@ -57,15 +57,16 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 
 	last_path = NULL;
 	ft_bzero(&path, sizeof(t_paths));
-	enqueue(&queue, list_adj[0], &last);
+	enqueue(&queue, li->list_adj[0], &last);
 	while (queue)
 	{
 		adj = queue->vertex;
 		pop_queue(&queue);
-		i = 0;
-		while (i < adj->count_edges)
+		i = LI_COUNTER;
+		while (++i < adj->count_edges)
+		if (!is_open_link(li, adj, adj->adj[i].vrtx) && is_open_link(li, adj->adj[i].vrtx, adj))
 		{
-			if (adj->adj[i].vrtx->type == LI_END && adj->adj[i].status == LI_CLOSE)
+			if (adj->adj[i].vrtx->type == LI_END)
 			{
 				adj->adj[i].vrtx->dist = adj->dist + 1;
 				adj->adj[i].vrtx->neighbor = adj;
@@ -73,14 +74,12 @@ t_paths			find_paths(t_queue *queue, t_vertex **list_adj, t_queue *last, int n_p
 				if (!(--n_path))
 					return (path);
 			}
-			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_CLOSE)
+			else if (!adj->adj[i].vrtx->marked)
 			{
 				enqueue(&queue, adj->adj[i].vrtx, &last);
-				adj->adj[i].vrtx->marked = true;
 				adj->adj[i].vrtx->dist = adj->dist + 1;
 				adj->adj[i].vrtx->neighbor = adj;
 			}
-			++i;
 		}
 	}
 	return (path);
@@ -102,24 +101,6 @@ void			open_link(t_vertex *vrtx)
 	}
 }
 
-void			split_vertex(t_vertex *path)
-{
-	// printf("--------\n");
-	while (path->type != LI_START)
-	{
-		// if (path->splited == false || path->neighbor->splited == false)
-		if (path->neighbor->out != path)
-			path->neighbor->adj[path->adj_index].status = LI_CLOSE;
-		else
-			open_link(path);
-		path->out = path->neighbor;
-		path->splited = path->type != LI_END ? true : false;
-		// printf("%s ", path->name);
-		path = path->neighbor;
-	}
-	// printf("\n");
-	// printf("--------\n\n");
-}
 
 void			clean_marked(t_vertex **list_adj)
 {
@@ -129,29 +110,6 @@ void			clean_marked(t_vertex **list_adj)
 		(*list_adj)->is_out = false;
 		++list_adj;
 	}
-}
-
-void			print_finding(t_paths finding)
-{
-	t_path		*path;
-	int			i;
-
-	printf(".................\n");
-	path = finding.path;
-	while (path)
-	{
-		printf("len %d\n", path->dist);
-		i = 0;
-		while (i < path->dist)
-		{
-			printf("%s ", path->vrtx[i]->name);
-			++i;
-		}
-		printf("\n");
-		path = path->next;
-	}
-	printf("count_paths = %d\n", finding.count_path);
-	printf(".................\n");
 }
 
 void			open_links(t_vertex **list_adj)
@@ -182,6 +140,23 @@ void			desplitted_vertexs(t_vertex **list_adj)
 
 }
 
+void			split_vertex(t_lem_in *li, t_vertex *path)
+{
+	// printf("--------\n");
+	while (path->type != LI_START)
+	{
+		li->matrix_adj[path->neighbor->id][path->id] = false;
+		// path->neighbor->adj[path->adj_index].status = LI_CLOSE;
+		if (path->neighbor->out != path)
+			path->out = path->neighbor;
+		path->splited = path->type != LI_END ? true : false;
+		// printf("%s ", path->name);
+		path = path->neighbor;
+	}
+	// printf("\n");
+	// printf("--------\n\n");
+}
+
 t_paths			suurballe(t_lem_in *li, int count_required_paths)
 {
 	// static int	count_here = 1;
@@ -197,21 +172,20 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	li->start->marked = true;
 	count_path = 0;
 	while (count_path < count_required_paths &&\
-		(path = bfs(queue, li->list_adj, last)))
+		(path = bfs(queue, li, last)))
 	{
 	// printf("HERE(%d)\n", count_here++);
-		split_vertex(path);
+		split_vertex(li, path);
 		clean_queue(&queue, &last);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
 	// count_here = 1;
 	// printf("count_path(bfs) = %d\n", count_path);
-	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
+	finding = find_paths(queue, li, last, count_required_paths);
+	clean_queue(&queue, &last);
 	desplitted_vertexs(&li->list_adj[1]);
-	open_links(li->list_adj);
-	mat
-	// print_finding(finding); //? for bonus mb
+	matrix_adj(li->matrix_adj, li->first_link);
 	return(finding);
 }

@@ -85,6 +85,29 @@
 // 	printf("\n");
 // }
 
+// void			print_finding(t_paths finding)
+// {
+// 	t_path		*path;
+// 	int			i;
+
+// 	printf(".................\n");
+// 	path = finding.path;
+// 	while (path)
+// 	{
+// 		printf("len %d\n", path->dist);
+// 		i = 0;
+// 		while (i < path->dist)
+// 		{
+// 			printf("%s ", path->vrtx[i]->name);
+// 			++i;
+// 		}
+// 		printf("\n");
+// 		path = path->next;
+// 	}
+// 	printf("count_paths = %d\n", finding.count_path);
+// 	printf(".................\n");
+// }
+
 // static void		free_lem_in(t_lem_in **li)
 // {
 
@@ -111,6 +134,7 @@ int   			main(void)
 	// print_links(li->first_link);
 	// print_matrix_adj(li->matrix_adj, li->count_vertex);
 	// print_list_adj(li->list_adj, li->count_vertex);
-	// free_lem_in(&li);
+	// print_finding(finding); //? for bonus mb
+	// free_lem_in(li);
 	return (0);
 }

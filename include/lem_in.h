@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 09:54:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 11:21:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,14 @@ void						enqueue(t_queue **queue, t_vertex *vertex,\
 														t_queue **last);
 t_vertex					*pop_queue(t_queue **queue);
 void						clean_queue(t_queue **queue, t_queue **last);
-t_vertex					*bfs(t_queue *queue, t_vertex **list_adj,\
-														t_queue *last);
+t_vertex					*bfs(t_queue *queue,  t_lem_in *li, t_queue *last);
 t_paths						check_paths(t_lem_in *li);
 
 int							validation(t_lem_in *li, char *line);
 void						init_dist(int *dist, t_paths finding);
 void						push_ants(t_lem_in *li, t_paths paths);
 void						print_finding(t_paths finding);
+int				is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);
+void				matrix_adj(char **matrix_adj, t_link *link);
 
 # endif
