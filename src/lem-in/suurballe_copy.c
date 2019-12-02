@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/29 16:47:09 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 09:57:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,11 +207,11 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	}
 	// count_here = 1;
 	// printf("count_path(bfs) = %d\n", count_path);
-	clean_marked(&li->list_adj[1]);
 	finding = find_paths(queue, li->list_adj, last, count_required_paths);
 	clean_marked(&li->list_adj[1]);
 	desplitted_vertexs(&li->list_adj[1]);
 	open_links(li->list_adj);
+	mat
 	// print_finding(finding); //? for bonus mb
 	return(finding);
 }

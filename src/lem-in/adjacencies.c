@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 09:54:21 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 09:56:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_vertex		**hash_table(t_vertex *vertex, int count_vertex)
 	return (hash_table);
 }
 
-static char			**matrix_adj(char **t_link *link, int count_vertex)
+static void			matrix_adj(char **matrix_adj, t_link *link)
 {
 	while (link)
 	{
@@ -111,8 +111,9 @@ void 				adjacencies(t_lem_in *li)
 	li->count_vertex = id_increment(li->start);
 	li->hash_table = hash_table(li->start, li->count_vertex);
 	li->matrix_adj = ft_memalloc_char_2xmas(li->count_vertex, li->count_vertex);
-	if (!matrix_adj)
-		error(strerror(errno)); = matrix_adj(li->first_link, li->count_vertex);
+	if (!li->matrix_adj)
+		error(strerror(errno));
+	matrix_adj(li->matrix_adj, li->first_link);
 	li->list_adj = li->hash_table;
 	list_adj(li);
 }
