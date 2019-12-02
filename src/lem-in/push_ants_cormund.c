@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/29 09:18:07 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 09:54:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void		push_ants(t_lem_in *li, t_paths paths)
 	t_ant	*ant;
 
 	first_ant = init_ants(li->count_ants);
-	li->end = li->list_adj[li->count_vertexs - 1];
+	li->end = li->list_adj[li->count_vertex - 1];
 	while (li->end->count_ants < li->count_ants)
 	{
 		ant = first_ant;

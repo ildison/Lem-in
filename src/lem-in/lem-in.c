@@ -41,28 +41,28 @@
 // 	}
 // }
 
-// static void		print_matrix_adj(char **matrix, int count_vertexs)
+// static void		print_matrix_adj(char **matrix, int count_vertex)
 // {
 // 	int			i;
 // 	int			j;
 
 // 	printf("\nmatrix_adj:\n\n ");
 // 	i = 0;
-// 	while (i < count_vertexs)
+// 	while (i < count_vertex)
 // 		printf("  %d", i++);
 // 	j = 0;
-// 	while (j < count_vertexs)
+// 	while (j < count_vertex)
 // 	{
 // 		printf("\n%d", j);
 // 		i = 0;
-// 		while (i < count_vertexs)
+// 		while (i < count_vertex)
 // 			printf("  %d", matrix[j][i++]);
 // 		++j;
 // 	}
 // 	printf("\n");
 // }
 
-// static void		print_list_adj(t_vertex **list_adj, int count_vertexs)
+// static void		print_list_adj(t_vertex **list_adj, int count_vertex)
 // {
 // 	int			i;
 // 	int			j;
@@ -70,7 +70,7 @@
 
 // 	printf("\nlist_adj:\n ");
 // 	i = 0;
-// 	while (i < count_vertexs)
+// 	while (i < count_vertex)
 // 	{
 // 		printf("\n%d ", list_adj[i]->id);
 // 		linked = list_adj[i]->adj;
@@ -109,8 +109,8 @@ int   			main(void)
 	*/
 	// print_vertex(li->start);
 	// print_links(li->first_link);
-	// print_matrix_adj(li->matrix_adj, li->count_vertexs);
-	// print_list_adj(li->list_adj, li->count_vertexs);
+	// print_matrix_adj(li->matrix_adj, li->count_vertex);
+	// print_list_adj(li->list_adj, li->count_vertex);
 	// free_lem_in(&li);
 	return (0);
 }

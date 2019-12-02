@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/29 16:51:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 09:41:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,19 @@ t_paths		check_paths(t_lem_in *li)
 	while (count_required_paths < li->count_ants)
 	{
 		new_paths = suurballe(li, count_required_paths);
-		count_steps = count_steps_for_paths(new_paths, li->count_ants);
-		// printf("count_steps %d\n", count_steps);
+		new_paths.count_steps = count_steps_for_paths(new_paths, li->count_ants);
+		// printf("count_steps %d\n", new_paths.count_steps);
 		// printf("count_path %d\n", new_paths.count_path);
 		if (new_paths.count_path < count_required_paths ||\
-						count_steps > best_paths.count_steps)
+						new_paths.count_steps > best_paths.count_steps)
 		{
 			// free_paths(new_paths);
 			break ;
 		}
-		if (count_steps < best_paths.count_steps)
+		if (new_paths.count_steps < best_paths.count_steps)
 		{
 			best_paths = new_paths;
-			best_paths.count_steps = count_steps;
 			// free_paths(new_paths);
-			// best_paths = new_best(new_paths, count_steps);
 		}
 		// free_paths(new_paths);
 		++count_required_paths;
