@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:20:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:27:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void						init_dist(int *dist, t_paths finding);
 void						push_ants(t_lem_in *li, t_paths paths);
 void						print_finding(t_paths finding);
 int							is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);
-void						matrix_adj(char **matrix_adj, t_link *link);
+void						set_matrix_adj(char **matrix_adj, t_link *link);
 
 /*
 /	bonus
