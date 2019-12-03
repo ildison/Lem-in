@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:55:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 12:58:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:15:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			print_list_adj(t_vertex **list_adj, int count_vertex)
 {
 	int			i;
 	int			j;
-	t_list_adj	*linked;
+	t_vertex	**linked;
 
 	printf("\nlist_adj:\n ");
 	i = 0;
@@ -77,7 +77,7 @@ void			print_list_adj(t_vertex **list_adj, int count_vertex)
 		j =  list_adj[i]->count_edges;
 		while (j--)
 		{
-			printf("%d-", linked->v->id);
+			printf("%d-", (*linked)->id);
 			++linked;
 		}
 		++i;

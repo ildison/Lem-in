@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:09:56 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int			get_count_links(char *links, int count_vertex)
 	return (count_links);
 }
 
-static void			get_adjacencies(t_lem_in *li, t_list_adj *adj, char *links)
+static void			get_adjacencies(t_lem_in *li, t_vertex **adj, char *links)
 {
 	int				i;
 
@@ -78,7 +78,7 @@ static void			get_adjacencies(t_lem_in *li, t_list_adj *adj, char *links)
 	{
 		if (links[i] == LI_TRUE)
 		{
-			adj->v = li->hash_table[i];
+			*adj = li->hash_table[i];
 			++adj;
 		}
 		++i;
@@ -87,7 +87,7 @@ static void			get_adjacencies(t_lem_in *li, t_list_adj *adj, char *links)
 
 static void			list_adj(t_lem_in *li)
 {
-	t_list_adj		*adj;
+	t_vertex		**adj;
 	int				count_links;
 	int				i;
 
@@ -95,7 +95,7 @@ static void			list_adj(t_lem_in *li)
 	while (i < li->count_vertex)
 	{
 		count_links = get_count_links(li->matrix_adj[i], li->count_vertex);
-		adj = (t_list_adj *)ft_memalloc(sizeof(t_list_adj) * count_links);
+		adj = (t_vertex **)malloc(sizeof(t_vertex *) * count_links);
 		if (!adj)
 			error(strerror(errno));
 		get_adjacencies(li, adj, li->matrix_adj[i]);

@@ -1,102 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_ants.c                                        :+:      :+:    :+:   */
+/*   push_ants_cormund.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 12:51:32 by vmormont          #+#    #+#             */
+/*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
 /*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				check_size(int **size)
+t_ant		*init_ants(int count_ants)
 {
-	int			s;
-	int			j;
+	t_ant	*first_ant;
+	t_ant	*ant;
 
-
-	s = 1;
-	if ((*size)[1] - (*size)[0] > 1)
-		++(*size)[0];
-	else
+	first_ant = ft_memalloc(sizeof(t_ant));
+	if (!first_ant)
+		error(strerror(errno));
+	first_ant->number = 1;
+	ant = first_ant;
+	while (--count_ants)
 	{
-		j = 0;
-		while ((*size)[j] == (*size)[j + 1])
-			j++;
-		while (j > 0)
-		{
-			(*size)[j]++;
-			j--;
-			s++;
-		}
+		ant->next = ft_memalloc(sizeof(t_ant));
+		if (!ant->next)
+			error(strerror(errno));
+		ant->next->number = ant->number + 1;
+		ant = ant->next;
 	}
-	return (s);
+	return (first_ant);
 }
 
-void			init_dist(int **dist, t_paths finding)
-{
-	t_path		*path;
-	int			i;
+// void		move_ant(t_ant *ant, t_path *path)
+// {
+// 	if (ant->move && (*ant->room)->type == LI_END && (ant->end = true))
+// 	{
+// 		(*ant->room)->vizited = false;
+// 		++(*ant->room)->count_ants;
+// 	}
+// 	else if (ant->move && (*ant->room + 1)->vizited)
+// 		return ;
+// 	else if (ant->move)
+// 	{
+// 		(*ant->room)->vizited = false;
+// 		++ant->room;
+// 		(*ant->room)->vizited = true;
+// 	}
+// 	else
+// 	{
+// 		while (path && (path->v[0]->vizited || !path->ants))
+// 			if (!(path = path->next))
+// 				return ;
+// 		ant->room = path->v;
+// 		ant->move = true;
+// 		(*path->v)->vizited = true;
+// 		--path->ants;
+// 	}
+// 	if (ant->move && !ant->end)
+// 		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
+// }
 
-	path = finding.path;
-	i = 0;
-	while (i != finding.count_path)
+void		move_ant(t_ant *ant, t_path *path)
+{
+	if (ant->move && (*ant->room)->type == LI_END)
 	{
-		dist[i] = path->dist;
-		path = path->next;
-		i++;
+		ant->move = false;
+		ant->end = true;
+		(*ant->room)->vizited = false;
 	}
+	else if (!ant->move)
+	{
+		while (path && (path->v[0]->vizited || !path->ants))
+			path = path->next;
+		if (!path)
+			return ;
+		ant->room = path->v;
+		ant->move = true;
+		(*path->v)->vizited = true;
+		--path->ants;
+		if ((*path->v)->type == LI_END)
+			++(*path->v)->count_ants;
+	}
+	else if (ant->move)
+	{
+		(*ant->room)->vizited = false;
+		++ant->room;
+		(*ant->room)->vizited = true;
+		if ((*ant->room)->type == LI_END)
+			++(*ant->room)->count_ants;
+	}
+	if (ant->move)
+		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
 }
 
-void			send_left_ants(t_paths *finding)
+void		push_ants(t_lem_in *li, t_paths paths)
 {
-	t_path		*cur_path;
-	int			i;
+	t_ant	*first_ant;
+	t_ant	*ant;
 
-	i = 0;
-	cur_path = finding->path;
-	while (cur_path)
+	first_ant = init_ants(li->count_ants);
+	li->end = li->list_adj[li->count_vertex - 1];
+	while (li->end->count_ants < li->count_ants)
 	{
-		if (cur_path->v[i]->count_ants > 0)
+		ant = first_ant;
+		while (ant)
 		{
-			cur_path->v[i + 1]->count_ants += 1;
-			cur_path->v[i]->count_ants -= 1;
+			if (!ant->end)
+				move_ant(ant, paths.path);
+			ant = ant->next;
 		}
-		cur_path = cur_path->next;
+		ft_printf("\n");
 	}
-}
-
-void			push_ants(t_paths finding, t_lem_in *li)
-{
-	t_path		*path;
-	int			dist[finding.count_path + 1];
-	int			counter;
-	int			need_push_ant;
-	int			ants;
-
-	init_dist(&dist, finding);
-	path = finding.path;
-	ants = 0;
-	while (li->end->count_ants != li->count_ants)
-	{
-		counter = 0;
-		need_push_ant = check_size(&(dist));
-		while (counter < need_push_ant)
-		{
-			if (path->v[0]->count_ants == 1)
-				send_left_ants(&finding);
-			if (li->start->count_ants > 0)
-			{
-				send_ant(finding, ants);
-				li->start->count_ants--;
-			}
-			++counter;
-			++ants;
-		}
-		write(1, "\n", 1);
-	}
-		send_ants_to_end(finding);
+	// printf("count_step = %d\n", paths.count_steps);
 }

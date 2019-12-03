@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:05:07 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:20:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_input		t_input;
 typedef struct s_pnt		t_pnt;
 typedef struct s_vertex		t_vertex;
 typedef struct s_link		t_link;
-typedef struct s_list_adj	t_list_adj;
 typedef struct s_lem_in		t_lem_in;
 typedef struct s_queue		t_queue;
 typedef struct s_path		t_path;
@@ -67,7 +66,7 @@ struct						s_pnt
 
 struct						s_vertex
 {
-	t_list_adj				*adj;
+	t_vertex				**adj;
 	t_pnt					coord;
 	int						id;
 	int						count_edges;
@@ -95,12 +94,6 @@ struct						s_link
 	t_vertex				*vertex_a;
 	t_vertex				*vertex_b;
 	struct s_link			*next;
-};
-
-struct						s_list_adj
-{
-	t_vertex				*v;
-	bool					status;
 };
 
 struct						s_lem_in

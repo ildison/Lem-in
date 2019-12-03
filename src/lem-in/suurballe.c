@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   suurballe_copy.c                                   :+:      :+:    :+:   */
+/*   suurballe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 12:49:00 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:14:27 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,44 +48,11 @@ void			add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path)
 	++paths->count_path;
 }
 
-void			open_link(t_vertex *v)
-{
-	int			i;
-
-	i = 0;
-	while (i < v->count_edges)
-	{
-		if (v->adj[i].v == v->neighbor)
-		{
-			v->adj[i].status = LI_OPEN;
-			break ;
-		}
-		++i;
-	}
-}
-
-
 void			clean_marked(t_vertex **list_adj)
 {
 	while (*list_adj)
 	{
 		(*list_adj)->marked = false;
-		++list_adj;
-	}
-}
-
-void			open_links(t_vertex **list_adj)
-{
-	int			i;
-
-	while (*list_adj)
-	{
-		i = 0;
-		while (i < (*list_adj)->count_edges)
-		{
-			(*list_adj)->adj[i].status = LI_OPEN;
-			++i;
-		}
 		++list_adj;
 	}
 }
@@ -117,20 +84,20 @@ t_paths			find_paths(t_queue *queue, t_lem_in *li, t_queue *last, int n_path)
 		vrx = pop_queue(&queue);
 		i = LI_COUNTER;
 		while (++i < vrx->count_edges)
-			if (is_open_link(li, vrx, vrx->adj[i].v) == -1  && !vrx->adj[i].v->marked)
+			if (is_open_link(li, vrx, vrx->adj[i]) == -1  && !vrx->adj[i]->marked)
 			{
-				vrx->adj[i].v->dist = vrx->dist + 1;
-				vrx->adj[i].v->neighbor = vrx;
-				if (vrx->adj[i].v->type == LI_END)
+				vrx->adj[i]->dist = vrx->dist + 1;
+				vrx->adj[i]->neighbor = vrx;
+				if (vrx->adj[i]->type == LI_END)
 				{
-					add_new_path(&path, vrx->adj[i].v, &last_path);
+					add_new_path(&path, vrx->adj[i], &last_path);
 					if (!(--n_path))
 						return (path);
 				}
 				else
 				{
-					enqueue(&queue, vrx->adj[i].v, &last);
-					vrx->adj[i].v->marked = true;
+					enqueue(&queue, vrx->adj[i], &last);
+					vrx->adj[i]->marked = true;
 				}
 			}
 	}
