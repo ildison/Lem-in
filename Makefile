@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/03 13:56:44 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/03 14:38:37 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_NAME := lem-in.c\
 			push_ants.c\
 			bonus.c\
 			hash_table.c\
+			find_paths.c\
 			get_count_steps_and_ants.c
 
 # SRC_VIS := visualization.c\

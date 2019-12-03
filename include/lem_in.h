@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 14:25:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 14:41:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ struct					s_vertex
 	char				type;
 	bool				marked;
 	bool				splited;
+	bool				vizited;
 	int					count_ants;
 	t_vertex			*out;
 	struct s_vertex		*neighbor;
@@ -160,7 +161,7 @@ int						get_edge(t_lem_in *li, t_vertex *src,\
 void					set_matrix_adj(char **matrix_adj, t_link *link);
 
 /*
-/	bonus
+**	bonus
 */
 void					print_input(t_input *in);
 void					print_vertex(t_vertex *vertex);
