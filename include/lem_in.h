@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:41:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 14:05:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define LI_TRUE 1
 # define LI_FALSE 0
 
+# define LI_REQUIRED_TWO_PATHS 1
 # define LI_COUNTER -1
 
 # define LI_START 1
@@ -158,7 +159,6 @@ t_vertex					*bfs(t_queue *queue,  t_lem_in *li, t_queue *last);
 t_paths						check_paths(t_lem_in *li);
 
 int							validation(t_lem_in *li, char *line);
-void						init_dist(int *dist, t_paths finding);
 void						push_ants(t_lem_in *li, t_paths paths);
 void						print_finding(t_paths finding);
 int							is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);

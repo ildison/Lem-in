@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:54:55 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 14:05:49 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_paths			check_paths(t_lem_in *li)
 	if (best_paths.count_path == 0)
 		error(LI_ERROR_NO_PATH_FROM_START_TO_END);
 	best_paths.count_steps = count_steps_and_ants(best_paths, li->count_ants);
-	count_required_paths = 2;
-	while (count_required_paths < li->count_ants)
+	count_required_paths = LI_REQUIRED_TWO_PATHS;
+	while (++count_required_paths < li->count_ants)
 	{
 		new_paths = suurballe(li, count_required_paths);
 		new_paths.count_steps = count_steps_and_ants(new_paths, li->count_ants);
@@ -51,8 +51,8 @@ t_paths			check_paths(t_lem_in *li)
 		}
 		if (new_paths.count_steps < best_paths.count_steps)
 			best_paths = new_best_paths(best_paths, new_paths);
-		free_paths(new_paths.path);
-		++count_required_paths;
+		else
+			free_paths(new_paths.path);
 	}
 	return (best_paths);
 }
