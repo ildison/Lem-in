@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:27:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:30:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ struct						s_ant
 void						read_input(t_input **beg_input);
 void						parsing(t_lem_in *li);
 void 						adjacencies(t_lem_in *li);
+int							id_increment(t_vertex *vertex);
+t_vertex					**hash_table(t_vertex *vertex, int count_vertex);
 t_paths						suurballe(t_lem_in *li, int count_required_paths);
 void						enqueue(t_queue **queue, t_vertex *vertex,\
 														t_queue **last);

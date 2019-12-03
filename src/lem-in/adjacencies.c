@@ -6,43 +6,11 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:27:48 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:29:27 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int			id_increment(t_vertex *vertex)
-{
-	int				count_vertex;
-
-	count_vertex = 0;
-	while (vertex)
-	{
-		vertex->id = count_vertex;
-		++count_vertex;
-		vertex = vertex->next;
-	}
-	return (count_vertex);
-}
-
-static t_vertex		**hash_table(t_vertex *vertex, int count_vertex)
-{
-	t_vertex		**hash_table;
-	int				i;
-
-	hash_table = (t_vertex **)ft_memalloc(sizeof(t_vertex *) * (count_vertex + 1));
-	if (!hash_table)
-		error(strerror(errno));
-	i = 0;
-	while (i < count_vertex)
-	{
-		hash_table[i] = vertex;
-		vertex = vertex->next;
-		++i;
-	}
-	return (hash_table);
-}
 
 void				set_matrix_adj(char **matrix_adj, t_link *link)
 {
