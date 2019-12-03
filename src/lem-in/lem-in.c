@@ -77,7 +77,7 @@
 // 		j =  list_adj[i]->count_edges;
 // 		while (j--)
 // 		{
-// 			printf("%d-", linked->vrtx->id);
+// 			printf("%d-", linked->v->id);
 // 			++linked;
 // 		}
 // 		++i;
@@ -85,28 +85,29 @@
 // 	printf("\n");
 // }
 
-// void			print_finding(t_paths finding)
-// {
-// 	t_path		*path;
-// 	int			i;
+void			print_finding(t_paths finding)
+{
+	t_path		*path;
+	int			i;
 
-// 	printf(".................\n");
-// 	path = finding.path;
-// 	while (path)
-// 	{
-// 		printf("len %d\n", path->dist);
-// 		i = 0;
-// 		while (i < path->dist)
-// 		{
-// 			printf("%s ", path->vrtx[i]->name);
-// 			++i;
-// 		}
-// 		printf("\n");
-// 		path = path->next;
-// 	}
-// 	printf("count_paths = %d\n", finding.count_path);
-// 	printf(".................\n");
-// }
+	printf(".................\n");
+	path = finding.path;
+	while (path)
+	{
+		printf("\nlen %d\n\n", path->dist);
+		i = 0;
+		while (i < path->dist)
+		{
+			printf("%s ", path->v[i]->name);
+			++i;
+		}
+		printf("\n");
+		path = path->next;
+	}
+	printf("count_paths = %d\n", finding.count_path);
+	printf("count steps = %d\n", finding.count_steps);
+	printf(".................\n");
+}
 
 // static void		free_lem_in(t_lem_in **li)
 // {
@@ -124,17 +125,17 @@ int   			main(void)
 	read_input(&li->first_line);
 	parsing(li);
 	adjacencies(li);
-	// print_input(li->first_line);
 	paths = check_paths(li);
 	push_ants(li, paths);
+	// free_lem_in(li);
 	/*
-	** TEST PRINTS
+	** FOR BONUS
 	*/
+	// print_input(li->first_line);
 	// print_vertex(li->start);
 	// print_links(li->first_link);
 	// print_matrix_adj(li->matrix_adj, li->count_vertex);
 	// print_list_adj(li->list_adj, li->count_vertex);
-	// print_finding(finding); //? for bonus mb
-	// free_lem_in(li);
+	// print_finding(paths);
 	return (0);
 }

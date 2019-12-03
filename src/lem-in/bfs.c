@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/02 11:26:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 11:12:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,29 @@
 // 		pop_queue(&queue);
 // 		if (adj->splited == true && adj->neighbor->splited == false)
 // 		{
-// 			if (!adj->adj[adj->path_index].vrtx->marked)
+// 			if (!adj->adj[adj->path_index].v->marked)
 // 			{
-// 				adj->adj[adj->path_index].vrtx->marked = true;
-// 				adj->adj[adj->path_index].vrtx->neighbor = adj;
-// 				enqueue(&queue, adj->adj[adj->path_index].vrtx, &last);
+// 				adj->adj[adj->path_index].v->marked = true;
+// 				adj->adj[adj->path_index].v->neighbor = adj;
+// 				enqueue(&queue, adj->adj[adj->path_index].v, &last);
 // 			}
 // 			continue ;
 // 		}
 // 		i = 0;
 // 		while (i < adj->count_edges)
 // 		{
-// 			if (adj->adj[i].vrtx->type == LI_END && adj->adj[i].status == LI_OPEN)
+// 			if (adj->adj[i].v->type == LI_END && adj->adj[i].status == LI_OPEN)
 // 			{
-// 				adj->adj[i].vrtx->neighbor = adj;
-// 				adj->adj[i].vrtx->adj_index = i;
-// 				return (adj->adj[i].vrtx);
+// 				adj->adj[i].v->neighbor = adj;
+// 				adj->adj[i].v->adj_index = i;
+// 				return (adj->adj[i].v);
 // 			}
-// 			else if (!adj->adj[i].vrtx->marked && adj->adj[i].status == LI_OPEN)
+// 			else if (!adj->adj[i].v->marked && adj->adj[i].status == LI_OPEN)
 // 			{
-// 				enqueue(&queue, adj->adj[i].vrtx, &last);
-// 				adj->adj[i].vrtx->marked = true;
-// 				adj->adj[i].vrtx->neighbor = adj;
-// 				adj->adj[i].vrtx->adj_index = i;
+// 				enqueue(&queue, adj->adj[i].v, &last);
+// 				adj->adj[i].v->marked = true;
+// 				adj->adj[i].v->neighbor = adj;
+// 				adj->adj[i].v->adj_index = i;
 // 			}
 // 			++i;
 // 		}
@@ -61,7 +61,7 @@
 // 	int			i;
 
 // 	i = 0;
-// 	while (src->adj[i].vrtx != dst)
+// 	while (src->adj[i].v != dst)
 // 		++i;
 // 	return (!src->adj[i].status);
 // }
@@ -71,7 +71,7 @@
 // 	int			i;
 
 // 	i = 0;
-// 	while (haystack->adj[i].vrtx != needle)
+// 	while (haystack->adj[i].v != needle)
 // 		++i;
 // 	return (i);
 // }
@@ -87,16 +87,16 @@ t_vertex		*marked_adjacent(t_queue **queue, t_lem_in *li, t_vertex *vrx, t_queue
 
 	i = LI_COUNTER;
 	while (++i < LI_COUNT_ADJACENTS)
-		if (is_open_link(li, vrx, vrx->adj[i].vrtx) && !vrx->adj[i].vrtx->marked)
+		if (is_open_link(li, vrx, vrx->adj[i].v) == 1 && !vrx->adj[i].v->marked)
 		{
-			// printf("vrx->name %s | vrx->adj[i].vrtx->name %s\n", vrx->name, vrx->adj[i].vrtx->name);
-			vrx->adj[i].vrtx->neighbor = vrx;
-			// vrx->adj[i].vrtx->adj_index = i;
-			if (vrx->adj[i].vrtx->type == LI_END)
-				return (vrx->adj[i].vrtx);
+			// printf("vrx->name %s | vrx->adj[i].v->name %s\n", vrx->name, vrx->adj[i].v->name);
+			vrx->adj[i].v->neighbor = vrx;
+			// vrx->adj[i].v->adj_index = i;
+			if (vrx->adj[i].v->type == LI_END)
+				return (vrx->adj[i].v);
 			else
-				enqueue(queue, vrx->adj[i].vrtx, last);
-			vrx->adj[i].vrtx->marked = true;
+				enqueue(queue, vrx->adj[i].v, last);
+			vrx->adj[i].v->marked = true;
 		}
 	return (NULL);
 }
@@ -110,13 +110,14 @@ t_vertex		*bfs(t_queue *queue, t_lem_in *li, t_queue *last)
 	while (queue)
 	{
 		vrx = pop_queue(&queue);
-		if (vrx->splited && is_open_link(li, vrx, vrx->neighbor))
+		if (vrx->splited && is_open_link(li, vrx, vrx->neighbor) == 1)
 		{
 			if (vrx->out->type != LI_START && !vrx->out->marked)
 			{
 				vrx->out->marked = true;
 				vrx->out->neighbor = vrx;
-				enqueue(&queue, vrx->out, &last);
+				if ((vrx = marked_adjacent(&queue, li, vrx->out, &last)))
+					return (vrx);
 			}
 		}
 		else if ((vrx = marked_adjacent(&queue, li, vrx, &last)))

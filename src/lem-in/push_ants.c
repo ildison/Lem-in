@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 12:51:32 by vmormont          #+#    #+#             */
-/*   Updated: 2019/11/25 13:09:44 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void			send_left_ants(t_paths *finding)
 	cur_path = finding->path;
 	while (cur_path)
 	{
-		if (cur_path->vrtx[i]->count_ants > 0)
+		if (cur_path->v[i]->count_ants > 0)
 		{
-			cur_path->vrtx[i + 1]->count_ants += 1;
-			cur_path->vrtx[i]->count_ants -= 1;
+			cur_path->v[i + 1]->count_ants += 1;
+			cur_path->v[i]->count_ants -= 1;
 		}
 		cur_path = cur_path->next;
 	}
@@ -86,7 +86,7 @@ void			push_ants(t_paths finding, t_lem_in *li)
 		need_push_ant = check_size(&(dist));
 		while (counter < need_push_ant)
 		{
-			if (path->vrtx[0]->count_ants == 1)
+			if (path->v[0]->count_ants == 1)
 				send_left_ants(&finding);
 			if (li->start->count_ants > 0)
 			{

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 13:10:37 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/26 11:50:53 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 t_vertex		*pop_queue(t_queue **queue)
 {
-	t_vertex	*vrtx;
+	t_vertex	*v;
 	t_queue		*head;
 
-	vrtx = NULL;
+	v = NULL;
 	if (*queue)
 	{
-		vrtx = (*queue)->vertex;
+		v = (*queue)->vertex;
 		head = *queue;
 		*queue = (*queue)->next;
 		free(head);
 		head = NULL;
 	}
-	return (vrtx);
+	return (v);
 }
 
 void			enqueue(t_queue **queue, t_vertex *vertex, t_queue **last)

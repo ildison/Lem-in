@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 09:54:21 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ t_ant		*init_ants(int count_ants)
 // 	}
 // 	else
 // 	{
-// 		while (path && (path->vrtx[0]->vizited || !path->ants))
+// 		while (path && (path->v[0]->vizited || !path->ants))
 // 			if (!(path = path->next))
 // 				return ;
-// 		ant->room = path->vrtx;
+// 		ant->room = path->v;
 // 		ant->move = true;
-// 		(*path->vrtx)->vizited = true;
+// 		(*path->v)->vizited = true;
 // 		--path->ants;
 // 	}
 // 	if (ant->move && !ant->end)
@@ -72,16 +72,16 @@ void		move_ant(t_ant *ant, t_path *path)
 	}
 	else if (!ant->move)
 	{
-		while (path && (path->vrtx[0]->vizited || !path->ants))
+		while (path && (path->v[0]->vizited || !path->ants))
 			path = path->next;
 		if (!path)
 			return ;
-		ant->room = path->vrtx;
+		ant->room = path->v;
 		ant->move = true;
-		(*path->vrtx)->vizited = true;
+		(*path->v)->vizited = true;
 		--path->ants;
-		if ((*path->vrtx)->type == LI_END)
-			++(*path->vrtx)->count_ants;
+		if ((*path->v)->type == LI_END)
+			++(*path->v)->count_ants;
 	}
 	else if (ant->move)
 	{

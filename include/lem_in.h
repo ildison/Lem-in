@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 11:21:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 12:15:05 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ struct						s_link
 
 struct						s_list_adj
 {
-	t_vertex				*vrtx;
+	t_vertex				*v;
 	bool					status;
 };
 
@@ -109,7 +109,6 @@ struct						s_lem_in
 	t_vertex				**hash_table;
 	t_vertex				**list_adj;
 	t_link					*first_link;
-	t_list_adj				*list_adj_old; //? delete
 	char					**matrix_adj;
 	int						count_ants;
 	int						count_vertex;
@@ -119,8 +118,6 @@ struct						s_lem_in
 
 struct						s_queue
 {
-	int						index;
-	int						steps;
 	t_vertex				*vertex;
 	t_queue					*next;
 	t_queue					*prev;
@@ -128,7 +125,7 @@ struct						s_queue
 
 struct						s_path
 {
-	t_vertex				**vrtx;
+	t_vertex				**v;
 	int						dist;
 	int						ants;
 	t_path					*next;
