@@ -6,64 +6,11 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 14:32:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 14:39:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:41:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void			init_dist(int *dist, t_paths finding)
-{
-	t_path		*path;
-	int			i;
-
-	path = finding.path;
-	i = 0;
-	while (i < finding.count_path)
-	{
-		dist[i] = path->dist;
-		path = path->next;
-		i++;
-	}
-}
-
-static void	count_ants_for_paths(int *dist, t_path *path)
-{
-	int		i;
-
-	i = 0;
-	while (path)
-	{
-		path->ants = dist[i] - path->dist;
-		++i;
-		path = path->next;
-	}
-}
-
-static int	count_steps_and_ants(t_paths paths, int count_ants)
-{
-	int		dist_increment[paths.count_path + 1];
-	int		max_use_index;
-	int		i;
-
-	init_dist(dist_increment, paths);
-	dist_increment[paths.count_path] = INT_MAX;
-	max_use_index = 0;
-	while (count_ants)
-	{
-		while (dist_increment[max_use_index] >= dist_increment[max_use_index + 1])
-			++max_use_index;
-		i = 0;
-		while (i <= max_use_index && count_ants)
-		{
-			++dist_increment[i];
-			++i;
-			--count_ants;
-		}
-	}
-	count_ants_for_paths(dist_increment, paths.path);
-	return (dist_increment[0] - 1);
-}
 
 t_paths		check_paths(t_lem_in *li)
 {
@@ -80,7 +27,6 @@ t_paths		check_paths(t_lem_in *li)
 	{
 		new_paths = suurballe(li, count_required_paths);
 		new_paths.count_steps = count_steps_and_ants(new_paths, li->count_ants);
-		// print_finding(new_paths);
 		if (new_paths.count_path < count_required_paths ||\
 						new_paths.count_steps > best_paths.count_steps)
 		{

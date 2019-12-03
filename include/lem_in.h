@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:30:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:41:43 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void 						adjacencies(t_lem_in *li);
 int							id_increment(t_vertex *vertex);
 t_vertex					**hash_table(t_vertex *vertex, int count_vertex);
 t_paths						suurballe(t_lem_in *li, int count_required_paths);
+int							count_steps_and_ants(t_paths paths, int count_ants);
 void						enqueue(t_queue **queue, t_vertex *vertex,\
 														t_queue **last);
 t_vertex					*pop_queue(t_queue **queue);
