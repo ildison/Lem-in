@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 14:05:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 14:25:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@
 # define CH_START '1'
 # define CH_END '0'
 
-# define LI_OPEN 0
-# define LI_CLOSE 1
+# define LI_OPEN 1
+# define LI_CLOSE 0
+# define LI_REVERSE -1
 
 # define LI_COUNT_ADJACENTS vrx->count_edges
 
@@ -42,136 +43,130 @@
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
 
-typedef struct s_input		t_input;
-typedef struct s_pnt		t_pnt;
-typedef struct s_vertex		t_vertex;
-typedef struct s_link		t_link;
-typedef struct s_lem_in		t_lem_in;
-typedef struct s_queue		t_queue;
-typedef struct s_path		t_path;
-typedef struct s_paths		t_paths;
-typedef struct s_ant		t_ant;
+typedef struct s_input	t_input;
+typedef struct s_pnt	t_pnt;
+typedef struct s_vertex	t_vertex;
+typedef struct s_link	t_link;
+typedef struct s_lem_in	t_lem_in;
+typedef struct s_queue	t_queue;
+typedef struct s_path	t_path;
+typedef struct s_paths	t_paths;
+typedef struct s_ant	t_ant;
 
-struct						s_input
+struct					s_input
 {
-	char					*line;
-	int						type;
-	struct s_input			*next;
+	char				*line;
+	int					type;
+	struct s_input		*next;
 };
 
-struct						s_pnt
+struct					s_pnt
 {
-	int						y;
-	int						x;
+	int					y;
+	int					x;
 };
 
-struct						s_vertex
+struct					s_vertex
 {
-	t_vertex				**adj;
-	t_pnt					coord;
-	int						id;
-	int						count_edges;
-	int						dist;
-	int						adj_index;
-	int						path_index;
-	char					*name;
-	char					type;
-	bool					marked;
-	bool					splited;
-	bool					duplicate;
-	bool					vizited;
-	int						count_ants;
-
-	bool					is_in;
-	bool					is_out;
-	t_vertex				*out;
-
-	struct s_vertex			*neighbor;
-	struct s_vertex			*next;
+	t_vertex			**adj;
+	t_pnt				coord;
+	int					id;
+	int					count_edges;
+	int					dist;
+	char				*name;
+	char				type;
+	bool				marked;
+	bool				splited;
+	int					count_ants;
+	t_vertex			*out;
+	struct s_vertex		*neighbor;
+	struct s_vertex		*next;
 };
 
-struct						s_link
+struct					s_link
 {
-	t_vertex				*vertex_a;
-	t_vertex				*vertex_b;
-	struct s_link			*next;
+	t_vertex			*vertex_a;
+	t_vertex			*vertex_b;
+	struct s_link		*next;
 };
 
-struct						s_lem_in
+struct					s_lem_in
 {
-	t_input					*first_line;
-	t_vertex				*start;
-	t_vertex				*end;
-	t_vertex				**hash_table;
-	t_vertex				**list_adj;
-	t_link					*first_link;
-	char					**matrix_adj;
-	int						count_ants;
-	int						count_vertex;
-	int						count_path;
-	bool					flag_link;
+	t_input				*first_line;
+	t_vertex			*start;
+	t_vertex			*end;
+	t_vertex			**hash_table;
+	t_vertex			**list_adj;
+	t_link				*first_link;
+	char				**matrix_adj;
+	int					count_ants;
+	int					count_vertex;
+	int					count_path;
+	bool				flag_link;
 };
 
-struct						s_queue
+struct					s_queue
 {
-	t_vertex				*vertex;
-	t_queue					*next;
-	t_queue					*prev;
+	t_vertex			*vertex;
+	t_queue				*next;
+	t_queue				*prev;
 };
 
-struct						s_path
+struct					s_path
 {
-	t_vertex				**v;
-	int						dist;
-	int						ants;
-	t_path					*next;
+	t_vertex			**v;
+	int					dist;
+	int					ants;
+	t_path				*next;
 };
 
-struct						s_paths
+struct					s_paths
 {
-	t_path					*path;
-	int						count_path;
-	int						count_steps;
+	t_path				*path;
+	int					count_path;
+	int					count_steps;
 };
 
-struct						s_ant
+struct					s_ant
 {
-	int						number;
-	bool					move;
-	bool					end;
-	t_vertex				**room;
-	t_ant					*next;
+	int					number;
+	bool				move;
+	bool				end;
+	t_vertex			**room;
+	t_ant				*next;
 };
 
 
-void						read_input(t_input **beg_input);
-void						parsing(t_lem_in *li);
-void 						adjacencies(t_lem_in *li);
-int							id_increment(t_vertex *vertex);
-t_vertex					**hash_table(t_vertex *vertex, int count_vertex);
-t_paths						suurballe(t_lem_in *li, int count_required_paths);
-int							count_steps_and_ants(t_paths paths, int count_ants);
-void						enqueue(t_queue **queue, t_vertex *vertex,\
-														t_queue **last);
-t_vertex					*pop_queue(t_queue **queue);
-void						clean_queue(t_queue **queue, t_queue **last);
-t_vertex					*bfs(t_queue *queue,  t_lem_in *li, t_queue *last);
-t_paths						check_paths(t_lem_in *li);
-
-int							validation(t_lem_in *li, char *line);
-void						push_ants(t_lem_in *li, t_paths paths);
-void						print_finding(t_paths finding);
-int							is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);
-void						set_matrix_adj(char **matrix_adj, t_link *link);
+void					read_input(t_input **beg_input);
+void					parsing(t_lem_in *li);
+void 					adjacencies(t_lem_in *li);
+int						id_increment(t_vertex *vertex);
+t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
+t_paths					suurballe(t_lem_in *li, int count_required_paths);
+t_paths					find_paths(t_queue *queue, t_lem_in *li, t_queue *last,\
+																	int n_path);
+int						count_steps_and_ants(t_paths paths, int count_ants);
+void					enqueue(t_queue **queue, t_vertex *vertex,\
+													t_queue **last);
+t_vertex				*pop_queue(t_queue **queue);
+void					clean_queue(t_queue **queue, t_queue **last);
+t_vertex				*bfs(t_queue *queue,  t_lem_in *li, t_queue *last);
+t_paths					check_paths(t_lem_in *li);
+int						validation(t_lem_in *li, char *line);
+void					push_ants(t_lem_in *li, t_paths paths);
+void					print_finding(t_paths finding);
+int						get_edge(t_lem_in *li, t_vertex *src,\
+															t_vertex *dst);
+void					set_matrix_adj(char **matrix_adj, t_link *link);
 
 /*
 /	bonus
 */
-void						print_input(t_input *in);
-void						print_vertex(t_vertex *vertex);
-void						print_links(t_link *link);
-void						print_matrix_adj(char **matrix, int count_vertex);
-void						print_list_adj(t_vertex **list_adj, int count_vertex);
-void						print_finding(t_paths finding);
+void					print_input(t_input *in);
+void					print_vertex(t_vertex *vertex);
+void					print_links(t_link *link);
+void					print_matrix_adj(char **matrix, int count_vertex);
+void					print_list_adj(t_vertex **list_adj, int count_vertex);
+void					print_finding(t_paths finding);
 
 # endif
