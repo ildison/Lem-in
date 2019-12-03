@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 12:15:05 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/03 13:05:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 
 # define LI_OPEN 0
 # define LI_CLOSE 1
+
+# define LI_COUNT_ADJACENTS vrx->count_edges
 
 # define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
@@ -163,7 +165,17 @@ int							validation(t_lem_in *li, char *line);
 void						init_dist(int *dist, t_paths finding);
 void						push_ants(t_lem_in *li, t_paths paths);
 void						print_finding(t_paths finding);
-int				is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);
-void				matrix_adj(char **matrix_adj, t_link *link);
+int							is_open_link(t_lem_in *li, t_vertex *src, t_vertex *dst);
+void						matrix_adj(char **matrix_adj, t_link *link);
+
+/*
+/	bonus
+*/
+void						print_input(t_input *in);
+void						print_vertex(t_vertex *vertex);
+void						print_links(t_link *link);
+void						print_matrix_adj(char **matrix, int count_vertex);
+void						print_list_adj(t_vertex **list_adj, int count_vertex);
+void						print_finding(t_paths finding);
 
 # endif
