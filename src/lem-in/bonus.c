@@ -6,7 +6,7 @@
 /*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:55:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/05 17:00:33 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/05 18:32:12 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,25 @@ void			print_input(t_input *in)
 	}
 }
 
-void			print_vertex(t_vertex *vertex)
-{
-	printf("vertexs:\n\nname => id\n");
-	while (vertex)
-	{
-		printf("%s => %d\n", vertex->name, vertex->id);
-		vertex = vertex->next;
-	}
-}
-
-void			print_links(t_link *link)
-{
-	printf("\nlinks:\n\n");
-	while (link)
-	{
-		ft_printf("%s - %s\n", link->vertex_a->name, link->vertex_b->name);
-		link = link->next;
-	}
-}
-
 void			print_matrix_adj(char **matrix, int count_vertex)
 {
 	int			i;
 	int			j;
 
-	printf("\nmatrix_adj:\n\n ");
+	ft_printf("\nmatrix_adj:\n\n ");
 	i = 0;
 	while (i < count_vertex)
-		printf("  %d", i++);
+		ft_printf("  %d", i++);
 	j = 0;
 	while (j < count_vertex)
 	{
-		printf("\n%d", j);
+		ft_printf("\n%d", j);
 		i = 0;
 		while (i < count_vertex)
-			printf("  %d", matrix[j][i++]);
+			ft_printf("  %d", matrix[j][i++]);
 		++j;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 void			print_list_adj(t_vertex **list_adj, int count_vertex)
@@ -68,24 +48,22 @@ void			print_list_adj(t_vertex **list_adj, int count_vertex)
 	int			j;
 	t_vertex	**linked;
 
-	printf("\nlist_adj:\n ");
+	ft_printf("\nlist_adj:\n ");
 	i = 0;
 	while (i < count_vertex)
 	{
-		printf("\n%d ", list_adj[i]->id);
+		ft_printf("\n%d ", list_adj[i]->id);
 		linked = list_adj[i]->adj;
-		j =  list_adj[i]->count_edges;
+		j = list_adj[i]->count_edges;
 		while (j--)
 		{
-			printf("%d-", (*linked)->id);
+			ft_printf("%d-", (*linked)->id);
 			++linked;
 		}
 		++i;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
-
-
 
 void			print_finding(t_paths finding)
 {
@@ -93,24 +71,25 @@ void			print_finding(t_paths finding)
 	int			i;
 	int			j;
 
-	printf("\nAll Path:\n");
+	ft_printf("\n-----All paths found in the graph:-----\n");
 	path = finding.path;
 	j = 1;
 	while (path)
 	{
-		printf("\n\nPath #%i:\n\n", j);
-		printf("len %d\n", path->dist);
+		ft_printf("\nPath #%i:\n", j++);
+		ft_printf("Path length %d\n\n", path->dist);
 		i = 0;
 		while (i < path->dist)
 		{
-			printf("%s ", path->v[i]->name);
+			if (i + 1 < path->dist)
+				ft_printf("%s - ", path->v[i]->name);
+			else
+				ft_printf("%s", path->v[i]->name);
 			++i;
 		}
-		printf("\n");
+		ft_printf("\n");
 		path = path->next;
-		j++;
 	}
-	printf("{green}count_paths = %d\n", finding.count_path);
-	printf("{green}count steps = %d\n", finding.count_steps);
-	printf("________________\n");
+	ft_printf("\n--Total number of paths in \
+the graph:--\n%d\n", finding.count_path);
 }

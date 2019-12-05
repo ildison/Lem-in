@@ -6,7 +6,7 @@
 #    By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/04 20:50:38 by vmormont         ###   ########.fr        #
+#    Updated: 2019/12/05 18:32:24 by vmormont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ vpath %.o $(DIR_BIN)/$(NAME)
 vpath %.h $(DIR_INCLUDE)
 vpath %.a $(DIR_LIBFT)
 
-SRC_NAME := lem-in.c\
+SRC_NAME := lem_in.c\
 			read_input.c\
 			parsing.c\
 			adjacencies.c\
