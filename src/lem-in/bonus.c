@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:55:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:15:46 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/05 17:00:33 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,21 @@ void			print_list_adj(t_vertex **list_adj, int count_vertex)
 	printf("\n");
 }
 
+
+
 void			print_finding(t_paths finding)
 {
 	t_path		*path;
 	int			i;
+	int			j;
 
-	printf(".................\n");
+	printf("\nAll Path:\n");
 	path = finding.path;
+	j = 1;
 	while (path)
 	{
-		printf("\nlen %d\n\n", path->dist);
+		printf("\n\nPath #%i:\n\n", j);
+		printf("len %d\n", path->dist);
 		i = 0;
 		while (i < path->dist)
 		{
@@ -103,8 +108,9 @@ void			print_finding(t_paths finding)
 		}
 		printf("\n");
 		path = path->next;
+		j++;
 	}
-	printf("count_paths = %d\n", finding.count_path);
-	printf("count steps = %d\n", finding.count_steps);
-	printf(".................\n");
+	printf("{green}count_paths = %d\n", finding.count_path);
+	printf("{green}count steps = %d\n", finding.count_steps);
+	printf("________________\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 14:38:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:40:12 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ t_ant		*init_ants(int count_ants)
 	return (first_ant);
 }
 
+static void	ant_is_move(t_ant **ant)
+{
+	(*(*ant)->room)->vizited = false;
+	++(*ant)->room;
+	(*(*ant)->room)->vizited = true;
+	if ((*(*ant)->room)->type == LI_END)
+		++(*(*ant)->room)->count_ants;
+}
+
 void		move_ant(t_ant *ant, t_path *path)
 {
 	if (ant->move && (*ant->room)->type == LI_END)
@@ -55,15 +64,23 @@ void		move_ant(t_ant *ant, t_path *path)
 			++(*path->v)->count_ants;
 	}
 	else if (ant->move)
-	{
-		(*ant->room)->vizited = false;
-		++ant->room;
-		(*ant->room)->vizited = true;
-		if ((*ant->room)->type == LI_END)
-			++(*ant->room)->count_ants;
-	}
+		ant_is_move(&ant);
 	if (ant->move)
 		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
+}
+
+static void	destroy_ants(t_ant *ants)
+{
+	t_ant	*tmp_free;
+	t_ant	*tmp_ant;
+
+	tmp_ant = ants;
+	while (tmp_ant)
+	{
+		tmp_free = tmp_ant->next;
+		free(tmp_ant);
+		tmp_ant = tmp_free;
+	}
 }
 
 void		push_ants(t_lem_in *li, t_paths paths)
@@ -84,5 +101,5 @@ void		push_ants(t_lem_in *li, t_paths paths)
 		}
 		ft_printf("\n");
 	}
-	// destroy_ants()
+	destroy_ants(first_ant);
 }

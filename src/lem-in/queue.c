@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   queue.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 13:10:37 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/02 16:45:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:17:59 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ void			clean_queue(t_queue **queue, t_queue **last)
 	t_queue		*free_tmp;
 
 	tmp = *queue;
-	if (tmp)
-		while (tmp)
-		{
-			free_tmp = tmp;
-			tmp = tmp->next;
-			free(free_tmp);
-		}
+	while (tmp)
+	{
+		free_tmp = tmp;
+		tmp = tmp->next;
+		free(free_tmp);
+	}
 	*queue = NULL;
 	*last = NULL;
 }

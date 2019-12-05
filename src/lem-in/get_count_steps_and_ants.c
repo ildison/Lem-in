@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_count_steps_and_ants.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 13:40:40 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:41:30 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:29:45 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void		init_dist(int *dist, t_paths finding)
 	}
 }
 
-static void	count_ants_for_paths(int *dist, t_path *path)
+static void		count_ants_for_paths(int *dist, t_path *path)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (path)
@@ -40,18 +40,19 @@ static void	count_ants_for_paths(int *dist, t_path *path)
 	}
 }
 
-int			count_steps_and_ants(t_paths paths, int count_ants)
+int				count_steps_and_ants(t_paths paths, int count_ants)
 {
-	int		dist_increment[paths.count_path + 1];
-	int		max_use_index;
-	int		i;
+	int			dist_increment[paths.count_path + 1];
+	int			max_use_index;
+	int			i;
 
 	init_dist(dist_increment, paths);
 	dist_increment[paths.count_path] = INT_MAX;
 	max_use_index = 0;
 	while (count_ants)
 	{
-		while (dist_increment[max_use_index] >= dist_increment[max_use_index + 1])
+		while (dist_increment[max_use_index] >=
+				dist_increment[max_use_index + 1])
 			++max_use_index;
 		i = 0;
 		while (i <= max_use_index && count_ants)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
+#    By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/03 14:38:37 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/04 20:50:38 by vmormont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ SRC_NAME := lem-in.c\
 			bonus.c\
 			hash_table.c\
 			find_paths.c\
-			get_count_steps_and_ants.c
+			get_count_steps_and_ants.c\
+			clear.c
 
 # SRC_VIS := visualization.c\
 # 			loop.c\

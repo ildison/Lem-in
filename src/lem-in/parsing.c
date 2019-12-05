@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/11/25 12:16:15 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/04 20:39:28 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		add_vertex(t_vertex **start, t_vertex *vertex)
 	if (!(tmp = *start))
 		*start = vertex;
 	else
+	{
 		if (vertex->type == LI_VERTEX || vertex->type == LI_END)
 		{
 			while (tmp->next && tmp->next->type != LI_END)
@@ -53,6 +54,7 @@ static void		add_vertex(t_vertex **start, t_vertex *vertex)
 			vertex->next = tmp;
 			*start = vertex;
 		}
+	}
 }
 
 static t_vertex	*get_vertex(t_vertex *vertex, char *name)

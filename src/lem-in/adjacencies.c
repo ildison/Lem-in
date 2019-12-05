@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adjacencies.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:29:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:28:23 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void			list_adj(t_lem_in *li)
 	}
 }
 
-void 				adjacencies(t_lem_in *li)
+void				adjacencies(t_lem_in *li)
 {
 	li->count_vertex = id_increment(li->start);
 	li->hash_table = hash_table(li->start, li->count_vertex);

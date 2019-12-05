@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 13:28:56 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 13:29:53 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:30:21 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "lem_in.h"
+#include "lem_in.h"
 
 int				id_increment(t_vertex *vertex)
 {
@@ -31,7 +31,8 @@ t_vertex		**hash_table(t_vertex *vertex, int count_vertex)
 	t_vertex	**hash_table;
 	int			i;
 
-	hash_table = (t_vertex **)ft_memalloc(sizeof(t_vertex *) * (count_vertex + 1));
+	hash_table = (t_vertex **)ft_memalloc(sizeof(t_vertex *)
+											* (count_vertex + 1));
 	if (!hash_table)
 		error(strerror(errno));
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 10:40:32 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/03 14:32:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:38:28 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static int			valid_ants(char *line)
 	return (0);
 }
 
-static int		valid_double(t_lem_in *li)
+static int			valid_double(t_lem_in *li)
 {
-	int			start;
-	int			end;
-	t_vertex	*tmp;
+	int				start;
+	int				end;
+	t_vertex		*tmp;
 
 	start = 0;
 	end = 0;
@@ -51,10 +51,10 @@ static int		valid_double(t_lem_in *li)
 	return (0);
 }
 
-static int		valid_vertexs(t_lem_in *li)
+static int			valid_vertexs(t_lem_in *li)
 {
-	t_vertex	*tmp;
-	t_vertex	*tmp2;
+	t_vertex		*tmp;
+	t_vertex		*tmp2;
 
 	tmp = li->start;
 	if (tmp->name[0] == 'L' || !(valid_double(li)))
@@ -76,9 +76,9 @@ static int		valid_vertexs(t_lem_in *li)
 	return (1);
 }
 
-int				validation(t_lem_in *li, char *line)
+int					validation(t_lem_in *li, char *line)
 {
-	int			ants;
+	int				ants;
 
 	if ((ants = valid_ants(line)))
 	{

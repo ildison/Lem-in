@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 14:41:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:55:15 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define LI_REVERSE -1
 
 # define LI_COUNT_ADJACENTS vrx->count_edges
-
-# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start to the end\n"
+# define LI_ADJ_MARKED vrx->adj[i]->marked
+# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start 2 the end\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
 
@@ -137,21 +137,20 @@ struct					s_ant
 	t_ant				*next;
 };
 
-
 void					read_input(t_input **beg_input);
 void					parsing(t_lem_in *li);
-void 					adjacencies(t_lem_in *li);
+void					adjacencies(t_lem_in *li);
 int						id_increment(t_vertex *vertex);
 t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
 t_paths					suurballe(t_lem_in *li, int count_required_paths);
-t_paths					find_paths(t_queue *queue, t_lem_in *li, t_queue *last,\
-																	int n_path);
+t_paths					find_paths(t_queue **queue, t_lem_in *li,\
+									t_queue **last, int n_path);
 int						count_steps_and_ants(t_paths paths, int count_ants);
 void					enqueue(t_queue **queue, t_vertex *vertex,\
 													t_queue **last);
 t_vertex				*pop_queue(t_queue **queue);
 void					clean_queue(t_queue **queue, t_queue **last);
-t_vertex				*bfs(t_queue *queue,  t_lem_in *li, t_queue *last);
+t_vertex				*bfs(t_queue **queue, t_lem_in *li, t_queue **last);
 t_paths					check_paths(t_lem_in *li);
 int						validation(t_lem_in *li, char *line);
 void					push_ants(t_lem_in *li, t_paths paths);
@@ -163,6 +162,7 @@ void					set_matrix_adj(char **matrix_adj, t_link *link);
 /*
 **	bonus
 */
+
 void					print_input(t_input *in);
 void					print_vertex(t_vertex *vertex);
 void					print_links(t_link *link);
@@ -170,4 +170,14 @@ void					print_matrix_adj(char **matrix, int count_vertex);
 void					print_list_adj(t_vertex **list_adj, int count_vertex);
 void					print_finding(t_paths finding);
 
-# endif
+/*
+**	Clear functions
+*/
+
+void					clear_paths(t_path **paths);
+void					clear_matrix(char **matrix);
+void					clear_start(t_vertex *start);
+void					clear_input(t_input *input);
+void					clear_links(t_link *links);
+
+#endif

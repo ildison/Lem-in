@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/03 14:22:11 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/04 20:36:13 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ static void		add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path)
 	++paths->count_path;
 }
 
-
-t_paths			find_paths(t_queue *queue, t_lem_in *li, t_queue *last,\
-																int n_path)
+t_paths			find_paths(t_queue **queue, t_lem_in *li, t_queue **last, int n)
 {
 	t_vertex	*vrx;
 	t_paths		path;
@@ -58,22 +56,21 @@ t_paths			find_paths(t_queue *queue, t_lem_in *li, t_queue *last,\
 
 	last_path = NULL;
 	ft_bzero(&path, sizeof(t_paths));
-	enqueue(&queue, li->list_adj[0], &last);
-	while ((vrx = pop_queue(&queue)))
+	enqueue(queue, li->list_adj[0], last);
+	while ((vrx = pop_queue(queue)))
 	{
 		i = LI_COUNTER;
 		while (++i < vrx->count_edges)
-			if (get_edge(li, vrx, vrx->adj[i]) == LI_REVERSE &&\
-											!vrx->adj[i]->marked)
+			if (get_edge(li, vrx, vrx->adj[i]) == LI_REVERSE && !LI_ADJ_MARKED)
 			{
 				vrx->adj[i]->dist = vrx->dist + 1;
 				vrx->adj[i]->neighbor = vrx;
 				if (vrx->adj[i]->type == LI_END)
 					add_new_path(&path, vrx->adj[i], &last_path);
 				else if ((vrx->adj[i]->marked = true))
-					enqueue(&queue, vrx->adj[i], &last);
-				if (path.count_path == n_path)
-						return (path);
+					enqueue(queue, vrx->adj[i], last);
+				if (path.count_path == n)
+					return (path);
 			}
 	}
 	return (path);
