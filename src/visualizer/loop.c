@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 17:06:24 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 17:29:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ static void		events(t_vis *vis)
 	// 	*step = vis->first_step;
 }
 
-void fill_circle(t_vis *vis, int cx, int cy, int radius)
+void			fill_circle(t_vis *vis, int cx, int cy, int radius)
 {
-	for (double dy = 1; dy <= radius; dy += 1.0)
+	double		dy;
+	double		dx;
+
+	dy = 1;
+	while (dy <= radius)
 	{
-		double dx = floor(sqrt((2.0 * radius * dy) - (dy * dy)));
+		dx = floor(sqrt((2.0 * radius * dy) - (dy * dy)));
 		// int x = cx - dx;
 		SDL_SetRenderDrawColor(vis->ren, vis->rect_clr.r, vis->rect_clr.g, vis->rect_clr.b, 0);
 		SDL_RenderDrawLine(vis->ren, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
 		SDL_RenderDrawLine(vis->ren, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
+		dy += 1.0;
 	}
 }
 
@@ -56,7 +61,7 @@ static void		render_update(t_vis *vis)
 	SDL_RenderClear(vis->ren);
 	// render_rects(vis, step);
 	// render_texts(vis, step);
-	fill_circle(vis, 1000, 1000, 500);
+	fill_circle(vis, 1000, 1000, 300);
 	// tex = SDL_CreateTextureFromSurface(vis->ren, surf);
 	// SDL_FreeSurface(surf);
 	SDL_RenderPresent(vis->ren);

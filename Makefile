@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/06 16:17:46 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/06 17:27:57 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ DIR_LIBFT := $(DIR_LIBS)/libft
 DIR_SRC := src/$(NAME) src/visualizer
 
 DIR_SDLLIBS := $(DIR_LIBS)/libSDL2
-DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_ttf.framework/Headers -I $(DIR_SDLLIBS)/SDL2_gfx.framework/Headers
-SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2 -framework SDL2_ttf -framework SDL2_gfx
+DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_ttf.framework/Headers
+SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2 -framework SDL2_ttf
 
 vpath %.c $(DIR_SRC)
 vpath %.o $(DIR_BIN)/$(NAME) $(DIR_BIN)/$(VISUAL)
