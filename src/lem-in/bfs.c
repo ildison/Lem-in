@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:54:03 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/04 20:36:51 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/06 12:57:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ static t_vertex	*marked_adjacent(t_queue **queue, t_lem_in *li,\
 	return (NULL);
 }
 
-t_vertex		*bfs(t_queue **queue, t_lem_in *li, t_queue **last)
+t_vertex		*bfs(t_queue **queue, t_lem_in *li)
 {
 	t_vertex	*vrx;
+	t_queue		*last;
 
-	enqueue(queue, li->list_adj[0], last);
+	enqueue(queue, li->list_adj[0], &last);
 	while (*queue)
 	{
 		vrx = pop_queue(queue);
@@ -50,11 +51,11 @@ t_vertex		*bfs(t_queue **queue, t_lem_in *li, t_queue **last)
 			{
 				vrx->out->marked = true;
 				vrx->out->neighbor = vrx;
-				if ((vrx = marked_adjacent(queue, li, vrx->out, last)))
+				if ((vrx = marked_adjacent(queue, li, vrx->out, &last)))
 					return (vrx);
 			}
 		}
-		else if ((vrx = marked_adjacent(queue, li, vrx, last)))
+		else if ((vrx = marked_adjacent(queue, li, vrx, &last)))
 			return (vrx);
 	}
 	return (NULL);

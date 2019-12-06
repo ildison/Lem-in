@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 11:51:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 12:59:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,13 @@ void					adjacencies(t_lem_in *li);
 int						id_increment(t_vertex *vertex);
 t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
 t_paths					suurballe(t_lem_in *li, int count_required_paths);
-t_paths					find_paths(t_queue **queue, t_lem_in *li,\
-									t_queue **last, int n_path);
+t_paths					find_paths(t_queue **queue, t_lem_in *li, int n_path);
 int						count_steps_and_ants(t_paths paths, int count_ants);
 void					enqueue(t_queue **queue, t_vertex *vertex,\
 													t_queue **last);
 t_vertex				*pop_queue(t_queue **queue);
-void					clean_queue(t_queue **queue, t_queue **last);
-t_vertex				*bfs(t_queue **queue, t_lem_in *li, t_queue **last);
+void					clean_queue(t_queue **queue);
+t_vertex				*bfs(t_queue **queue, t_lem_in *li);
 t_paths					check_paths(t_lem_in *li);
 int						validation(t_lem_in *li, char *line);
 void					push_ants(t_lem_in *li, t_paths paths);
@@ -180,5 +179,11 @@ void					clear_matrix(char **matrix);
 void					clear_start(t_vertex *start);
 void					clear_input(t_input *input);
 void					clear_links(t_link *links);
+
+/*
+**	Visualizer function, other in li_vizualizer_h
+*/
+
+void					vizualizer(t_lem_in *li, int count_paths);
 
 #endif

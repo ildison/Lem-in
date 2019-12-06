@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/04 20:36:13 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/06 13:00:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ static void		add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path)
 	++paths->count_path;
 }
 
-t_paths			find_paths(t_queue **queue, t_lem_in *li, t_queue **last, int n)
+t_paths			find_paths(t_queue **queue, t_lem_in *li, int n)
 {
 	t_vertex	*vrx;
 	t_paths		path;
+	t_queue		*last;
 	t_path		*last_path;
 	int			i;
 
 	last_path = NULL;
 	ft_bzero(&path, sizeof(t_paths));
-	enqueue(queue, li->list_adj[0], last);
+	enqueue(queue, li->list_adj[0], &last);
 	while ((vrx = pop_queue(queue)))
 	{
 		i = LI_COUNTER;
@@ -68,7 +69,7 @@ t_paths			find_paths(t_queue **queue, t_lem_in *li, t_queue **last, int n)
 				if (vrx->adj[i]->type == LI_END)
 					add_new_path(&path, vrx->adj[i], &last_path);
 				else if ((vrx->adj[i]->marked = true))
-					enqueue(queue, vrx->adj[i], last);
+					enqueue(queue, vrx->adj[i], &last);
 				if (path.count_path == n)
 					return (path);
 			}
