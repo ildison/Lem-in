@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 11:56:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 11:58:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ static void		parse_args(bool *d, bool *v, char **argv, int argc)
 	static char *opt[] = {"d", "v", "debug", "visu"};
 
 	if (argc > 1 && !check_valid_options(argc, argv, opt, 4))
-		error("UASGE: ./lem-in < [map]\n\t-d for \
-debug\n\t-v for visualisation\n");
+		error("USAGE: ./lem-in < [map]\n\t-d for \
+debug\n\t-v for visualization\n");
 	if (get_option(argc, argv, "d") > 0)
 		*d = true;
 	else if (get_option(argc, argv, "debug") > 0)
