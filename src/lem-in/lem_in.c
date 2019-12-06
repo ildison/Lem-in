@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/05 18:33:20 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/06 11:56:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ int				main(int argc, char **argv)
 	adjacencies(li);
 	paths = check_paths(li);
 	print_input(li->first_line);
-	push_ants(li, paths);
 	if (debug == true)
 		print_finding(paths);
+	else
+		push_ants(li, paths);
 	/*
 	** print_list_adj(li->list_adj, li->count_vertex);
 	** print_matrix_adj(li->matrix_adj, li->count_vertex);
