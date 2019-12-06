@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 10:40:32 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/04 20:38:28 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/06 11:51:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int					validation(t_lem_in *li, char *line)
 {
 	int				ants;
 
+	if (!line)
+		error(LI_ERROR_NOT_INPUT);
 	if ((ants = valid_ants(line)))
 	{
 		if (valid_vertexs(li))
