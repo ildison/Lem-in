@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 12:59:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 16:12:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ struct					s_lem_in
 	t_vertex			**list_adj;
 	t_link				*first_link;
 	char				**matrix_adj;
+	char				**edges;
 	int					count_ants;
 	int					count_vertex;
 	int					count_path;
@@ -117,6 +118,7 @@ struct					s_queue
 struct					s_path
 {
 	t_vertex			**v;
+	char				*edge;
 	int					dist;
 	int					ants;
 	t_path				*next;
@@ -158,6 +160,9 @@ void					print_finding(t_paths finding);
 int						get_edge(t_lem_in *li, t_vertex *src,\
 															t_vertex *dst);
 void					set_matrix_adj(char **matrix_adj, t_link *link);
+void					add_new_path(t_paths *paths, t_vertex *adj,\
+											t_path **last_path, char **edges);
+t_path					*new_path(t_vertex *vrx, char **edges);
 
 /*
 **	bonus
@@ -184,6 +189,6 @@ void					clear_links(t_link *links);
 **	Visualizer function, other in li_vizualizer_h
 */
 
-void					vizualizer(t_lem_in *li, int count_paths);
+void					visualizer(t_lem_in *li, int count_paths);
 
 #endif

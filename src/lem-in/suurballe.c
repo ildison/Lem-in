@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 13:01:43 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 14:14:45 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	last = NULL;
 	li->start->marked = true;
 	count_path = 0;
-	while (count_path < count_required_paths &&\
-					(path = bfs(&queue, li)))
+	while (count_path < count_required_paths && (path = bfs(&queue, li)))
 	{
 		split_vertex(li->matrix_adj, path);
 		clean_queue(&queue);

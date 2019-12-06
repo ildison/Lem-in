@@ -6,13 +6,13 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 13:00:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 14:33:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static t_path	*new_path(t_vertex *vrx)
+t_path			*new_path(t_vertex *vrx, char **edges)
 {
 	t_path		*new;
 	int			i;
@@ -22,23 +22,26 @@ static t_path	*new_path(t_vertex *vrx)
 		error(strerror(errno));
 	new->dist = vrx->dist;
 	new->v = (t_vertex **)malloc(sizeof(t_vertex *) * new->dist);
-	if (!new->v)
+	new->edge = (char *)malloc(new->dist);
+	if (!new->v || !new->edge)
 		error(strerror(errno));
 	i = vrx->dist - 1;
 	while (vrx->type != LI_START)
 	{
 		new->v[i] = vrx;
+		new->edge[i] = edges[vrx->neighbor->id][vrx->id];
 		vrx = vrx->neighbor;
 		--i;
 	}
 	return (new);
 }
 
-static void		add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path)
+void			add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path,\
+																char **edges)
 {
 	t_path		*new;
 
-	new = new_path(adj);
+	new = new_path(adj, edges);
 	if (*last_path)
 		(*last_path)->next = new;
 	else
@@ -67,7 +70,7 @@ t_paths			find_paths(t_queue **queue, t_lem_in *li, int n)
 				vrx->adj[i]->dist = vrx->dist + 1;
 				vrx->adj[i]->neighbor = vrx;
 				if (vrx->adj[i]->type == LI_END)
-					add_new_path(&path, vrx->adj[i], &last_path);
+					add_new_path(&path, vrx->adj[i], &last_path, li->edges);
 				else if ((vrx->adj[i]->marked = true))
 					enqueue(queue, vrx->adj[i], &last);
 				if (path.count_path == n)

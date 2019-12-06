@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 11:58:50 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/06 16:11:02 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,15 @@ int				main(int argc, char **argv)
 	parsing(li);
 	adjacencies(li);
 	paths = check_paths(li);
-	print_input(li->first_line);
+	if (visu == true)
+		visualizer(li, paths.count_path);
 	if (debug == true)
 		print_finding(paths);
 	else
+	{
+		print_input(li->first_line);
 		push_ants(li, paths);
+	}
 	/*
 	** print_list_adj(li->list_adj, li->count_vertex);
 	** print_matrix_adj(li->matrix_adj, li->count_vertex);

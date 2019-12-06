@@ -2,5 +2,6 @@
     "editor.insertSpaces": false,
     "files.associations": {
         "ios": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
