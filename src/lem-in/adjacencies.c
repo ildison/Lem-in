@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 14:33:09 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 16:57:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void				set_matrix_adj(char **matrix_adj, t_link *link)
 {
 	while (link)
 	{
-		matrix_adj[link->vertex_a->id][link->vertex_b->id] = LI_TRUE;
-		matrix_adj[link->vertex_b->id][link->vertex_a->id] = LI_TRUE;
+		matrix_adj[link->a->id][link->a->id] = LI_TRUE;
+		matrix_adj[link->a->id][link->a->id] = LI_TRUE;
 		link = link->next;
 	}
 }

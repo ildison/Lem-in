@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 13:01:14 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:26:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,29 @@
 
 # define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
-# define CLR_RECT 0xddd9c9
+# define CLR_CIRCLE 0xddd9c9
+
+# define CLR_1 0xea7c78
+# define CLR_2 0x896287
+# define CLR_3 0xf2b13e
+# define CLR_4 0x96dcd1
+# define CLR_5 0xd26476
+# define CLR_6 0x4ca5cd
+# define CLR_7 0x7ff7ab
+# define CLR_8 0xec88b8
+# define CLR_9 0x629542
+# define CLR_10 0xf5d272
+# define CLR_11 0xb3e3ee
+# define CLR_12 0xbcc1e8
+# define CLR_13 0xf3cdb7
+# define CLR_14 0xe6e0b2
+# define CLR_15 0x41837f
+# define CLR_16 0x448c54
+# define CLR_17 0xa82e26
 
 typedef struct		s_step
 {
-	SDL_Texture		*oper;
-	SDL_Rect		oper_rect;
+	int				**clrs;
 	SDL_bool		fin;
 	struct s_step	*prev;
 	struct s_step	*next;
@@ -56,7 +73,8 @@ typedef struct		s_vis
 	TTF_Font		*font_text;
 	SDL_Color		text_clr;
 	SDL_Color		bgrnd_clr;
-	SDL_Color		rect_clr;
+	SDL_Color		gray_clr;
+	SDL_Color		colors[17];
 	SDL_Point		scale;
 	SDL_Event		e;
 	SDL_bool		quit;

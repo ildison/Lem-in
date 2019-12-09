@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 11:59:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 16:57:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ struct					s_vertex
 
 struct					s_link
 {
-	t_vertex			*vertex_a;
-	t_vertex			*vertex_b;
+	t_vertex			*a;
+	t_vertex			*a;
 	struct s_link		*next;
 };
 
