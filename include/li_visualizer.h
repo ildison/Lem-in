@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 16:14:00 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 11:18:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "lem_in.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
+# include "SDL2_framerate.h"
+# include "SDL2_gfxPrimitives.h"
+# include "SDL2_imageFilter.h"
+# include "SDL2_rotozoom.h"
 
 # define SCREEN_WIDTH 2040
 # define SCREEN_HEIGHT 1240
@@ -34,7 +38,7 @@
 
 # define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
-# define CLR_RECT 0xddd9c9
+# define CLR_RECT 0xffddd9c9
 
 typedef struct		s_step
 {

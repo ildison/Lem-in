@@ -6,14 +6,14 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/06 17:27:57 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/09 10:30:06 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lem-in
 VISUAL := visual
 LIBFT := libft.a
-HEADERS := libft.h lem_in.h SDL.h SDL_ttf.h
+HEADERS := libft.h lem_in.h SDL.h SDL_ttf.h SDL2_framerate.h SDL2_gfxPrimitives.h SDL2_imageFilter.h SDL2_rotozoom.h
 CC := clang
 CFLAGS := -Wall -Wextra -Werror -O3 -g
 REMOVE := /bin/rm -rf
@@ -24,13 +24,14 @@ DIR_LIBFT := $(DIR_LIBS)/libft
 DIR_SRC := src/$(NAME) src/visualizer
 
 DIR_SDLLIBS := $(DIR_LIBS)/libSDL2
-DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_ttf.framework/Headers
+DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_ttf.framework/Headers -I $(DIR_SDLLIBS)/SDL2_gfx/include
 SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2 -framework SDL2_ttf
+SDL2_GFX := $(DIR_SDLLIBS)/SDL2_gfx/lib/libSDL2_gfx.a
 
 vpath %.c $(DIR_SRC)
 vpath %.o $(DIR_BIN)/$(NAME) $(DIR_BIN)/$(VISUAL)
 vpath %.h $(DIR_INCLUDE) $(DIR_INCLUDE_SDL)
-vpath %.a $(DIR_LIBFT)
+vpath %.a $(DIR_LIBFT) $(SDL2_GFX)
 
 SRC_NAME := lem_in.c\
 			read_input.c\
@@ -60,7 +61,7 @@ OBJ_VIS := $(SRC_VIS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_NAME) $(OBJ_VIS)
-	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/, $(addprefix $(NAME)/, $(OBJ_NAME)) $(addprefix $(VISUAL)/, $(OBJ_VIS))) -lft -L $(DIR_LIBFT) $(SDL_LIBS) -o $@
+	@$(CC) $(CFLAGS) $(addprefix $(DIR_BIN)/, $(addprefix $(NAME)/, $(OBJ_NAME)) $(addprefix $(VISUAL)/, $(OBJ_VIS))) -lft -L $(DIR_LIBFT) $(SDL_LIBS) $(SDL2_GFX) -o $@
 	@printf "\r\e[J\e[32m$@\e[0m done!\n\e[?25h"
 
 $(OBJ_NAME): %.o: %.c $(HEADERS)

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 17:29:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 11:18:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ static void		render_update(t_vis *vis)
 	SDL_RenderClear(vis->ren);
 	// render_rects(vis, step);
 	// render_texts(vis, step);
-	fill_circle(vis, 1000, 1000, 300);
-	// tex = SDL_CreateTextureFromSurface(vis->ren, surf);
-	// SDL_FreeSurface(surf);
+	thickLineColor(vis->ren, 1000, 1000, 500, 500, 10, CLR_RECT);
+	filledCircleColor(vis->ren, 1000, 1000, 20, CLR_RECT);
+	fill_circle(vis, 1000, 940, 20);
 	SDL_RenderPresent(vis->ren);
 }
 
