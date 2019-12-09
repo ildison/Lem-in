@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 13:35:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:24:39 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 // 	return (tex);
 // }
 
-SDL_Color		get_color(int clr)
+SDL_Color			get_color(int clr)
 {
-	SDL_Color	color;
+	SDL_Color		color;
 
 	color.r = clr >> 16;
 	color.g = (clr >> 8) & 0xff;
@@ -35,22 +35,26 @@ SDL_Color		get_color(int clr)
 	return (color);
 }
 
-// void			rect_size(t_vis *vis, t_checker *chkr)
-// {
-// 	int			count_rects;
-// 	int			wigth;
-
-// 	count_rects = size_stack(chkr->a);
-// 	wigth = SCREEN_WIDTH / count_rects;
-// 	vis->between_rect = wigth / 2;
-// 	vis->rect.x = wigth - vis->between_rect;
-// 	if (vis->rect.x > 20)
-// 	{
-// 		vis->rect.x = 20;
-// 		vis->between_rect = 20;
-// 	}
-// 	vis->rect.y = (SCREEN_HEIGHT / 2 - 40) / count_rects;
-// }
+static void		set_colors(SDL_Color *colors)
+{
+	colors[0] = get_color(CLR_1);
+	colors[1] = get_color(CLR_2);
+	colors[2] = get_color(CLR_3);
+	colors[3] = get_color(CLR_4);
+	colors[4] = get_color(CLR_5);
+	colors[5] = get_color(CLR_6);
+	colors[6] = get_color(CLR_7);
+	colors[7] = get_color(CLR_8);
+	colors[8] = get_color(CLR_9);
+	colors[9] = get_color(CLR_10);
+	colors[10] = get_color(CLR_11);
+	colors[11] = get_color(CLR_12);
+	colors[12] = get_color(CLR_13);
+	colors[13] = get_color(CLR_14);
+	colors[14] = get_color(CLR_15);
+	colors[15] = get_color(CLR_16);
+	colors[16] = get_color(CLR_17);
+}
 
 // void			text(t_vis *vis)
 // {
@@ -70,11 +74,11 @@ SDL_Color		get_color(int clr)
 // 	vis->oper_sz.x = SCREEN_WIDTH / 2;
 // }
 
-SDL_Point		get_scale(t_vertex *v, int indent)
+static SDL_Point	set_scale(t_vertex *v, int indent)
 {
-	SDL_Point	scale;
-	int			max_x;
-	int			max_y;
+	SDL_Point		scale;
+	int				max_x;
+	int				max_y;
 
 	max_x = v->coord.x;
 	max_y = v->coord.y;
@@ -89,12 +93,13 @@ SDL_Point		get_scale(t_vertex *v, int indent)
 	return (scale);
 }
 
-void			background(t_vis *vis, t_lem_in *li)
+void				background(t_vis *vis, t_lem_in *li)
 {
 	vis->bgrnd_clr = get_color(CLR_BG);
-	vis->gray_clr = get_color(CLR_RECT);
+	vis->gray_clr = get_color(CLR_CIRCLE);
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2;
-	vis->scale = get_scale(li->start, vis->radius * 5);
+	vis->scale = set_scale(li->start, vis->radius * 5);
+	set_colors(vis->colors);
 }
