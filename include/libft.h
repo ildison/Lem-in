@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:17:44 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/11/13 11:36:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 12:58:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define CHECK_MOD(x)		((x) > 0) ? (x) : -(x)
 # define SET_BIT(val, num)	((val) = ((val) | (1 << (num))))
 # define NUM_CMP(a, b) 		((((a) ^ (b)) == 0) ? 0 : 1)
+# define FT_MIN(X, Y)		(((X) < (Y)) ? (X) : (Y))
+# define FT_MAX(X, Y)		(((X) > (Y)) ? (X) : (Y))
 
 typedef struct		s_list
 {

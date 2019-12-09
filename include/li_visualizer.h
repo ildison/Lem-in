@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 11:18:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 13:01:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@
 
 # define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
-# define CLR_RECT 0xffddd9c9
+# define CLR_RECT 0xddd9c9
 
 typedef struct		s_step
 {
-	short			*a;
-	short			*b;
 	SDL_Texture		*oper;
 	SDL_Rect		oper_rect;
 	SDL_bool		fin;
@@ -59,16 +57,14 @@ typedef struct		s_vis
 	SDL_Color		text_clr;
 	SDL_Color		bgrnd_clr;
 	SDL_Color		rect_clr;
+	SDL_Point		scale;
 	SDL_Event		e;
 	SDL_bool		quit;
 	SDL_bool		pause;
-	SDL_Texture		*stack_a;
-	SDL_Texture		*stack_b;
-	SDL_Rect		stack_a_rect;
-	SDL_Rect		stack_b_rect;
 	t_step			*first_step;
-	t_pnt			oper_sz;
 	t_pnt			rect;
+	int				radius;
+	int				line_width;
 	int				delay;
 	const Uint8		*keystate;
 	int				between_rect;
