@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 16:57:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 18:03:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@
 
 # define LI_COUNT_ADJACENTS vrx->count_edges
 # define LI_ADJ_MARKED vrx->adj[i]->marked
-# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start 2 the end\n"
+# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start 2 the end.\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
+# define LI_ERROR_NOT_VALID_EDGE "not valid edge.\n"
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
-# define LI_ERROR_NOT_INPUT "no input, check usage: -h\n"
+# define LI_ERROR_NOT_INPUT "no input, check usage: -h.\n"
 
 typedef struct s_input	t_input;
 typedef struct s_pnt	t_pnt;
@@ -88,7 +89,7 @@ struct					s_vertex
 struct					s_link
 {
 	t_vertex			*a;
-	t_vertex			*a;
+	t_vertex			*b;
 	struct s_link		*next;
 };
 

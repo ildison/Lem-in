@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 17:02:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 17:09:10 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		events(t_vis *vis)
 // 	}
 // }
 
-static void		render_update(t_vis *vis)
+static void		render_update(t_vis *vis, t_lem_in *li, t_step *step)
 {
 	// SDL_Texture	*tex;
 	// SDL_Surface	*surf;
@@ -59,10 +59,7 @@ static void		render_update(t_vis *vis)
 	SDL_SetRenderDrawColor(vis->ren, vis->bgrnd_clr.r, vis->bgrnd_clr.g,\
 										vis->bgrnd_clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
-	// render_rects(vis, step);
-	// render_texts(vis, step);
-	fill_circle(vis, 1000, 940, 20);
-	filledCircleColor(vis->ren, 1000, 1000, 20, 0xffc9d9dd);
+	render_graph(vis, li, step);
 	SDL_RenderPresent(vis->ren);
 }
 
@@ -72,15 +69,13 @@ void			loop(t_vis *vis, t_lem_in *li)
 	int			delay;
 
 	// step = new_step(chkr, vis, ft_strdup(FIRST_STEP));
-	li = 0; //!delete
-	vis->delay = 10;
 	delay = vis->delay;
 	while (!vis->quit)
 	{
 		SDL_Delay(2);
 		while (SDL_PollEvent(&vis->e))
 			events(vis);
-		render_update(vis);
+		render_update(vis, li);
 		// if (!vis->pause && !delay)
 		// 	step = next_step(vis, step, chkr);
 		delay += delay ? -1 : vis->delay;

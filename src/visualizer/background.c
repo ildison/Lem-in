@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 15:24:39 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 17:22:28 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,16 @@ static void		set_colors(SDL_Color *colors)
 // 	vis->oper_sz.x = SCREEN_WIDTH / 2;
 // }
 
-static SDL_Point	set_scale(t_vertex *v, int indent)
+static void			set_scale(t_vertex *vrx, int indent)
 {
 	SDL_Point		scale;
+	t_vertex		*v;
 	int				max_x;
 	int				max_y;
 
 	max_x = v->coord.x;
 	max_y = v->coord.y;
+	v = vrx;
 	while (v->next)
 	{
 		v = v->next;
@@ -90,7 +92,13 @@ static SDL_Point	set_scale(t_vertex *v, int indent)
 	}
 	scale.x = (SCREEN_WIDTH - indent) / max_x;
 	scale.y = (SCREEN_HEIGHT - indent) / max_y;
-	return (scale);
+	v = vrx;
+	while (v)
+	{
+		v->coord.x *= scale.x;
+		v->coord.y *= scale.y;
+		v = v->next;
+	}
 }
 
 void				background(t_vis *vis, t_lem_in *li)
@@ -100,6 +108,6 @@ void				background(t_vis *vis, t_lem_in *li)
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2;
-	vis->scale = set_scale(li->start, vis->radius * 5);
+	set_scale(li->start, vis->radius * 5);
 	set_colors(vis->colors);
 }

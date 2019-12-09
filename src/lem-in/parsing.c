@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 16:23:55 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 16:57:40 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 17:59:38 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static t_vertex	*get_vertex(t_vertex *vertex, char *name)
 		while (vertex && *vertex->name != *name)
 			vertex = vertex->next;
 	}
+	if (!vertex)
+		error(LI_ERROR_NOT_VALID_EDGE);
 	return (vertex);
 }
 
@@ -78,7 +80,7 @@ static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 	if (!link || !split_line)
 		error(strerror(errno));
 	link->a = get_vertex(vertex, split_line[0]);
-	link->a = get_vertex(vertex, split_line[1]);
+	link->b = get_vertex(vertex, split_line[1]);
 	ft_free_2x_mas((void **)split_line);
 	if (*first_link)
 		link->next = *first_link;
