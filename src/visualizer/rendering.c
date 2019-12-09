@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:08:12 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 19:18:05 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:19:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
 	while (link)
 	{
 		c = clrs[link->a->id][link->b->id];
-		thickLineRGBA(vis->ren, link->a->coord.x, link->a->coord.y, link->b->coord.x, link->b->coord.y, vis->radius, c.r, c.g, c.b, 255);
+		thickLineRGBA(vis->ren, link->a->coord.x, link->a->coord.y, link->b->coord.x, link->b->coord.y, vis->line_width, c.r, c.g, c.b, 255);
 		link = link->next;
 	}
 }
