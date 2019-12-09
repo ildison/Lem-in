@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 16:12:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 12:11:12 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,15 @@ static void	init(t_vis *vis)
 void		visualizer(t_lem_in *li, int count_paths)
 {
 	t_vis	*vis;
+	t_paths	srbl_paths;
+	t_paths	paths;
 
 	if (!(vis = (t_vis *)ft_memalloc(sizeof(t_vis))))
 		error(strerror(errno));
 	init(vis);
-	count_paths = 1;
 	background(vis, li);
+	paths = suurballe(li, count_paths, &srbl_paths);
+	collection_step();
 	loop(vis, li);
 	destroy_init(vis);
 	// cleaning_up(vis, vis->first_step);

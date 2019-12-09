@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/06 14:14:45 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 11:58:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		split_vertex(char **matrix_adj, t_vertex *path)
 	}
 }
 
-t_paths			suurballe(t_lem_in *li, int count_required_paths)
+t_paths			suurballe(t_lem_in *li, int count_required_paths, t_paths *vis)
 {
 	t_queue		*queue;
 	t_vertex	*path;
@@ -65,6 +65,8 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths)
 	{
 		split_vertex(li->matrix_adj, path);
 		clean_queue(&queue);
+		if (vis)
+			add_new_path(vis, path, &last, li->edges);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
 	}
