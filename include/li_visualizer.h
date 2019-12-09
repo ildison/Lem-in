@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 17:09:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:12:07 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,17 @@
 # define CLR_16 0x448c54
 # define CLR_17 0xa82e26
 
+typedef struct		s_clr_v
+{
+	t_vertex		*v;
+	SDL_Color		clr;
+}					t_clr_v;
+
+
 typedef struct		s_step
 {
-	int				**clrs;
+	SDL_Color		**clrs;
+	t_clr_v			*clr_v;
 	SDL_bool		fin;
 	struct s_step	*prev;
 	struct s_step	*next;
@@ -89,8 +97,9 @@ typedef struct		s_vis
 }					t_vis;
 
 void				background(t_vis *vis, t_lem_in *li);
-void				loop(t_vis *vis, t_lem_in *li);
-t_step				*collectin_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths);
+SDL_Color			get_color(int clr);
+void				loop(t_vis *vis, t_lem_in *li, t_step *step);
+t_step				*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths);
 void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);
 // void				render_texts(t_vis *vis, t_step *stp);
 // void				render_rects(t_vis *vis, t_step *stp);

@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 17:22:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 18:53:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ static void			set_scale(t_vertex *vrx, int indent)
 	int				max_x;
 	int				max_y;
 
+	v = vrx;
 	max_x = v->coord.x;
 	max_y = v->coord.y;
-	v = vrx;
 	while (v->next)
 	{
 		v = v->next;

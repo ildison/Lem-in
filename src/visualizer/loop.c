@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 17:09:10 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:11:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void		render_update(t_vis *vis, t_lem_in *li, t_step *step)
 	SDL_RenderPresent(vis->ren);
 }
 
-void			loop(t_vis *vis, t_lem_in *li)
+void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 {
 	// t_step		*step;
 	int			delay;
@@ -75,7 +75,7 @@ void			loop(t_vis *vis, t_lem_in *li)
 		SDL_Delay(2);
 		while (SDL_PollEvent(&vis->e))
 			events(vis);
-		render_update(vis, li);
+		render_update(vis, li, step);
 		// if (!vis->pause && !delay)
 		// 	step = next_step(vis, step, chkr);
 		delay += delay ? -1 : vis->delay;

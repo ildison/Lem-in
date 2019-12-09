@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 18:01:48 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/09 19:11:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		visualizer(t_lem_in *li, int count_paths)
 	background(vis, li);
 	paths = suurballe(li, count_paths, &srbl_paths);
 	vis->first_step = collection_steps(vis, li, srbl_paths, paths);
-	loop(vis, li);
+	loop(vis, li, vis->first_step);
 	destroy_init(vis);
 	// cleaning_up(vis, vis->first_step);
 }
