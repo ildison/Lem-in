@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 11:49:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 11:53:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ res_paths = srbl_paths;//!delete
 	step->m_clrs = init_matrix_clr(NULL, li->count_vertex, li->first_link);
 	step->clr_v = init_vertex_clr(NULL, li);
 	last_step = collect_srbll_paths(vis, step, li, srbl_paths);
+	last_step->fin = SDL_TRUE;
 	return (step);
 }

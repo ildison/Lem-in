@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 19:11:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 11:50:21 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 			events(vis);
 		render_update(vis, li, step);
 		// if (!vis->pause && !delay)
-		// 	step = next_step(vis, step, chkr);
+		// 	step = next_step(vis, step);
 		delay += delay ? -1 : vis->delay;
 	}
 }
