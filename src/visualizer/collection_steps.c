@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 11:48:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 11:49:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 		path = path->next;
 		++n_path;
 	}
-	return ()
+	return (step);
 }
 
 t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths)
