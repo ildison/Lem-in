@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 12:23:44 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 12:25:55 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void			add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 		step->m_clrs[path->v[index]->id][0] = clr;
 		step->m_clrs[0][path->v[index]->id] = clr;
 	}
-	step->clr_v[path->v[index]->id].clr = clr;
+	if (step->clr_v[path->v[index]->id].v->type != LI_END)
+		step->clr_v[path->v[index]->id].clr = clr;
 }
 
 t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths paths)
