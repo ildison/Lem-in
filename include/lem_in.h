@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 18:37:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 13:58:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ struct					s_lem_in
 	int					count_vertex;
 	int					count_path;
 	bool				flag_link;
+	bool				visu;
 };
 
 struct					s_queue
@@ -163,8 +164,8 @@ int						get_edge(t_lem_in *li, t_vertex *src,\
 															t_vertex *dst);
 void					set_matrix_adj(char **matrix_adj, t_link *link);
 void					add_new_path(t_paths *paths, t_vertex *adj,\
-											t_path **last_path, char **edges);
-t_path					*new_path(t_vertex *vrx, char **edges);
+											t_path **last_path,  t_lem_in *li);
+t_path					*new_path(t_vertex *vrx,  t_lem_in *li);
 
 /*
 **	bonus
