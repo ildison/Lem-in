@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 10:01:58 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 19:10:55 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,21 @@ static void		set_colors(SDL_Color *colors)
 // 	vis->oper_sz.x = SCREEN_WIDTH / 2;
 // }
 
-static void			set_scale(t_vertex *vrx, int indent)
+static void		set_new_vrx_coord(t_vertex *vrx, int indent, int radius)
 {
-	SDL_Point		scale;
-	t_vertex		*v;
-	int				max_x;
-	int				max_y;
+	SDL_Point	square;
+	SDL_Point	coord;
+
+	square.x = SCREEN_WIDTH - indent * 2;
+	square.y = SCREEN_HEIGHT - indent * 2;
+}
+
+static void		set_scale(t_vertex *vrx, int indent, int radius)
+{
+	SDL_Point	scale;
+	t_vertex	*v;
+	int			max_x;
+	int			max_y;
 
 	v = vrx;
 	max_x = v->coord.x;
@@ -92,6 +101,11 @@ static void			set_scale(t_vertex *vrx, int indent)
 	}
 	scale.x = (SCREEN_WIDTH - indent * 2) / max_x;
 	scale.y = (SCREEN_HEIGHT - indent * 2) / max_y;
+	// if (scale.x == 0 || scale.y == 0)
+	// {
+	// 	set_new_vrx_coord(vrx, indent, radius);
+	// 	set_scale(vrx, indent, radius);
+	// }
 	v = vrx;
 	while (v)
 	{
@@ -101,7 +115,7 @@ static void			set_scale(t_vertex *vrx, int indent)
 	}
 }
 
-void				background(t_vis *vis, t_lem_in *li)
+void			background(t_vis *vis, t_lem_in *li)
 {
 	vis->bgrnd_clr = get_color(CLR_BG);
 	vis->gray_clr = get_color(CLR_CIRCLE);
@@ -109,6 +123,6 @@ void				background(t_vis *vis, t_lem_in *li)
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2.1;
 	vis->line_width = FT_MAX(1, vis->line_width);
-	set_scale(li->start, vis->radius * 2);
+	set_scale(li->start, SCREEN_WIDTH / 10, vis->radius);
 	set_colors(vis->colors);
 }
