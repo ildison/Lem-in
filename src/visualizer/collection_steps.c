@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 15:11:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 15:37:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ t_step			*new_step()
 		error(strerror(errno));
 	return (new);
 }
-
-// int			**set_clrs(t_lem_in *li, t_vertex *v)
-// {
-	
-// }
 
 SDL_Color		**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link)
 {
@@ -136,17 +131,44 @@ t_step			*turn_off_unused_paths(t_step *step, t_lem_in *li, t_link *link)
 	return (step);
 }
 
+t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths paths)
+{
+	t_path		*path;
+	int			n_path;
+	int			n_v;
+
+	path = paths.path;
+	n_path = 0;
+	while (n_path < paths.count_path)
+	{
+		step->next = new_step();
+		step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, li->first_link);
+		step->next->clr_v = init_vertex_clr(step->clr_v, li);
+		step->next->prev = step;
+		step = step->next;
+		n_v = 0;
+		while (n_v < path->dist)
+		{
+			add_color(step, path, n_v, vis->colors[n_path]);
+			++n_v;
+		}
+		path = path->next;
+		++n_path;
+	}
+	return (step);
+}
+
 t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths)
 {
 	t_step		*step;
 	t_step		*last_step;
 
-res_paths = srbl_paths;//!delete
 	step = new_step();
 	step->m_clrs = init_matrix_clr(NULL, li->count_vertex, li->first_link);
 	step->clr_v = init_vertex_clr(NULL, li);
 	last_step = collect_srbll_paths(vis, step, li, srbl_paths);
 	last_step = turn_off_unused_paths(last_step, li, li->first_link);
+	last_step = collect_final_paths(vis, last_step, li, res_paths);
 	last_step->fin = SDL_TRUE;
 	return (step);
 }
