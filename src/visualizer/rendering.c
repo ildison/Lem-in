@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:08:12 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 19:19:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 10:24:24 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void			render_vertexs(t_vis *vis, t_clr_v *c_vrx, int n_vrx)
 
 void			render_graph(t_vis *vis, t_lem_in *li, t_step *step)
 {
-	render_egdes(vis, li->first_link, step->clrs);
+	render_egdes(vis, li->first_link, step->m_clrs);
 	render_vertexs(vis, step->clr_v, li->count_vertex);
 }

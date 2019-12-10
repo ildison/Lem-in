@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 19:19:38 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 10:01:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ static void			set_scale(t_vertex *vrx, int indent)
 		max_x = FT_MAX(v->coord.x, max_x);
 		max_y = FT_MAX(v->coord.y, max_y);
 	}
-	scale.x = (SCREEN_WIDTH - indent) / max_x;
-	scale.y = (SCREEN_HEIGHT - indent) / max_y;
+	scale.x = (SCREEN_WIDTH - indent * 2) / max_x;
+	scale.y = (SCREEN_HEIGHT - indent * 2) / max_y;
 	v = vrx;
 	while (v)
 	{
-		v->coord.x *= scale.x;
-		v->coord.y *= scale.y;
+		v->coord.x = v->coord.x * scale.x + indent;
+		v->coord.y = v->coord.y * scale.y + indent;
 		v = v->next;
 	}
 }
@@ -107,7 +107,8 @@ void				background(t_vis *vis, t_lem_in *li)
 	vis->gray_clr = get_color(CLR_CIRCLE);
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
-	vis->line_width = vis->radius / 2;
-	set_scale(li->start, vis->radius * 5);
+	vis->line_width = vis->radius / 2.1;
+	vis->line_width = FT_MAX(1, vis->line_width);
+	set_scale(li->start, vis->radius * 2);
 	set_colors(vis->colors);
 }

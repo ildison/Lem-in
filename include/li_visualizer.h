@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 19:12:07 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 11:20:32 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
 # define CLR_CIRCLE 0xddd9c9
+# define CLR_BLACK 0x000000
 
 # define CLR_1 0xea7c78
 # define CLR_2 0x896287
@@ -67,7 +68,7 @@ typedef struct		s_clr_v
 
 typedef struct		s_step
 {
-	SDL_Color		**clrs;
+	SDL_Color		**m_clrs;
 	t_clr_v			*clr_v;
 	SDL_bool		fin;
 	struct s_step	*prev;
