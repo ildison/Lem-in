@@ -6,7 +6,7 @@
 #    By: cormund <cormund@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/09 19:00:04 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/10 11:54:06 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRC_VIS := visualization.c\
 			background.c\
 			collection_steps.c\
 			loop.c\
-			rendering.c
+			rendering.c\
+			next_step.c
 			# render.c\
 			# steps.c\
 

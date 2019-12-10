@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 11:20:32 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 12:16:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ SDL_Color			get_color(int clr);
 void				loop(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths);
 void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);
+t_step				*next_step(t_step *step);
 // void				render_texts(t_vis *vis, t_step *stp);
 // void				render_rects(t_vis *vis, t_step *stp);
 // t_step				*new_step(t_checker *chkr, t_vis *vis, char *oper);

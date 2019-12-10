@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 11:53:22 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 12:23:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_step			*new_step()
 {
 	t_step		*new;
 
-	new = (t_step *)malloc(sizeof(t_step));
+	new = (t_step *)ft_memalloc(sizeof(t_step));
 	if (!new)
 		error(strerror(errno));
 	return (new);
@@ -34,7 +34,7 @@ SDL_Color		**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link)
 	m_clr = (SDL_Color **)ft_memalloc_int_mas(n_v, n_v);
 	if (!m_clr)
 		error(strerror(errno));
-	if (!m_cpy)
+	if (m_cpy)
 		while (link)
 		{
 			m_clr[link->a->id][link->b->id] = m_cpy[link->a->id][link->b->id];
@@ -107,6 +107,7 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 			step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, li->first_link);
 			step->next->clr_v = init_vertex_clr(step->clr_v, li);
 			add_color(step->next, path, n_v, vis->colors[n_path]);
+			step->next->prev = step;
 			step = step->next;
 			++n_v;
 		}

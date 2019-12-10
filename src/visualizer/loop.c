@@ -6,32 +6,32 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 11:50:21 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/10 12:21:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
 
-static void		events(t_vis *vis)
+static void		events(t_vis *vis, t_step **step)
 {
 	if (SDL_EVENT == SDL_QUIT || SDL_KEYSTATE[SDL_ESCAPE])
 		vis->quit = SDL_TRUE;
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_SPACE])
 		vis->pause ^= SDL_TRUE;
-	// else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
-	// 		SDL_KEYSTATE[SDL_RIGHT] && *step && (*step)->next)
-	// 	*step = (*step)->next;
-	// else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
-	// 		SDL_KEYSTATE[SDL_LEFT] && *step && (*step)->prev)
-	// 	*step = (*step)->prev;
+	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
+			SDL_KEYSTATE[SDL_RIGHT] && *step && (*step)->next)
+		*step = (*step)->next;
+	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
+			SDL_KEYSTATE[SDL_LEFT] && *step && (*step)->prev)
+		*step = (*step)->prev;
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_UP] &&\
 													vis->delay < 100)
 		++vis->delay;
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_DOWN] &&\
 													vis->delay > 0)
 		--vis->delay;
-	// else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_R])
-	// 	*step = vis->first_step;
+	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_R])
+		*step = vis->first_step;
 }
 
 // void			fill_circle(t_vis *vis, int cx, int cy, int radius)
@@ -74,10 +74,10 @@ void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 	{
 		SDL_Delay(2);
 		while (SDL_PollEvent(&vis->e))
-			events(vis);
+			events(vis, &step);
 		render_update(vis, li, step);
-		// if (!vis->pause && !delay)
-		// 	step = next_step(vis, step);
+		if (!vis->pause && !delay && !step->fin)
+			step = step->next;
 		delay += delay ? -1 : vis->delay;
 	}
 }
