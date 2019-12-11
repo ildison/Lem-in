@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:04:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 13:24:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,18 @@ int				main(int argc, char **argv)
 	t_lem_in	*li;
 	t_paths		paths;
 	bool		debug;
+	bool		visu;
 
 	debug = false;
+	visu = false;
 	if (!(li = (t_lem_in *)ft_memalloc(sizeof(t_lem_in))))
 		error(strerror(errno));
-	parse_args(&debug, &li->visu, argv, argc);
+	parse_args(&debug, &visu, argv, argc);
 	read_input(&li->first_line);
 	parsing(li);
 	adjacencies(li);
 	paths = check_paths(li);
-	if (li->visu == true)
+	if (visu == true)
 		visualizer(li, paths.count_path);
 	else if (debug == true)
 		print_finding(paths);

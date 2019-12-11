@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 15:38:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 13:23:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void		visualizer(t_lem_in *li, int count_paths)
 	t_paths	srbl_paths;
 	t_paths	paths;
 
+	li->visu = true;
 	if (!(vis = (t_vis *)ft_memalloc(sizeof(t_vis))))
 		error(strerror(errno));
 	init(vis);

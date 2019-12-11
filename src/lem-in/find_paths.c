@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 13:58:10 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 13:22:25 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_path			*new_path(t_vertex *vrx, t_lem_in *li)
 	new->v = (t_vertex **)malloc(sizeof(t_vertex *) * new->dist);
 	if (li->visu == true)
 		new->edge = (char *)malloc(new->dist);
-	if (!new->v || (li->visu == true &&!new->edge))
+	if (!new->v || (li->visu == true && !new->edge))
 		error(strerror(errno));
 	i = vrx->dist - 1;
 	while (vrx->type != LI_START)

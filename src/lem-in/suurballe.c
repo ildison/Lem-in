@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 13:59:00 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 13:25:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_paths			suurballe(t_lem_in *li, int count_required_paths, t_paths *vis)
 	{
 		split_vertex(li->matrix_adj, path);
 		clean_queue(&queue);
-		if (vis)
+		if (li->visu == true)
 			add_new_path(vis, path, &last, li);
 		clean_marked(&li->list_adj[1]);
 		++count_path;
