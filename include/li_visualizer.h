@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 12:16:16 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:30:04 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@
 # define CLR_15 0x41837f
 # define CLR_16 0x448c54
 # define CLR_17 0xa82e26
+# define CLR_18 0x039482
+# define CLR_19 0x820199
+# define CLR_20 0x2ea491
 
 typedef struct		s_clr_v
 {

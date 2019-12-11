@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 10:59:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:30:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ static void		set_colors(SDL_Color *colors)
 	colors[14] = get_color(CLR_15);
 	colors[15] = get_color(CLR_16);
 	colors[16] = get_color(CLR_17);
+	colors[17] = get_color(CLR_18);
+	colors[18] = get_color(CLR_19);
+	colors[19] = get_color(CLR_20);
 }
 
 // void			text(t_vis *vis)
