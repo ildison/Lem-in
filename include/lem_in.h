@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:53:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:07:47 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,19 +149,18 @@ void					parsing(t_lem_in *li);
 void					adjacencies(t_lem_in *li);
 int						id_increment(t_vertex *vertex);
 t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
-t_paths					suurballe(t_lem_in *li, int count_required_paths,\
-																t_paths *vis);
-t_paths					find_paths(t_queue **queue, t_lem_in *li, int n_path);
-int						count_steps_and_ants(t_paths paths, int count_ants);
+t_paths					*suurballe(t_lem_in *li, int count_required_paths,\
+																t_paths **vis);
+t_paths					*find_paths(t_queue **queue, t_lem_in *li, int n_path);
+int						count_steps_and_ants(t_paths *paths, int count_ants);
 void					enqueue(t_queue **queue, t_vertex *vertex,\
 													t_queue **last);
 t_vertex				*pop_queue(t_queue **queue);
 void					clean_queue(t_queue **queue);
 t_vertex				*bfs(t_queue **queue, t_lem_in *li);
-t_paths					check_paths(t_lem_in *li);
+t_paths					*check_paths(t_lem_in *li);
 int						validation(t_lem_in *li, char *line);
-void					push_ants(t_lem_in *li, t_paths paths);
-void					print_finding(t_paths finding);
+void					push_ants(t_lem_in *li, t_paths *paths);
 int						get_edge(t_lem_in *li, t_vertex *src,\
 															t_vertex *dst);
 void					set_matrix_adj(char **matrix_adj, t_link *link);
@@ -178,7 +177,7 @@ void					print_vertex(t_vertex *vertex);
 void					print_links(t_link *link);
 void					print_matrix_adj(char **matrix, int count_vertex);
 void					print_list_adj(t_vertex **list_adj, int count_vertex);
-void					print_finding(t_paths finding);
+void					print_finding(t_paths *finding);
 
 /*
 **	Clear functions

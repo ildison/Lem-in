@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualization.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 13:23:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:17:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,17 @@ static void	init(t_vis *vis)
 void		visualizer(t_lem_in *li, int count_paths)
 {
 	t_vis	*vis;
-	t_paths	srbl_paths;
-	t_paths	paths;
+	// t_paths	*srbl_paths;
+	// t_paths	*paths;
 
 	li->visu = true;
 	if (!(vis = (t_vis *)ft_memalloc(sizeof(t_vis))))
 		error(strerror(errno));
 	init(vis);
 	background(vis, li);
-	paths = suurballe(li, count_paths, &srbl_paths);
-	vis->first_step = collection_steps(vis, li, srbl_paths, paths);
+	vis->srbl_paths = ft_memalloc(sizeof(t_paths));
+	vis->paths = suurballe(li, count_paths, &vis->srbl_paths);
+	vis->first_step = collection_steps(vis, li, vis->srbl_paths, vis->paths);
 	loop(vis, li, vis->first_step);
 	destroy_init(vis);
 	// cleaning_up(vis, vis->first_step);

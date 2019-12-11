@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 13:24:29 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 15:54:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ debug\n\t-v for visualization\n");
 int				main(int argc, char **argv)
 {
 	t_lem_in	*li;
-	t_paths		paths;
+	t_paths		*paths;
 	bool		debug;
 	bool		visu;
 
@@ -101,7 +101,7 @@ int				main(int argc, char **argv)
 	adjacencies(li);
 	paths = check_paths(li);
 	if (visu == true)
-		visualizer(li, paths.count_path);
+		visualizer(li, paths->count_path);
 	else if (debug == true)
 		print_finding(paths);
 	else
@@ -113,6 +113,6 @@ int				main(int argc, char **argv)
 	** print_list_adj(li->list_adj, li->count_vertex);
 	** print_matrix_adj(li->matrix_adj, li->count_vertex);
 	*/
-	free_lem_in(li, &paths);
+	free_lem_in(li, paths);
 	return (0);
 }

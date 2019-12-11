@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_paths.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 12:03:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:03:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 }
 
 t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li,\
-																t_paths paths)
+																t_paths *paths)
 {
 	t_path		*path;
 	int			n_path;
 	int			n_v;
 	int			n_clr;
 
-	path = paths.path;
+	path = paths->path;
 	n_path = 0;
 	n_clr = 0;
-	while (n_path < paths.count_path)
+	while (n_path < paths->count_path)
 	{
 		n_v = LI_COUNTER;
 		while (++n_v < path->dist)
@@ -90,17 +90,17 @@ t_step			*turn_off_unused_paths(t_step *step, t_lem_in *li, t_link *link)
 }
 
 t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
-																t_paths paths)
+																t_paths *paths)
 {
 	t_path		*path;
 	int			n_path;
 	int			n_v;
 	int			n_clr;
 
-	path = paths.path;
+	path = paths->path;
 	n_path = 0;
 	n_clr = COUNT_COLORS;
-	while (n_path < paths.count_path)
+	while (n_path < paths->count_path)
 	{
 		step->next = new_step();
 		step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX,\

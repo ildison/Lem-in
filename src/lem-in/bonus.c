@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 12:55:42 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/05 18:32:12 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/11 15:52:40 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void			print_list_adj(t_vertex **list_adj, int count_vertex)
 	ft_printf("\n");
 }
 
-void			print_finding(t_paths finding)
+void			print_finding(t_paths *finding)
 {
 	t_path		*path;
 	int			i;
 	int			j;
 
 	ft_printf("\n-----All paths found in the graph:-----\n");
-	path = finding.path;
+	path = finding->path;
 	j = 1;
 	while (path)
 	{
@@ -91,5 +91,5 @@ void			print_finding(t_paths finding)
 		path = path->next;
 	}
 	ft_printf("\n--Total number of paths in \
-the graph:--\n%d\n", finding.count_path);
+the graph:--\n%d\n", finding->count_path);
 }

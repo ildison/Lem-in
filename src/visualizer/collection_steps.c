@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collection_steps.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:59:23 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 16:00:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_clr_v			*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li)
 	return (clr_v);
 }
 
-t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths res_paths)
+t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths *srbl_paths, t_paths *res_paths)
 {
 	t_step		*step;
 	t_step		*last_step;

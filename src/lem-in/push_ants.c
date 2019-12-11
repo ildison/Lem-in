@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vmormont <vmormont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/04 20:40:12 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/11 15:48:54 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	destroy_ants(t_ant *ants)
 	}
 }
 
-void		push_ants(t_lem_in *li, t_paths paths)
+void		push_ants(t_lem_in *li, t_paths *paths)
 {
 	t_ant	*first_ant;
 	t_ant	*ant;
@@ -96,7 +96,7 @@ void		push_ants(t_lem_in *li, t_paths paths)
 		while (ant)
 		{
 			if (!ant->end)
-				move_ant(ant, paths.path);
+				move_ant(ant, paths->path);
 			ant = ant->next;
 		}
 		ft_printf("\n");

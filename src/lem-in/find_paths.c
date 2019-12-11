@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_paths.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 13:22:25 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 15:59:51 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ void			add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path,\
 	++paths->count_path;
 }
 
-t_paths			find_paths(t_queue **queue, t_lem_in *li, int n)
+t_paths			*find_paths(t_queue **queue, t_lem_in *li, int n)
 {
 	t_vertex	*vrx;
-	t_paths		path;
+	t_paths		*path;
 	t_queue		*last;
 	t_path		*last_path;
 	int			i;
 
 	last_path = NULL;
-	ft_bzero(&path, sizeof(t_paths));
+	path = ft_memalloc(sizeof(t_paths));
 	enqueue(queue, li->list_adj[0], &last);
 	while ((vrx = pop_queue(queue)))
 	{
@@ -72,10 +72,10 @@ t_paths			find_paths(t_queue **queue, t_lem_in *li, int n)
 				vrx->adj[i]->dist = vrx->dist + 1;
 				vrx->adj[i]->neighbor = vrx;
 				if (vrx->adj[i]->type == LI_END)
-					add_new_path(&path, vrx->adj[i], &last_path, li);
+					add_new_path(path, vrx->adj[i], &last_path, li);
 				else if ((vrx->adj[i]->marked = true))
 					enqueue(queue, vrx->adj[i], &last);
-				if (path.count_path == n)
+				if (path->count_path == n)
 					return (path);
 			}
 	}
