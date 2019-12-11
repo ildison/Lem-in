@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 16:00:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:30:59 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,30 @@ t_clr_v			*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li)
 	return (clr_v);
 }
 
-t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths *srbl_paths, t_paths *res_paths)
+t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_step *step)
 {
-	t_step		*step;
 	t_step		*last_step;
 
-	step = new_step();
-	step->m_clrs = init_matrix_clr(NULL, LI_COUNT_VRTX, li->first_link);
-	step->clr_v = init_vertex_clr(NULL, li);
-	last_step = collect_srbll_paths(vis, step, li, srbl_paths);
-	last_step = turn_off_unused_paths(last_step, li, li->first_link);
-	last_step = collect_final_paths(vis, last_step, li, res_paths);
-	last_step->fin = SDL_TRUE;
+	last_step = NULL;
+	if (!step)
+	{
+		step = new_step();
+		step->m_clrs = init_matrix_clr(NULL, LI_COUNT_VRTX, li->first_link);
+		step->clr_v = init_vertex_clr(NULL, li);
+		vis->srbll_flag = 0;
+	}
+	else if (vis->srbll_flag == false)
+	{
+		collect_srbll_paths(vis, step, li, vis->srbll);
+		vis->srbll_flag = true;
+		return (step->next);
+	}
+	else
+	{
+		last_step = turn_off_unused_paths(step, li, li->first_link);
+		last_step = collect_final_paths(vis, last_step, li, vis->paths);
+		last_step->fin = SDL_TRUE;
+		return (step->next);
+	}
 	return (step);
 }

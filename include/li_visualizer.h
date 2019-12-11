@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 16:01:15 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:28:27 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ typedef struct		s_vis
 {
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
-	TTF_Font		*font_text;
-	SDL_Color		text_clr;
+	// TTF_Font		*font_text;
+	// SDL_Color		text_clr;
 	SDL_Color		bgrnd_clr;
 	SDL_Color		gray_clr;
 	SDL_Color		colors[17];
@@ -94,23 +94,21 @@ typedef struct		s_vis
 	SDL_bool		quit;
 	SDL_bool		pause;
 	t_paths			*paths;
-	t_paths			*srbl_paths;
+	t_paths			*srbll;
 	t_step			*first_step;
-	t_pnt			rect;
+	bool			srbll_flag;
 	int				radius;
 	int				line_width;
-	int				delay;
 	const Uint8		*keystate;
-	int				between_rect;
+	int				delay;
 }					t_vis;
 
 void				background(t_vis *vis, t_lem_in *li);
 SDL_Color			get_color(int clr);
 void				loop(t_vis *vis, t_lem_in *li, t_step *step);
-t_step				*collection_steps(t_vis *vis, t_lem_in *li,\
-								t_paths *srbl_paths, t_paths *res_paths);
+t_step				*collection_steps(t_vis *vis, t_lem_in *li, t_step *step);
 void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);
-t_step				*next_step(t_step *step);
+t_step				*next_step(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*new_step();
 SDL_Color			**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link);
 t_clr_v				*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 12:21:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 17:47:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,15 @@ static void		render_update(t_vis *vis, t_lem_in *li, t_step *step)
 	SDL_SetRenderDrawColor(vis->ren, vis->bgrnd_clr.r, vis->bgrnd_clr.g,\
 										vis->bgrnd_clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
-	render_graph(vis, li, step);
+	if (step)
+		render_graph(vis, li, step);
 	SDL_RenderPresent(vis->ren);
 }
 
 void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 {
-	// t_step		*step;
 	int			delay;
 
-	// step = new_step(chkr, vis, ft_strdup(FIRST_STEP));
 	delay = vis->delay;
 	while (!vis->quit)
 	{
@@ -77,7 +76,7 @@ void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 			events(vis, &step);
 		render_update(vis, li, step);
 		if (!vis->pause && !delay && !step->fin)
-			step = step->next;
+			step = next_step(vis, li, step);
 		delay += delay ? -1 : vis->delay;
 	}
 }

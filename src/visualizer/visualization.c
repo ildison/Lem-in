@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 16:17:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:30:17 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@
 
 static void	destroy_init(t_vis *vis)
 {
-	TTF_CloseFont(vis->font_text);
+	// TTF_CloseFont(vis->font_text);
 	SDL_DestroyRenderer(vis->ren);
 	SDL_DestroyWindow(vis->win);
 	TTF_Quit();
 	SDL_Quit();
 }
 
-static void	open_font(t_vis *vis)
-{
-	vis->font_text = TTF_OpenFont("/src/visualizer/font/FuturaPT-Light.ttf",\
-																		20);
-	if (!vis->font_text)
-		error(TTF_GetError());
-}
+// static void	open_font(t_vis *vis)
+// {
+// 	vis->font_text = TTF_OpenFont("/src/visualizer/font/FuturaPT-Light.ttf",\
+// 																		20);
+// 	if (!vis->font_text)
+// 		error(TTF_GetError());
+// }
 
 static void	init(t_vis *vis)
 {
@@ -59,7 +59,7 @@ static void	init(t_vis *vis)
 		error(TTF_GetError());
 	if (!(vis->ren = SDL_CreateRenderer(vis->win, -1, 0)))
 		error(TTF_GetError());
-	open_font(vis);
+	// open_font(vis);
 	vis->keystate = SDL_GetKeyboardState(NULL);
 	vis->delay = 40;
 }
@@ -67,17 +67,17 @@ static void	init(t_vis *vis)
 void		visualizer(t_lem_in *li, int count_paths)
 {
 	t_vis	*vis;
-	// t_paths	*srbl_paths;
-	// t_paths	*paths;
 
 	li->visu = true;
-	if (!(vis = (t_vis *)ft_memalloc(sizeof(t_vis))))
+	if (!(vis = ft_memalloc(sizeof(t_vis))))
 		error(strerror(errno));
 	init(vis);
 	background(vis, li);
-	vis->srbl_paths = ft_memalloc(sizeof(t_paths));
-	vis->paths = suurballe(li, count_paths, &vis->srbl_paths);
-	vis->first_step = collection_steps(vis, li, vis->srbl_paths, vis->paths);
+	vis->srbll = ft_memalloc(sizeof(t_paths));
+	if (!vis->srbll)
+		error(strerror(errno));
+	vis->paths = suurballe(li, count_paths, vis->srbll);
+	vis->first_step = collection_steps(vis, li, NULL);
 	loop(vis, li, vis->first_step);
 	destroy_init(vis);
 	// cleaning_up(vis, vis->first_step);

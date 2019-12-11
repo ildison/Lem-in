@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 16:07:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 18:30:09 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void					adjacencies(t_lem_in *li);
 int						id_increment(t_vertex *vertex);
 t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
 t_paths					*suurballe(t_lem_in *li, int count_required_paths,\
-																t_paths **vis);
+																t_paths *vis);
 t_paths					*find_paths(t_queue **queue, t_lem_in *li, int n_path);
 int						count_steps_and_ants(t_paths *paths, int count_ants);
 void					enqueue(t_queue **queue, t_vertex *vertex,\
