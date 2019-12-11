@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:50:58 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:53:56 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ t_clr_v			*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li)
 	t_clr_v		*clr_v;
 	int			i;
 
-	clr_v = (t_clr_v *)ft_memalloc(sizeof(t_clr_v) * li->count_vertex);
+	clr_v = (t_clr_v *)ft_memalloc(sizeof(t_clr_v) * LI_COUNT_VRTX);
 	if (!clr_v)
 		error(strerror(errno));
 	i = 0;
-	while (i < li->count_vertex)
+	while (i < LI_COUNT_VRTX)
 	{
 		clr_v[i].v = li->list_adj[i];
 		clr_v[i].clr = cpy_v ? cpy_v[i].clr : get_color(CLR_CIRCLE);
@@ -102,7 +102,7 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 		while (++n_v < path->dist)
 		{
 			step->next = new_step();
-			step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, li->first_link);
+			step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX, li->first_link);
 			step->next->clr_v = init_vertex_clr(step->clr_v, li);
 			add_color(step->next, path, n_v, vis->colors[n_path]);
 			step->next->prev = step;
@@ -119,7 +119,7 @@ t_step			*turn_off_unused_paths(t_step *step, t_lem_in *li, t_link *link)
 {
 	step->next = new_step();
 	step->next->clr_v = init_vertex_clr(NULL, li);
-	step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, link);
+	step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX, link);
 	step->next->prev = step;
 	step = step->next;
 	while (link)
@@ -146,7 +146,7 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 	while (n_path < paths.count_path)
 	{
 		step->next = new_step();
-		step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, li->first_link);
+		step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX, li->first_link);
 		step->next->clr_v = init_vertex_clr(step->clr_v, li);
 		step->next->prev = step;
 		step = step->next;
@@ -166,7 +166,7 @@ t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_paths srbl_paths, t_paths
 	t_step		*last_step;
 
 	step = new_step();
-	step->m_clrs = init_matrix_clr(NULL, li->count_vertex, li->first_link);
+	step->m_clrs = init_matrix_clr(NULL, LI_COUNT_VRTX, li->first_link);
 	step->clr_v = init_vertex_clr(NULL, li);
 	last_step = collect_srbll_paths(vis, step, li, srbl_paths);
 	last_step = turn_off_unused_paths(last_step, li, li->first_link);

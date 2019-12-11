@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 13:58:47 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:53:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@
 # define LI_CLOSE 0
 # define LI_REVERSE -1
 
+# define LI_COUNT_VRTX li->count_vertex
 # define LI_COUNT_ADJACENTS vrx->count_edges
 # define LI_ADJ_MARKED vrx->adj[i]->marked
+
 # define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start 2 the end.\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
 # define LI_ERROR_NOT_VALID_EDGE "not valid edge.\n"
