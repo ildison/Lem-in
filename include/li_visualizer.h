@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:30:04 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:45:43 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@
 # define CLR_17 0xa82e26
 # define CLR_18 0x039482
 # define CLR_19 0x820199
-# define CLR_20 0x2ea491
+# define CLR_20 0xf2b13e
+
+# define COUNT_COLORS 19
 
 typedef struct		s_clr_v
 {

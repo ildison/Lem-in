@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 15:37:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:50:58 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 	t_path		*path;
 	int			n_path;
 	int			n_v;
+	int			n_clr;
 
 	path = paths.path;
 	n_path = 0;
+	n_clr = 0;
 	while (n_path < paths.count_path)
 	{
-		n_v = 0;
-		while (n_v < path->dist)
+		n_v = LI_COUNTER;
+		while (++n_v < path->dist)
 		{
 			step->next = new_step();
 			step->next->m_clrs = init_matrix_clr(step->m_clrs, li->count_vertex, li->first_link);
@@ -105,9 +107,9 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 			add_color(step->next, path, n_v, vis->colors[n_path]);
 			step->next->prev = step;
 			step = step->next;
-			++n_v;
 		}
 		path = path->next;
+		n_clr += n_clr < 19 ? 1 : -COUNT_COLORS;
 		++n_path;
 	}
 	return (step);
@@ -136,9 +138,11 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 	t_path		*path;
 	int			n_path;
 	int			n_v;
+	int			n_clr;
 
 	path = paths.path;
 	n_path = 0;
+	n_clr = COUNT_COLORS;
 	while (n_path < paths.count_path)
 	{
 		step->next = new_step();
@@ -146,12 +150,10 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li, t_paths pa
 		step->next->clr_v = init_vertex_clr(step->clr_v, li);
 		step->next->prev = step;
 		step = step->next;
-		n_v = 0;
-		while (n_v < path->dist)
-		{
-			add_color(step, path, n_v, vis->colors[n_path]);
-			++n_v;
-		}
+		n_v = LI_COUNTER;
+		while (++n_v < path->dist)
+			add_color(step, path, n_v, vis->colors[n_clr]);
+		n_clr += n_clr != 0 ? -1 : COUNT_COLORS;
 		path = path->next;
 		++n_path;
 	}
