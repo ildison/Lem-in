@@ -6,7 +6,7 @@
 /*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/10 13:59:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/11 11:04:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int				main(int argc, char **argv)
 	paths = check_paths(li);
 	if (li->visu == true)
 		visualizer(li, paths.count_path);
-	if (debug == true)
+	else if (debug == true)
 		print_finding(paths);
 	else
 	{
