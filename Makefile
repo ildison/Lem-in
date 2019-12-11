@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/11 17:34:30 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/11 18:46:11 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ VISUAL := visual
 LIBFT := libft.a
 HEADERS := libft.h lem_in.h SDL.h SDL_ttf.h SDL2_framerate.h SDL2_gfxPrimitives.h SDL2_imageFilter.h SDL2_rotozoom.h
 CC := clang
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -O3
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
