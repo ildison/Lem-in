@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 12:04:45 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 14:37:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_ant		*init_ants(int count_ants)
+t_ant		*init_ants(int count_ants, t_vertex *start)
 {
 	t_ant	*first_ant;
 	t_ant	*ant;
@@ -21,6 +21,8 @@ t_ant		*init_ants(int count_ants)
 	if (!first_ant)
 		error(strerror(errno));
 	first_ant->number = 1;
+	first_ant->x = start->coord.x;
+	first_ant->y = start->coord.y
 	ant = first_ant;
 	while (--count_ants)
 	{
@@ -88,7 +90,7 @@ t_ant		*push_ants(t_lem_in *li, t_paths *paths)
 	t_ant	*ant;
 
 	if (!li->first_ant)
-		li->first_ant = init_ants(li->count_ants);
+		li->first_ant = init_ants(li->count_ants, li->start);
 	while (li->end->count_ants < li->count_ants)
 	{
 		ant = li->first_ant;
