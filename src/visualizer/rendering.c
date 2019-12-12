@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:08:12 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:53:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 14:24:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
 	}
 }
 
-static void		render_vertexs(t_vis *vis, t_clr_v *c_vrx, int n_vrx)
+static void		render_vertexs(t_vis *vis, t_circle *c_vrx, int n_vrx)
 {
 	SDL_Color	c;
 	int			i;
@@ -33,7 +33,7 @@ static void		render_vertexs(t_vis *vis, t_clr_v *c_vrx, int n_vrx)
 	while (i < n_vrx)
 	{
 		c = c_vrx[i].clr;
-		filledCircleRGBA(vis->ren, c_vrx[i].v->coord.x, c_vrx[i].v->coord.y, vis->radius, c.r, c.g, c.b, c.a);
+		filledCircleRGBA(vis->ren, c_vrx[i].x, c_vrx[i].y, vis->radius, c.r, c.g, c.b, c.a);
 		++i;
 	}
 }

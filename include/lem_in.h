@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 12:04:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 14:00:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,10 @@ struct					s_ant
 	int					number;
 	bool				move;
 	bool				end;
+	float				x;
+	float				y;
+	float				dx;
+	float				dy;
 	t_vertex			**room;
 	t_ant				*next;
 };

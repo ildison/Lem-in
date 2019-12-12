@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 11:47:52 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 12:16:29 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,10 @@ static void		set_scale(t_vertex *vrx, int indent)
 
 void			background(t_vis *vis, t_lem_in *li)
 {
-	vis->bgrnd_clr = set_color(CLR_BG, 0xff);
+	vis->bgrnd_clr = set_color(CLR_BG, SDL_ALPHA_OPAQUE);
 	vis->gray = set_color(CLR_CIRCLE, LI_ALPHA_LINE);
 	vis->black = set_color(CLR_BLACK, LI_ALPHA_BLACK);
+	vis->ant = set_color(CLR_ANT, SDL_ALPHA_OPAQUE);
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2.1;

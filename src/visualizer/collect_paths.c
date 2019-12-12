@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:50:50 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 14:29:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 		step->m_clrs[path->v[index]->id][0] = clr;
 		step->m_clrs[0][path->v[index]->id] = clr;
 	}
-	if (step->clr_v[path->v[index]->id].v->type != LI_END)
+	if (path->v[index]->type != LI_END)
 		step->clr_v[path->v[index]->id].clr = clr;
 }
 
@@ -55,7 +55,6 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 	t_path		*path;
 	int			n_path;
 	int			n_v;
-
 
 	path = paths->path;
 	n_path = 0;
@@ -106,9 +105,11 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 	t_path		*path;
 	int			n_path;
 	int			n_v;
+	int			n_clr;
 
 	path = paths->path;
 	n_path = 0;
+	n_clr = COUNT_COLORS;
 	while (n_path < paths->count_path)
 	{
 		step->next = new_step();
@@ -119,8 +120,9 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 		step = step->next;
 		n_v = LI_COUNTER;
 		while (++n_v < path->dist)
-			add_color(step, path, n_v, get_color(vis, n_path));
+			add_color(step, path, n_v, get_color(vis, n_clr));
 		++n_path;
+		--n_clr;
 		path = path->next;
 	}
 	return (step);

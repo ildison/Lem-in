@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 11:48:37 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 14:25:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define CLR_CIRCLE 0xbcbaac
 # define CLR_LINE 0xddd9c9
 # define CLR_BLACK 0x000000
+# define CLR_ANT 0xbebebe
 
 # define CLR_1 0xea7c78
 # define CLR_2 0x896287
@@ -67,17 +68,18 @@
 
 # define COUNT_COLORS 19
 
-typedef struct		s_clr_v
+typedef struct		s_circle
 {
-	t_vertex		*v;
+	float			x;
+	float			y;
 	SDL_Color		clr;
-}					t_clr_v;
+}					t_circle;
 
 
 typedef struct		s_step
 {
 	SDL_Color		**m_clrs;
-	t_clr_v			*clr_v;
+	t_circle		*clr_v;
 	SDL_bool		fin;
 	struct s_step	*prev;
 	struct s_step	*next;
@@ -90,6 +92,7 @@ typedef struct		s_vis
 	SDL_Color		bgrnd_clr;
 	SDL_Color		gray;
 	SDL_Color		black;
+	SDL_Color		ant;
 	SDL_Color		colors[17];
 	SDL_Point		scale;
 	SDL_Event		e;
@@ -114,7 +117,7 @@ void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*next_step(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*new_step();
 SDL_Color			**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link);
-t_clr_v				*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li);
+t_circle				*init_vertex_clr(t_circle *cpy_v, t_lem_in *li);
 t_step				*collect_srbll_paths(t_vis *vis, t_step *step,\
 											t_lem_in *li, t_paths *paths);
 t_step				*collect_final_paths(t_vis *vis, t_step *step,\
