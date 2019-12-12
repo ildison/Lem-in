@@ -6,20 +6,20 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:26:45 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:50:50 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
 
-static int	get_color(t_vis *vis, int index)
+SDL_Color		get_color(t_vis *vis, int index)
 {
 	if (index <= COUNT_COLORS && index >= 0)
 		return (vis->colors[index]);
 	else
 	{
 		srand(index);
-		return (set_color)
+		return (set_color(rand(), SDL_ALPHA_OPAQUE));
 	}
 }
 
@@ -35,9 +35,9 @@ static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 		else
 		{
 			step->m_clrs[path->v[index]->id][path->v[index - 1]->id] =\
-												set_color(CLR_BLACK, LI_ALPHA);
+											set_color(CLR_BLACK, LI_ALPHA_BLACK);
 			step->m_clrs[path->v[index - 1]->id][path->v[index]->id] =\
-												set_color(CLR_BLACK, LI_ALPHA);
+											set_color(CLR_BLACK, LI_ALPHA_BLACK);
 		}
 	}
 	else
@@ -55,11 +55,10 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 	t_path		*path;
 	int			n_path;
 	int			n_v;
-	int			n_clr;
+
 
 	path = paths->path;
 	n_path = 0;
-	n_clr = 0;
 	while (n_path < paths->count_path)
 	{
 		n_v = LI_COUNTER;
@@ -69,12 +68,11 @@ t_step			*collect_srbll_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 			step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX,\
 																li->first_link);
 			step->next->clr_v = init_vertex_clr(step->clr_v, li);
-			add_color(step->next, path, n_v, vis->colors[n_path]);
+			add_color(step->next, path, n_v, get_color(vis, n_path));
 			step->next->prev = step;
 			step = step->next;
 		}
 		path = path->next;
-		n_clr += n_clr < 19 ? 1 : -COUNT_COLORS;
 		++n_path;
 	}
 	return (step);
@@ -90,13 +88,13 @@ t_step			*turn_off_unused_paths(t_step *step, t_lem_in *li, t_link *link)
 	while (link)
 	{
 		if (step->prev->m_clrs[link->a->id][link->b->id].r ==\
-											set_color(CLR_CIRCLE, LI_ALPHA).r)
+										set_color(CLR_LINE, LI_ALPHA_LINE).r)
 			step->m_clrs[link->a->id][link->b->id] = set_color(CLR_BLACK,\
-																LI_ALPHA);
+																LI_ALPHA_BLACK);
 		else if (step->prev->m_clrs[link->a->id][link->b->id].r !=\
-											set_color(CLR_BLACK, LI_ALPHA).r)
-			step->m_clrs[link->a->id][link->b->id] = set_color(CLR_CIRCLE,\
-																	LI_ALPHA);
+										set_color(CLR_BLACK, LI_ALPHA_BLACK).r)
+			step->m_clrs[link->a->id][link->b->id] = set_color(CLR_LINE,\
+																LI_ALPHA_LINE);
 		link = link->next;
 	}
 	return (step);
@@ -108,11 +106,9 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 	t_path		*path;
 	int			n_path;
 	int			n_v;
-	int			n_clr;
 
 	path = paths->path;
 	n_path = 0;
-	n_clr = COUNT_COLORS;
 	while (n_path < paths->count_path)
 	{
 		step->next = new_step();
@@ -123,10 +119,9 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 		step = step->next;
 		n_v = LI_COUNTER;
 		while (++n_v < path->dist)
-			add_color(step, path, n_v, vis->colors[n_clr]);
-		n_clr += n_clr != 0 ? -1 : COUNT_COLORS;
-		path = path->next;
+			add_color(step, path, n_v, get_color(vis, n_path));
 		++n_path;
+		path = path->next;
 	}
 	return (step);
 }

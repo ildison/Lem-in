@@ -6,13 +6,13 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:08:12 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 09:56:34 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:53:03 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
 
-void			render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
+static void		render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
 {
 	SDL_Color	c;
 
@@ -24,7 +24,7 @@ void			render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
 	}
 }
 
-void			render_vertexs(t_vis *vis, t_clr_v *c_vrx, int n_vrx)
+static void		render_vertexs(t_vis *vis, t_clr_v *c_vrx, int n_vrx)
 {
 	SDL_Color	c;
 	int			i;

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:26:48 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:50:31 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@
 
 # define FIRST_STEP "begin"
 
-# define LI_ALPHA 50
+# define LI_ALPHA_BLACK 50
+# define LI_ALPHA_LINE 120
 
-# define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
 # define CLR_CIRCLE 0xbcbaac
+# define CLR_LINE 0xddd9c9
 # define CLR_BLACK 0x000000
 
 # define CLR_1 0xea7c78
@@ -89,7 +90,8 @@ typedef struct		s_vis
 	// TTF_Font		*font_text;
 	// SDL_Color		text_clr;
 	SDL_Color		bgrnd_clr;
-	SDL_Color		gray_clr;
+	SDL_Color		gray;
+	SDL_Color		black;
 	SDL_Color		colors[17];
 	SDL_Point		scale;
 	SDL_Event		e;

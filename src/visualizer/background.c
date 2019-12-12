@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:27:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:31:18 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ SDL_Color			set_color(int clr, int alpha)
 	color.r = clr >> 16;
 	color.g = (clr >> 8) & 0xff;
 	color.b = clr & 0xff;
-	color.a = 0xff;
+	color.a = alpha;
 	return (color);
 }
 
@@ -139,7 +139,7 @@ void			background(t_vis *vis, t_lem_in *li)
 {
 	vis->bgrnd_clr = set_color(CLR_BG, 0xff);
 	vis->gray = set_color(CLR_CIRCLE, LI_ALPHA);
-	vis->black = set_color(CLR_BLACK, LI_ALPHA)
+	vis->black = set_color(CLR_BLACK, LI_ALPHA);
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2.1;
