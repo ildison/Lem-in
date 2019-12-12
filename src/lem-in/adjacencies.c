@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adjacencies.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 10:34:01 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/09 17:44:23 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 12:01:09 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void				adjacencies(t_lem_in *li)
 	set_matrix_adj(li->matrix_adj, li->first_link);
 	li->list_adj = li->hash_table;
 	list_adj(li);
+	li->end = li->list_adj[li->count_vertex - 1];
 }

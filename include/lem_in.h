@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 18:30:09 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 12:04:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ struct					s_lem_in
 	t_vertex			**hash_table;
 	t_vertex			**list_adj;
 	t_link				*first_link;
+	t_ant				*first_ant;
 	char				**matrix_adj;
 	char				**edges;
 	int					count_ants;
@@ -160,7 +161,7 @@ void					clean_queue(t_queue **queue);
 t_vertex				*bfs(t_queue **queue, t_lem_in *li);
 t_paths					*check_paths(t_lem_in *li);
 int						validation(t_lem_in *li, char *line);
-void					push_ants(t_lem_in *li, t_paths *paths);
+t_ant					*push_ants(t_lem_in *li, t_paths *paths);
 int						get_edge(t_lem_in *li, t_vertex *src,\
 															t_vertex *dst);
 void					set_matrix_adj(char **matrix_adj, t_link *link);

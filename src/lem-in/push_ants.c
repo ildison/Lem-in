@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 15:48:54 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 12:04:45 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,23 +83,26 @@ static void	destroy_ants(t_ant *ants)
 	}
 }
 
-void		push_ants(t_lem_in *li, t_paths *paths)
+t_ant		*push_ants(t_lem_in *li, t_paths *paths)
 {
-	t_ant	*first_ant;
 	t_ant	*ant;
 
-	first_ant = init_ants(li->count_ants);
-	li->end = li->list_adj[li->count_vertex - 1];
+	if (!li->first_ant)
+		li->first_ant = init_ants(li->count_ants);
 	while (li->end->count_ants < li->count_ants)
 	{
-		ant = first_ant;
+		ant = li->first_ant;
 		while (ant)
 		{
 			if (!ant->end)
 				move_ant(ant, paths->path);
 			ant = ant->next;
 		}
-		ft_printf("\n");
+		if (li->visu == true)
+			return (li->first_ant);
+		else
+			ft_printf("\n");
 	}
-	destroy_ants(first_ant);
+	destroy_ants(li->first_ant);
+	return (NULL);
 }
