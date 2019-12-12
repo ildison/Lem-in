@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:50:31 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 11:48:37 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ typedef struct		s_vis
 {
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
-	// TTF_Font		*font_text;
-	// SDL_Color		text_clr;
 	SDL_Color		bgrnd_clr;
 	SDL_Color		gray;
 	SDL_Color		black;
@@ -100,6 +98,7 @@ typedef struct		s_vis
 	t_paths			*paths;
 	t_paths			*srbll;
 	t_step			*first_step;
+	t_step			*final_paths;
 	bool			srbll_flag;
 	int				radius;
 	int				line_width;

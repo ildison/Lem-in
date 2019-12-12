@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 10:50:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 11:49:35 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_step *step)
 		step = new_step();
 		step->m_clrs = init_matrix_clr(NULL, LI_COUNT_VRTX, li->first_link);
 		step->clr_v = init_vertex_clr(NULL, li);
-		vis->srbll_flag = 0;
 	}
 	else if (vis->srbll_flag == false)
 	{
@@ -82,11 +81,11 @@ t_step			*collection_steps(t_vis *vis, t_lem_in *li, t_step *step)
 		vis->srbll_flag = true;
 		return (step->next);
 	}
-	else
+	else if (!vis->final_paths)
 	{
 		last_step = turn_off_unused_paths(step, li, li->first_link);
-		last_step = collect_final_paths(vis, last_step, li, vis->paths);
-		last_step->fin = SDL_TRUE;
+		vis->final_paths = collect_final_paths(vis, last_step, li, vis->paths);
+		vis->final_paths->fin = SDL_TRUE;
 		return (step->next);
 	}
 	return (step);
