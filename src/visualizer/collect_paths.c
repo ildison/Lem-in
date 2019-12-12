@@ -6,11 +6,22 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 17:33:30 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:26:45 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
+
+static int	get_color(t_vis *vis, int index)
+{
+	if (index <= COUNT_COLORS && index >= 0)
+		return (vis->colors[index]);
+	else
+	{
+		srand(index);
+		return (set_color)
+	}
+}
 
 static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 {
@@ -24,9 +35,9 @@ static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 		else
 		{
 			step->m_clrs[path->v[index]->id][path->v[index - 1]->id] =\
-													get_color(CLR_BLACK);
+												set_color(CLR_BLACK, LI_ALPHA);
 			step->m_clrs[path->v[index - 1]->id][path->v[index]->id] =\
-													get_color(CLR_BLACK);
+												set_color(CLR_BLACK, LI_ALPHA);
 		}
 	}
 	else
@@ -79,11 +90,13 @@ t_step			*turn_off_unused_paths(t_step *step, t_lem_in *li, t_link *link)
 	while (link)
 	{
 		if (step->prev->m_clrs[link->a->id][link->b->id].r ==\
-												get_color(CLR_CIRCLE).r)
-			step->m_clrs[link->a->id][link->b->id] = get_color(CLR_BLACK);
+											set_color(CLR_CIRCLE, LI_ALPHA).r)
+			step->m_clrs[link->a->id][link->b->id] = set_color(CLR_BLACK,\
+																LI_ALPHA);
 		else if (step->prev->m_clrs[link->a->id][link->b->id].r !=\
-											get_color(CLR_BLACK).r)
-			step->m_clrs[link->a->id][link->b->id] = get_color(CLR_CIRCLE);
+											set_color(CLR_BLACK, LI_ALPHA).r)
+			step->m_clrs[link->a->id][link->b->id] = set_color(CLR_CIRCLE,\
+																	LI_ALPHA);
 		link = link->next;
 	}
 	return (step);

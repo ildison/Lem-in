@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 18:28:27 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:26:48 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@
 
 # define FIRST_STEP "begin"
 
+# define LI_ALPHA 50
+
 # define CLR_TEXT 0xddd9c9
 # define CLR_BG 0x414244
-# define CLR_CIRCLE 0xddd9c9
+# define CLR_CIRCLE 0xbcbaac
 # define CLR_BLACK 0x000000
 
 # define CLR_1 0xea7c78
@@ -104,7 +106,7 @@ typedef struct		s_vis
 }					t_vis;
 
 void				background(t_vis *vis, t_lem_in *li);
-SDL_Color			get_color(int clr);
+SDL_Color			set_color(int clr, int alpha);
 void				loop(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*collection_steps(t_vis *vis, t_lem_in *li, t_step *step);
 void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);

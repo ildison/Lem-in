@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 11:45:56 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:27:06 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // 	return (tex);
 // }
 
-SDL_Color			get_color(int clr)
+SDL_Color			set_color(int clr, int alpha)
 {
 	SDL_Color		color;
 
@@ -37,26 +37,26 @@ SDL_Color			get_color(int clr)
 
 static void		set_colors(SDL_Color *colors)
 {
-	colors[0] = get_color(CLR_1);
-	colors[1] = get_color(CLR_2);
-	colors[2] = get_color(CLR_3);
-	colors[3] = get_color(CLR_4);
-	colors[4] = get_color(CLR_5);
-	colors[5] = get_color(CLR_6);
-	colors[6] = get_color(CLR_7);
-	colors[7] = get_color(CLR_8);
-	colors[8] = get_color(CLR_9);
-	colors[9] = get_color(CLR_10);
-	colors[10] = get_color(CLR_11);
-	colors[11] = get_color(CLR_12);
-	colors[12] = get_color(CLR_13);
-	colors[13] = get_color(CLR_14);
-	colors[14] = get_color(CLR_15);
-	colors[15] = get_color(CLR_16);
-	colors[16] = get_color(CLR_17);
-	colors[17] = get_color(CLR_18);
-	colors[18] = get_color(CLR_19);
-	colors[19] = get_color(CLR_20);
+	colors[0] = set_color(CLR_1, SDL_ALPHA_OPAQUE);
+	colors[1] = set_color(CLR_2, SDL_ALPHA_OPAQUE);
+	colors[2] = set_color(CLR_3, SDL_ALPHA_OPAQUE);
+	colors[3] = set_color(CLR_4, SDL_ALPHA_OPAQUE);
+	colors[4] = set_color(CLR_5, SDL_ALPHA_OPAQUE);
+	colors[5] = set_color(CLR_6, SDL_ALPHA_OPAQUE);
+	colors[6] = set_color(CLR_7, SDL_ALPHA_OPAQUE);
+	colors[7] = set_color(CLR_8, SDL_ALPHA_OPAQUE);
+	colors[8] = set_color(CLR_9, SDL_ALPHA_OPAQUE);
+	colors[9] = set_color(CLR_10, SDL_ALPHA_OPAQUE);
+	colors[10] = set_color(CLR_11, SDL_ALPHA_OPAQUE);
+	colors[11] = set_color(CLR_12, SDL_ALPHA_OPAQUE);
+	colors[12] = set_color(CLR_13, SDL_ALPHA_OPAQUE);
+	colors[13] = set_color(CLR_14, SDL_ALPHA_OPAQUE);
+	colors[14] = set_color(CLR_15, SDL_ALPHA_OPAQUE);
+	colors[15] = set_color(CLR_16, SDL_ALPHA_OPAQUE);
+	colors[16] = set_color(CLR_17, SDL_ALPHA_OPAQUE);
+	colors[17] = set_color(CLR_18, SDL_ALPHA_OPAQUE);
+	colors[18] = set_color(CLR_19, SDL_ALPHA_OPAQUE);
+	colors[19] = set_color(CLR_20, SDL_ALPHA_OPAQUE);
 }
 
 // void			text(t_vis *vis)
@@ -137,8 +137,9 @@ static void		set_scale(t_vertex *vrx, int indent)
 
 void			background(t_vis *vis, t_lem_in *li)
 {
-	vis->bgrnd_clr = get_color(CLR_BG);
-	vis->gray_clr = get_color(CLR_CIRCLE);
+	vis->bgrnd_clr = set_color(CLR_BG, 0xff);
+	vis->gray = set_color(CLR_CIRCLE, LI_ALPHA);
+	vis->black = set_color(CLR_BLACK, LI_ALPHA)
 	vis->radius = FT_MIN(SCREEN_WIDTH, SCREEN_HEIGHT) / (li->count_vertex * 3);
 	vis->radius = FT_MAX(2, vis->radius);
 	vis->line_width = vis->radius / 2.1;

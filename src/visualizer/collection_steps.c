@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 13:40:20 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 18:30:59 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 10:26:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ SDL_Color		**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link)
 	else
 		while (link)
 		{
-			m_clr[link->a->id][link->b->id] = get_color(CLR_CIRCLE);
+			m_clr[link->a->id][link->b->id] = set_color(CLR_CIRCLE, LI_ALPHA);
 			link = link->next;
 		}
 	return (m_clr);
@@ -56,7 +56,7 @@ t_clr_v			*init_vertex_clr(t_clr_v *cpy_v, t_lem_in *li)
 	while (i < LI_COUNT_VRTX)
 	{
 		clr_v[i].v = li->list_adj[i];
-		clr_v[i].clr = cpy_v ? cpy_v[i].clr : get_color(CLR_CIRCLE);
+		clr_v[i].clr = cpy_v ? cpy_v[i].clr : set_color(CLR_CIRCLE, LI_ALPHA);
 		++i;
 	}
 	return (clr_v);

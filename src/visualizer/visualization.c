@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 18:30:17 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 09:54:46 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	init(t_vis *vis)
 		error(TTF_GetError());
 	// open_font(vis);
 	vis->keystate = SDL_GetKeyboardState(NULL);
-	vis->delay = 40;
+	vis->delay = 30;
 }
 
 void		visualizer(t_lem_in *li, int count_paths)
@@ -80,5 +80,6 @@ void		visualizer(t_lem_in *li, int count_paths)
 	vis->first_step = collection_steps(vis, li, NULL);
 	loop(vis, li, vis->first_step);
 	destroy_init(vis);
+
 	// cleaning_up(vis, vis->first_step);
 }
