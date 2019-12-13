@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: vmormont <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/13 16:03:59 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/13 18:21:01 by vmormont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_NAME := lem_in.c\
 			find_paths.c\
 			get_count_steps_and_ants.c\
 			clear.c\
-			help.c
+			help.c\
+			vertex.c
 
 SRC_VIS := visualization.c\
 			background.c\

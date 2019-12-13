@@ -22,3 +22,15 @@ void			print_help(void)
 	ft_printf("\t-v - for visualisation\n\n");
 	ft_printf("Have a nice day, My Friend!\n");
 }
+
+void			check_split(char **split)
+{
+	int			i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	if (i == 2)
+		return ;
+	error("no valid link");
+}

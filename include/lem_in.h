@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 15:45:56 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 18:15:53 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,17 @@ void					print_matrix_adj(char **matrix, int count_vertex);
 void					print_list_adj(t_vertex **list_adj, int count_vertex);
 void					print_finding(t_paths *finding);
 void					print_help(void);
+void					check_split(char **split);
+
+/*
+**	Vertexs functions
+*/
+
+t_vertex				*new_vertex(char *line, int vertex_type);
+void					add_vertex(t_vertex **start, t_vertex *vertex);
+t_vertex				*get_vertex(t_vertex *vertex, char *name);
+void					add_new_link(t_link **first_link, t_vertex *vertex, char *line);
+
 
 /*
 **	Clear functions
