@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 17:47:17 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 13:18:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		events(t_vis *vis, t_step **step)
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_SPACE])
 		vis->pause ^= SDL_TRUE;
 	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
-			SDL_KEYSTATE[SDL_RIGHT] && *step && (*step)->next)
+			SDL_KEYSTATE[SDL_RIGHT] && *step && (*step)->next && !(*step)->fin)
 		*step = (*step)->next;
 	else if (vis->pause && SDL_EVENT == SDL_KEYDOWN &&\
 			SDL_KEYSTATE[SDL_LEFT] && *step && (*step)->prev)
@@ -51,11 +51,8 @@ static void		events(t_vis *vis, t_step **step)
 // 	}
 // }
 
-static void		render_update(t_vis *vis, t_lem_in *li, t_step *step)
+void			render_update(t_vis *vis, t_lem_in *li, t_step *step)
 {
-	// SDL_Texture	*tex;
-	// SDL_Surface	*surf;
-
 	SDL_SetRenderDrawColor(vis->ren, vis->bgrnd_clr.r, vis->bgrnd_clr.g,\
 										vis->bgrnd_clr.b, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(vis->ren);
@@ -75,7 +72,7 @@ void			loop(t_vis *vis, t_lem_in *li, t_step *step)
 		while (SDL_PollEvent(&vis->e))
 			events(vis, &step);
 		render_update(vis, li, step);
-		if (!vis->pause && !delay && !step->fin)
+		if (!vis->pause && (!delay || step->n_ant) && !step->fin)
 			step = next_step(vis, li, step);
 		delay += delay ? -1 : vis->delay;
 	}

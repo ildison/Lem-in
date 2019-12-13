@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 14:25:03 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 14:04:33 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,14 @@
 # define CLR_20 0xf2b13e
 
 # define COUNT_COLORS 19
+# define COUNT_MOVE_STEPS 75
 
 typedef struct		s_circle
 {
 	float			x;
 	float			y;
+	float			dx;
+	float			dy;
 	SDL_Color		clr;
 }					t_circle;
 
@@ -80,7 +83,9 @@ typedef struct		s_step
 {
 	SDL_Color		**m_clrs;
 	t_circle		*clr_v;
+	t_circle		*ants_move;
 	SDL_bool		fin;
+	int				n_ant;
 	struct s_step	*prev;
 	struct s_step	*next;
 }					t_step;
@@ -104,6 +109,7 @@ typedef struct		s_vis
 	t_step			*final_paths;
 	bool			srbll_flag;
 	int				radius;
+	int				ant_radius;
 	int				line_width;
 	const Uint8		*keystate;
 	int				delay;
@@ -124,5 +130,8 @@ t_step				*collect_final_paths(t_vis *vis, t_step *step,\
 											t_lem_in *li, t_paths *paths);
 t_step				*turn_off_unused_paths(t_step *step, t_lem_in *li,\
 															t_link *link);
+void				collect_ant_move(t_vis *vis, t_lem_in *li,\
+											t_step *final_step);
+void				render_update(t_vis *vis, t_lem_in *li, t_step *step);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:00:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 14:37:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/12 17:30:01 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ t_ant		*init_ants(int count_ants, t_vertex *start)
 		error(strerror(errno));
 	first_ant->number = 1;
 	first_ant->x = start->coord.x;
-	first_ant->y = start->coord.y
+	first_ant->y = start->coord.y;
 	ant = first_ant;
 	while (--count_ants)
 	{
 		ant->next = ft_memalloc(sizeof(t_ant));
 		if (!ant->next)
 			error(strerror(errno));
+		ant->next->x = start->coord.x;
+		ant->next->y = start->coord.y;
 		ant->next->number = ant->number + 1;
 		ant = ant->next;
 	}
@@ -44,7 +46,7 @@ static void	ant_is_move(t_ant **ant)
 		++(*(*ant)->room)->count_ants;
 }
 
-void		move_ant(t_ant *ant, t_path *path)
+void		move_ant(t_ant *ant, t_path *path, int visu_flag)
 {
 	if (ant->move && (*ant->room)->type == LI_END)
 	{
@@ -67,7 +69,7 @@ void		move_ant(t_ant *ant, t_path *path)
 	}
 	else if (ant->move)
 		ant_is_move(&ant);
-	if (ant->move)
+	if (ant->move && !visu_flag)
 		ft_printf("L%d-%s ", ant->number, (*ant->room)->name);
 }
 
@@ -97,7 +99,7 @@ t_ant		*push_ants(t_lem_in *li, t_paths *paths)
 		while (ant)
 		{
 			if (!ant->end)
-				move_ant(ant, paths->path);
+				move_ant(ant, paths->path, li->visu);
 			ant = ant->next;
 		}
 		if (li->visu == true)

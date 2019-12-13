@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 14:29:35 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 13:22:13 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,12 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 																t_paths *paths)
 {
 	t_path		*path;
-	int			n_path;
 	int			n_v;
 	int			n_clr;
 
 	path = paths->path;
-	n_path = 0;
 	n_clr = COUNT_COLORS;
-	while (n_path < paths->count_path)
+	while (path)
 	{
 		step->next = new_step();
 		step->next->m_clrs = init_matrix_clr(step->m_clrs, LI_COUNT_VRTX,\
@@ -121,7 +119,6 @@ t_step			*collect_final_paths(t_vis *vis, t_step *step, t_lem_in *li,\
 		n_v = LI_COUNTER;
 		while (++n_v < path->dist)
 			add_color(step, path, n_v, get_color(vis, n_clr));
-		++n_path;
 		--n_clr;
 		path = path->next;
 	}
