@@ -6,16 +6,16 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/13 15:19:33 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/13 16:03:59 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := lem-in
 VISUAL := visual
 LIBFT := libft.a
-HEADERS := libft.h lem_in.h li_visualizer.h SDL.h SDL_ttf.h SDL2_framerate.h SDL2_gfxPrimitives.h SDL2_imageFilter.h SDL2_rotozoom.h
+HEADERS := libft.h lem_in.h li_visualizer.h SDL.h SDL2_gfxPrimitives.h
 CC := clang
-CFLAGS := -Wall -Wextra -Werror -g -O3
+CFLAGS := -Wall -Wextra -Werror -O3 -g
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
@@ -24,8 +24,8 @@ DIR_LIBFT := $(DIR_LIBS)/libft
 DIR_SRC := src/$(NAME) src/visualizer
 
 DIR_SDLLIBS := $(DIR_LIBS)/libSDL2
-DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_ttf.framework/Headers -I $(DIR_SDLLIBS)/SDL2_gfx/include
-SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2 -framework SDL2_ttf
+DIR_INCLUDE_SDL := -I $(DIR_SDLLIBS)/SDL2.framework/Headers -I $(DIR_SDLLIBS)/SDL2_gfx/include
+SDL_LIBS := -Wl,-rpath,$(DIR_SDLLIBS) -F $(DIR_SDLLIBS) -framework SDL2
 SDL2_GFX := $(DIR_SDLLIBS)/SDL2_gfx/lib/libSDL2_gfx.a
 
 vpath %.c $(DIR_SRC)

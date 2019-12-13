@@ -41,11 +41,11 @@
 # define LI_COUNT_ADJACENTS vrx->count_edges
 # define LI_ADJ_MARKED vrx->adj[i]->marked
 
-# define LI_ERROR_NO_PATH_FROM_START_2_END "no path from the start to the end\n"
-# define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
-# define LI_ERROR_NOT_VALID_EDGE "not valid edge.\n"
-# define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
-# define LI_ERROR_NOT_INPUT "no input, check usage: -h.\n"
+# define LI_ERROR_NO_PATH_FROM_START_2_END "no path from the start to the end"
+# define LI_ERROR_NOT_VALID_V "not valid vertexs."
+# define LI_ERROR_NOT_VALID_EDGE "not valid edge."
+# define LI_ERROR_NOT_VALID_ANTS "not valid count ants."
+# define LI_ERROR_NOT_INPUT "no input, check usage: -h."
 
 typedef struct s_input	t_input;
 typedef struct s_pnt	t_pnt;

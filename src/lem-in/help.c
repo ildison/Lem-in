@@ -14,11 +14,11 @@
 
 void			print_help(void)
 {
-	ft_printf("Welcome to Lem-in (Authors: Cormund and Vmormont\n");
-	ft_printf("Start the program correctly:\n");
-	ft_printf("\t./lem-in {flag} < {map}\n");
-	ft_printf("Flags:\n");
+	ft_printf("Welcome to Lem-in (Authors: Cormund and Vmormont)\n\n");
+	ft_printf("Start the program correctly:\n\n");
+	ft_printf("\t./lem-in {flag} < {map}\n\n");
+	ft_printf("Flags:\n\n");
 	ft_printf("\t-d - for debug information\n");
-	ft_printf("\t-v - for visualisation\n");
-	ft_printf("Have a nica day, My Friend!\n");
+	ft_printf("\t-v - for visualisation\n\n");
+	ft_printf("Have a nice day, My Friend!\n");
 }

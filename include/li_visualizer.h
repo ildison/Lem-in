@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 15:42:57 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 16:04:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "lem_in.h"
 # include "SDL.h"
-# include "SDL_ttf.h"
 # include "SDL2_gfxPrimitives.h"
 
 # define SCREEN_WIDTH 2040

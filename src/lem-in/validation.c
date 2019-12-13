@@ -57,6 +57,8 @@ static int			valid_vertexs(t_lem_in *li)
 	t_vertex		*tmp2;
 
 	tmp = li->start;
+	if (!tmp)
+		error("no valid vertex\n");
 	if (tmp->name[0] == 'L' || !(valid_double(li)))
 		return (0);
 	while (tmp)

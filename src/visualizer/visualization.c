@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:40:31 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 15:08:41 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 16:07:22 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	init(t_vis *vis)
 	vis->win = SDL_CreateWindow("Lem-in visualizer", SDL_WINDOWPOS_CENTERED,\
 	SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (!vis->win)
-		error(TTF_GetError());
+		error(NULL);
 	if (!(vis->ren = SDL_CreateRenderer(vis->win, -1, 0)))
-		error(TTF_GetError());
+		error(NULL);
 	vis->keystate = SDL_GetKeyboardState(NULL);
 	vis->delay = 30;
 }

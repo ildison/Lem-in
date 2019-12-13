@@ -70,6 +70,18 @@ static t_vertex	*get_vertex(t_vertex *vertex, char *name)
 	return (vertex);
 }
 
+static void		check_split(char **split)
+{
+	int			i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	if (i == 2)
+		return ;
+	error("no valid link");
+}
+
 static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 {
 	t_link		*link;
@@ -79,6 +91,7 @@ static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 	link = (t_link *)ft_memalloc(sizeof(t_link));
 	if (!link || !split_line)
 		error(strerror(errno));
+	check_split(split_line);
 	link->a = get_vertex(vertex, split_line[0]);
 	link->b = get_vertex(vertex, split_line[1]);
 	ft_free_2x_mas((void **)split_line);
@@ -89,17 +102,21 @@ static void		add_new_link(t_link **first_link, t_vertex *vertex, char *line)
 
 void			parsing(t_lem_in *li)
 {
+	t_input		*comment;
 	t_input		*input;
 	t_vertex	*vertex;
 
 	if ((input = li->first_line->next))
 		while (input->line)
 		{
-			if (input->type == LI_START || input->type == LI_END)
+			if ((input->type == LI_START || input->type == LI_END))
 			{
-				vertex = new_vertex(input->next->line, input->type);
+				comment = input->next;
+				while (comment->type == LI_COMMENT)
+					comment = comment->next;
+				vertex = new_vertex(comment->line, input->type);
 				add_vertex(&li->start, vertex);
-				input = input->next;
+				input = comment;
 			}
 			else if (input->type == LI_VERTEX)
 			{

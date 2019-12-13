@@ -73,8 +73,10 @@ static void		parse_args(bool *d, bool *v, char **argv, int argc)
 	static char *opt[] = {"d", "v", "debug", "visu", "h"};
 
 	if (argc > 1 && !check_valid_options(argc, argv, opt, 4))
-		error("USAGE: ./lem-in < [map]\n\t-d for \
-debug\n\t-v for visualization\n");
+	{
+		print_help();
+		exit(EXIT_FAILURE);
+	}
 	if (get_option(argc, argv, "d") > 0)
 		*d = true;
 	else if (get_option(argc, argv, "debug") > 0)

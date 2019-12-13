@@ -15,6 +15,9 @@
 void			error(const char *error_msg)
 {
 	if (error_msg)
-		ft_putstr(error_msg);
+	{
+		ft_putstr("ERROR: ");
+		ft_putendl(error_msg);
+	}
 	exit(-1);
 }
