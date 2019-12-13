@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 13:15:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 15:54:06 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:24:14 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void		free_lem_in(t_lem_in *li, t_paths *paths)
 	clear_links(li->first_link);
 	clear_matrix(li->matrix_adj);
 	clear_paths(&paths->path);
+	free(paths);
 	free(li->hash_table);
 	free(li);
 }
@@ -69,7 +70,7 @@ static int		check_valid_options(int ac, char **av, char **opt, int opt_num)
 
 static void		parse_args(bool *d, bool *v, char **argv, int argc)
 {
-	static char *opt[] = {"d", "v", "debug", "visu"};
+	static char *opt[] = {"d", "v", "debug", "visu", "h"};
 
 	if (argc > 1 && !check_valid_options(argc, argv, opt, 4))
 		error("USAGE: ./lem-in < [map]\n\t-d for \
@@ -82,6 +83,11 @@ debug\n\t-v for visualization\n");
 		*v = true;
 	else if (get_option(argc, argv, "visu") > 0)
 		*v = true;
+	else if (get_option(argc, argv, "h") > 0)
+	{
+		print_help();
+		exit(EXIT_FAILURE);
+	}
 }
 
 int				main(int argc, char **argv)
@@ -109,10 +115,6 @@ int				main(int argc, char **argv)
 		print_input(li->first_line);
 		push_ants(li, paths);
 	}
-	/*
-	** print_list_adj(li->list_adj, li->count_vertex);
-	** print_matrix_adj(li->matrix_adj, li->count_vertex);
-	*/
 	free_lem_in(li, paths);
 	return (0);
 }

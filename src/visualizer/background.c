@@ -6,23 +6,11 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/12 16:46:01 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:39:16 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
-
-// SDL_Texture		*create_texture(TTF_Font *font, char *text, SDL_Renderer *ren,\
-// 															SDL_Color color)
-// {
-// 	SDL_Texture	*tex;
-// 	SDL_Surface	*surf;
-
-// 	surf = TTF_RenderText_Blended(font, text, color);
-// 	tex = SDL_CreateTextureFromSurface(ren, surf);
-// 	SDL_FreeSurface(surf);
-// 	return (tex);
-// }
 
 SDL_Color			set_color(int clr, int alpha)
 {
@@ -35,7 +23,7 @@ SDL_Color			set_color(int clr, int alpha)
 	return (color);
 }
 
-static void		set_colors(SDL_Color *colors)
+static void			set_colors(SDL_Color *colors)
 {
 	colors[0] = set_color(CLR_1, SDL_ALPHA_OPAQUE);
 	colors[1] = set_color(CLR_2, SDL_ALPHA_OPAQUE);
@@ -59,27 +47,9 @@ static void		set_colors(SDL_Color *colors)
 	colors[19] = set_color(CLR_20, SDL_ALPHA_OPAQUE);
 }
 
-// void			text(t_vis *vis)
-// {
-// 	TTF_SizeText(vis->font_text, "Stack a", &vis->stack_a_rect.w,\
-// 												&vis->stack_a_rect.h);
-// 	vis->stack_a_rect.x = 10;
-// 	vis->stack_a_rect.y = 10;
-// 	vis->stack_a = create_texture(vis->font_text, "Stack a", vis->ren,\
-// 															vis->text_clr);
-// 	vis->stack_b_rect.w = vis->stack_a_rect.w;
-// 	vis->stack_b_rect.h = vis->stack_a_rect.h;
-// 	vis->stack_b_rect.x = vis->stack_a_rect.x;
-// 	vis->stack_b_rect.y = vis->stack_a_rect.y + SCREEN_HEIGHT / 2;
-// 	vis->stack_b = create_texture(vis->font_text, "Stack b", vis->ren,\
-// 															vis->text_clr);
-// 	vis->oper_sz.y = SCREEN_HEIGHT / 2;
-// 	vis->oper_sz.x = SCREEN_WIDTH / 2;
-// }
-
-static void		set_new_vrx_coord(t_vertex *v, int indent)
+static void			set_new_vrx_coord(t_vertex *v, int indent)
 {
-	SDL_Point	sq;
+	SDL_Point		sq;
 
 	sq.x = SCREEN_WIDTH - indent;
 	sq.y = SCREEN_HEIGHT - indent;
@@ -105,24 +75,23 @@ static void		set_new_vrx_coord(t_vertex *v, int indent)
 	}
 }
 
-static void		set_scale(t_vertex *vrx, int indent)
+static void			set_scale(t_vertex *vrx, int indent)
 {
-	SDL_Point	scale;
-	t_vertex	*v;
-	int			max_x;
-	int			max_y;
+	SDL_Point		scale;
+	SDL_Point		max;
+	t_vertex		*v;
 
 	v = vrx;
-	max_x = v->coord.x;
-	max_y = v->coord.y;
+	max.x = v->coord.x;
+	max.y = v->coord.y;
 	while (v->next)
 	{
 		v = v->next;
-		max_x = FT_MAX(v->coord.x, max_x);
-		max_y = FT_MAX(v->coord.y, max_y);
+		max.x = FT_MAX(v->coord.x, max.x);
+		max.y = FT_MAX(v->coord.y, max.y);
 	}
-	scale.x = (SCREEN_WIDTH - indent * 2) / max_x;
-	scale.y = (SCREEN_HEIGHT - indent * 2) / max_y;
+	scale.x = (SCREEN_WIDTH - indent * 2) / max.x;
+	scale.y = (SCREEN_HEIGHT - indent * 2) / max.y;
 	v = vrx;
 	if (scale.x == 0 || scale.y == 0)
 		set_new_vrx_coord(vrx, indent);
@@ -135,7 +104,7 @@ static void		set_scale(t_vertex *vrx, int indent)
 		}
 }
 
-void			background(t_vis *vis, t_lem_in *li)
+void				background(t_vis *vis, t_lem_in *li)
 {
 	vis->bgrnd_clr = set_color(CLR_BG, SDL_ALPHA_OPAQUE);
 	vis->gray = set_color(CLR_CIRCLE, LI_ALPHA_LINE);

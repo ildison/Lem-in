@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 14:04:39 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:45:56 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define LI_COUNT_ADJACENTS vrx->count_edges
 # define LI_ADJ_MARKED vrx->adj[i]->marked
 
-# define LI_ERROR_NO_PATH_FROM_START_TO_END "No path from the start 2 the end.\n"
+# define LI_ERROR_NO_PATH_FROM_START_2_END "no path from the start to the end\n"
 # define LI_ERROR_NOT_VALID_V "not valid vertexs.\n"
 # define LI_ERROR_NOT_VALID_EDGE "not valid edge.\n"
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants.\n"
@@ -154,7 +154,8 @@ int						id_increment(t_vertex *vertex);
 t_vertex				**hash_table(t_vertex *vertex, int count_vertex);
 t_paths					*suurballe(t_lem_in *li, int count_required_paths,\
 																t_paths *vis);
-t_paths					*find_paths(t_queue **queue, t_lem_in *li, int n_path);
+t_paths					*find_paths(t_queue **queue, t_lem_in *li, int n_path,\
+																		int i);
 int						count_steps_and_ants(t_paths *paths, int count_ants);
 void					enqueue(t_queue **queue, t_vertex *vertex,\
 													t_queue **last);
@@ -168,8 +169,8 @@ int						get_edge(t_lem_in *li, t_vertex *src,\
 															t_vertex *dst);
 void					set_matrix_adj(char **matrix_adj, t_link *link);
 void					add_new_path(t_paths *paths, t_vertex *adj,\
-											t_path **last_path,  t_lem_in *li);
-t_path					*new_path(t_vertex *vrx,  t_lem_in *li);
+											t_path **last_path, t_lem_in *li);
+t_path					*new_path(t_vertex *vrx, t_lem_in *li);
 
 /*
 **	bonus
@@ -181,6 +182,7 @@ void					print_links(t_link *link);
 void					print_matrix_adj(char **matrix, int count_vertex);
 void					print_list_adj(t_vertex **list_adj, int count_vertex);
 void					print_finding(t_paths *finding);
+void					print_help(void);
 
 /*
 **	Clear functions

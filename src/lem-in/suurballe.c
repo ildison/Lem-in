@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 15:05:26 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 18:29:55 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:31:34 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,17 @@ t_paths			*suurballe(t_lem_in *li, int count_required_paths, t_paths *vis)
 	queue = NULL;
 	last = NULL;
 	li->start->marked = true;
-	count_path = 0;
-	while (count_path < count_required_paths && (path = bfs(&queue, li)))
+	count_path = -1;
+	while (++count_path < count_required_paths && (path = bfs(&queue, li)))
 	{
 		split_vertex(li->matrix_adj, path);
 		clean_queue(&queue);
 		if (li->visu == true)
 			add_new_path(vis, path, &last, li);
 		clean_marked(&li->list_adj[1]);
-		++count_path;
 	}
 	clean_marked(&li->list_adj[1]);
-	finding = find_paths(&queue, li, count_required_paths);
+	finding = find_paths(&queue, li, count_required_paths, LI_COUNTER);
 	clean_marked(&li->list_adj[1]);
 	clean_queue(&queue);
 	desplitted_vertexs(&li->list_adj[1]);

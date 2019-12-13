@@ -6,20 +6,17 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:03:24 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 14:04:33 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:42:57 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PS_VISUALIZER_H
-# define PS_VISUALIZER_H
+#ifndef LI_VISUALIZER_H
+# define LI_VISUALIZER_H
 
 # include "lem_in.h"
 # include "SDL.h"
 # include "SDL_ttf.h"
-# include "SDL2_framerate.h"
 # include "SDL2_gfxPrimitives.h"
-# include "SDL2_imageFilter.h"
-# include "SDL2_rotozoom.h"
 
 # define SCREEN_WIDTH 2040
 # define SCREEN_HEIGHT 1240
@@ -33,8 +30,6 @@
 # define SDL_UP SDL_SCANCODE_UP
 # define SDL_DOWN SDL_SCANCODE_DOWN
 # define SDL_R SDL_SCANCODE_R
-
-# define FIRST_STEP "begin"
 
 # define LI_ALPHA_BLACK 50
 # define LI_ALPHA_LINE 120
@@ -77,7 +72,6 @@ typedef struct		s_circle
 	float			dy;
 	SDL_Color		clr;
 }					t_circle;
-
 
 typedef struct		s_step
 {
@@ -123,7 +117,7 @@ void				render_graph(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*next_step(t_vis *vis, t_lem_in *li, t_step *step);
 t_step				*new_step();
 SDL_Color			**init_matrix_clr(SDL_Color **m_cpy, int n_v, t_link *link);
-t_circle				*init_vertex_clr(t_circle *cpy_v, t_lem_in *li);
+t_circle			*init_vertex_clr(t_circle *cpy_v, t_lem_in *li);
 t_step				*collect_srbll_paths(t_vis *vis, t_step *step,\
 											t_lem_in *li, t_paths *paths);
 t_step				*collect_final_paths(t_vis *vis, t_step *step,\

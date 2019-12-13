@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 15:02:47 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 13:18:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:37:44 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,6 @@ static void		events(t_vis *vis, t_step **step)
 	else if (SDL_EVENT == SDL_KEYDOWN && SDL_KEYSTATE[SDL_R])
 		*step = vis->first_step;
 }
-
-// void			fill_circle(t_vis *vis, int cx, int cy, int radius)
-// {
-// 	double		dy;
-// 	double		dx;
-
-// 	dy = 1;
-// 	while (dy <= radius)
-// 	{
-// 		dx = floor(sqrt((2.0 * radius * dy) - (dy * dy)));
-// 		// int x = cx - dx;
-// 		SDL_SetRenderDrawColor(vis->ren, vis->gray_clr.r, vis->gray_clr.g, vis->gray_clr.b, 0);
-// 		SDL_RenderDrawLine(vis->ren, cx - dx, cy + dy - radius, cx + dx, cy + dy - radius);
-// 		SDL_RenderDrawLine(vis->ren, cx - dx, cy - dy + radius, cx + dx, cy - dy + radius);
-// 		dy += 1.0;
-// 	}
-// }
 
 void			render_update(t_vis *vis, t_lem_in *li, t_step *step)
 {

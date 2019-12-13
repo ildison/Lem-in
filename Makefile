@@ -6,7 +6,7 @@
 #    By: cormund <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/08 12:44:34 by cormund           #+#    #+#              #
-#    Updated: 2019/12/13 13:29:19 by cormund          ###   ########.fr        #
+#    Updated: 2019/12/13 15:19:33 by cormund          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ VISUAL := visual
 LIBFT := libft.a
 HEADERS := libft.h lem_in.h li_visualizer.h SDL.h SDL_ttf.h SDL2_framerate.h SDL2_gfxPrimitives.h SDL2_imageFilter.h SDL2_rotozoom.h
 CC := clang
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g -O3
 REMOVE := /bin/rm -rf
 DIR_BIN := bin
 DIR_INCLUDE := -I include
@@ -47,7 +47,8 @@ SRC_NAME := lem_in.c\
 			hash_table.c\
 			find_paths.c\
 			get_count_steps_and_ants.c\
-			clear.c
+			clear.c\
+			help.c
 
 SRC_VIS := visualization.c\
 			background.c\

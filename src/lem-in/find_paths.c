@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 14:13:39 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/11 15:59:51 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:30:43 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ void			add_new_path(t_paths *paths, t_vertex *adj, t_path **last_path,\
 	++paths->count_path;
 }
 
-t_paths			*find_paths(t_queue **queue, t_lem_in *li, int n)
+t_paths			*find_paths(t_queue **queue, t_lem_in *li, int n, int i)
 {
 	t_vertex	*vrx;
 	t_paths		*path;
 	t_queue		*last;
 	t_path		*last_path;
-	int			i;
 
 	last_path = NULL;
 	path = ft_memalloc(sizeof(t_paths));

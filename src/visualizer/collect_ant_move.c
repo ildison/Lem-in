@@ -6,30 +6,32 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 12:11:59 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 14:07:49 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:34:11 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "li_visualizer.h"
 
-int		catching_ants(t_circle *anthill, t_ant *ant)
+static int		catching_ants(t_circle *anthill, t_ant *ant)
 {
 	int			n_ants;
 
 	n_ants = 0;
 	while (ant)
 	{
-		 if (ant->move)
-		 {
-			 anthill[n_ants].x = ant->x;
-			 anthill[n_ants].y = ant->y;
-			 ant->x = (*ant->room)->coord.x;
-			 ant->y = (*ant->room)->coord.y;
-			 anthill[n_ants].dx = (ant->x - anthill[n_ants].x) / COUNT_MOVE_STEPS;
-			 anthill[n_ants].dy = (ant->y - anthill[n_ants].y) / COUNT_MOVE_STEPS;
-			 ++n_ants;
-		 }
-		 ant = ant->next;
+		if (ant->move)
+		{
+			anthill[n_ants].x = ant->x;
+			anthill[n_ants].y = ant->y;
+			ant->x = (*ant->room)->coord.x;
+			ant->y = (*ant->room)->coord.y;
+			anthill[n_ants].dx = (ant->x - anthill[n_ants].x) /\
+												COUNT_MOVE_STEPS;
+			anthill[n_ants].dy = (ant->y - anthill[n_ants].y) /\
+												COUNT_MOVE_STEPS;
+			++n_ants;
+		}
+		ant = ant->next;
 	}
 	return (n_ants);
 }
@@ -94,4 +96,6 @@ void			collect_ant_move(t_vis *vis, t_lem_in *li, t_step *final_step)
 	ft_memcpy(step->next, final_step, sizeof(t_step));
 	step->next->fin = SDL_TRUE;
 	step->next->prev = step;
+	step->next->next = NULL;
+	free(anthill);
 }

@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free2xmas.c                                     :+:      :+:    :+:   */
+/*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/30 15:49:08 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 14:25:02 by cormund          ###   ########.fr       */
+/*   Created: 2019/12/13 15:15:03 by cormund           #+#    #+#             */
+/*   Updated: 2019/12/13 15:23:19 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-void		ft_free_2x_mas(void **mas)
+void			print_help(void)
 {
-	void	**tmp;
-
-	if ((tmp = mas))
-	{
-		while (*mas)
-		{
-			free(*mas);
-			++mas;
-		}
-		free(tmp);
-		tmp = NULL;
-	}
+	ft_printf("Welcome to Lem-in (Authors: Cormund and Vmormont\n");
+	ft_printf("Start the program correctly:\n");
+	ft_printf("\t./lem-in {flag} < {map}\n");
+	ft_printf("Flags:\n");
+	ft_printf("\t-d - for debug information\n");
+	ft_printf("\t-v - for visualisation\n");
+	ft_printf("Have a nica day, My Friend!\n");
 }

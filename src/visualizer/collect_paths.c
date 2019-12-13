@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:58:57 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 13:22:13 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:39:36 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void		add_color(t_step *step, t_path *path, int index, SDL_Color clr)
 		else
 		{
 			step->m_clrs[path->v[index]->id][path->v[index - 1]->id] =\
-											set_color(CLR_BLACK, LI_ALPHA_BLACK);
+										set_color(CLR_BLACK, LI_ALPHA_BLACK);
 			step->m_clrs[path->v[index - 1]->id][path->v[index]->id] =\
-											set_color(CLR_BLACK, LI_ALPHA_BLACK);
+										set_color(CLR_BLACK, LI_ALPHA_BLACK);
 		}
 	}
 	else

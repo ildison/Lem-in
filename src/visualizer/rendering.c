@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 17:08:12 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 14:11:28 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/13 15:36:43 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void		render_egdes(t_vis *vis, t_link *link, SDL_Color **clrs)
 			c.g /= 2;
 			c.b /= 2;
 		}
-		thickLineRGBA(vis->ren, link->a->coord.x, link->a->coord.y, link->b->coord.x, link->b->coord.y, vis->line_width, c.r, c.g, c.b, c.a);
+		thickLineRGBA(vis->ren, link->a->coord.x, link->a->coord.y,\
+			link->b->coord.x, link->b->coord.y, vis->line_width,\
+			c.r, c.g, c.b, c.a);
 		link = link->next;
 	}
 }
@@ -45,7 +47,8 @@ static void		render_vertexs(t_vis *vis, t_circle *c_vrx, int n_vrx)
 			c.g /= 2;
 			c.b /= 2;
 		}
-		filledCircleRGBA(vis->ren, c_vrx[i].x, c_vrx[i].y, vis->radius, c.r, c.g, c.b, c.a);
+		filledCircleRGBA(vis->ren, c_vrx[i].x, c_vrx[i].y, vis->radius,\
+			c.r, c.g, c.b, c.a);
 		++i;
 	}
 }
@@ -67,7 +70,8 @@ static void		render_ants(t_vis *vis, t_step *step)
 	while (i < step->n_ant)
 	{
 		ant = step->ants_move[i];
-		filledCircleRGBA(vis->ren, ant.x, ant.y, vis->ant_radius, c.r, c.g, c.b, c.a);
+		filledCircleRGBA(vis->ren, ant.x, ant.y, vis->ant_radius,\
+			c.r, c.g, c.b, c.a);
 		++i;
 	}
 }
