@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:15:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 15:23:19 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/14 20:25:11 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,43 @@ void			check_split(char **split)
 		i++;
 	if (i == 2)
 		return ;
-	error("no valid link");
+	error(LI_ERROR_NOT_VALID_EDGE);
+}
+
+void			check_split_vertex(char **split)
+{
+	int			i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	if (i == 3)
+		return ;
+	error(LI_ERROR_NOT_VALID_V);
+}
+
+int				check_coord(char *coord)
+{
+	int			int_nbr;
+	char		*char_nbr;
+
+	int_nbr = 0;
+	char_nbr = NULL;
+	int_nbr = ft_atoi(coord);
+	char_nbr = ft_itoa(int_nbr);
+	if (ft_strequ(char_nbr, coord))
+	{
+		free(char_nbr);
+		return (int_nbr);
+	}
+	else
+		error(LI_ERROR_NOT_VALID_COORD);
+	return (1);
+}
+
+char			*check_name(char *name)
+{
+	if (*name == 'L')
+		error(LI_ERROR_NOT_VALID_V);
+	return (ft_strdup(name));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cormund <cormund@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 10:40:32 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/06 11:51:17 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/14 20:18:47 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ static int			valid_vertexs(t_lem_in *li)
 
 	tmp = li->start;
 	if (!tmp)
-		error("no valid vertex\n");
-	if (tmp->name[0] == 'L' || !(valid_double(li)))
+		error(LI_ERROR_NOT_VALID_V);
+	if (!(valid_double(li)))
 		return (0);
 	while (tmp)
 	{
 		tmp2 = tmp->next;
 		while (tmp2)
 		{
-			if (ft_strequ(tmp->name, tmp2->name) || tmp2->name[0] == 'L')
+			if (ft_strequ(tmp->name, tmp2->name))
 				return (0);
 			if ((tmp->coord.x == tmp2->coord.x) &&
 				(tmp->coord.y == tmp2->coord.y))
@@ -87,9 +87,7 @@ int					validation(t_lem_in *li, char *line)
 	if ((ants = valid_ants(line)))
 	{
 		if (valid_vertexs(li))
-		{
 			return (ants);
-		}
 		error(LI_ERROR_NOT_VALID_V);
 	}
 	error(LI_ERROR_NOT_VALID_ANTS);

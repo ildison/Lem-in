@@ -6,7 +6,7 @@
 /*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:41:25 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/13 18:15:53 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/14 20:27:09 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@
 # define LI_ERROR_NOT_VALID_EDGE "not valid edge."
 # define LI_ERROR_NOT_VALID_ANTS "not valid count ants."
 # define LI_ERROR_NOT_INPUT "no input, check usage: -h."
+# define LI_ERROR_EMPTY_LINE "empty line is not defined."
+# define LI_ERROR_NOT_VALID_COORD "not valid coordinates"
+# define LI_ERROR_NOT_VALID_COMMAND "this command does not exist"
 
 typedef struct s_input	t_input;
 typedef struct s_pnt	t_pnt;
@@ -183,7 +186,15 @@ void					print_matrix_adj(char **matrix, int count_vertex);
 void					print_list_adj(t_vertex **list_adj, int count_vertex);
 void					print_finding(t_paths *finding);
 void					print_help(void);
+
+/*
+**	Additional validation
+*/
+
 void					check_split(char **split);
+void					check_split_vertex(char **split);
+int						check_coord(char *coord);
+char					*check_name(char *name);
 
 /*
 **	Vertexs functions
@@ -192,8 +203,8 @@ void					check_split(char **split);
 t_vertex				*new_vertex(char *line, int vertex_type);
 void					add_vertex(t_vertex **start, t_vertex *vertex);
 t_vertex				*get_vertex(t_vertex *vertex, char *name);
-void					add_new_link(t_link **first_link, t_vertex *vertex, char *line);
-
+void					add_new_link(t_link **first_link,\
+									t_vertex *vertex, char *line);
 
 /*
 **	Clear functions

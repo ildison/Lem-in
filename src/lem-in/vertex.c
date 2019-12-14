@@ -6,7 +6,7 @@
 /*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 18:14:00 by vmormont          #+#    #+#             */
-/*   Updated: 2019/12/13 18:14:59 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/14 19:52:28 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ t_vertex		*new_vertex(char *line, int vertex_type)
 	vertex = (t_vertex *)ft_memalloc(sizeof(t_vertex));
 	if (!vertex || !split_line)
 		error(strerror(errno));
-	vertex->name = ft_strdup(split_line[0]);
-	vertex->coord.x = ft_atoi(split_line[1]);
-	vertex->coord.y = ft_atoi(split_line[2]);
+	check_split_vertex(split_line);
+	vertex->name = check_name(split_line[0]);
+	vertex->coord.x = check_coord(split_line[1]);
+	vertex->coord.y = check_coord(split_line[2]);
 	ft_free_2x_mas((void **)split_line);
 	vertex->type = vertex_type;
 	return (vertex);
