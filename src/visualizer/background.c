@@ -6,7 +6,7 @@
 /*   By: cormund <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 12:33:51 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/16 11:52:42 by cormund          ###   ########.fr       */
+/*   Updated: 2019/12/18 15:39:27 by cormund          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ void				background(t_vis *vis, t_lem_in *li)
 	vis->ant_radius = FT_MAX(3, vis->ant_radius);
 	vis->line_width = vis->radius / 2.1;
 	vis->line_width = FT_MAX(1, vis->line_width);
-	set_scale(li->start, SCREEN_WIDTH / 10);
+	set_scale(li->start, SCREEN_WIDTH / 18);
 	set_colors(vis->colors);
 }

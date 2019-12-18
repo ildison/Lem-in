@@ -1,0 +1,40 @@
+100
+##start
+a 4 0
+b 2 1
+c 4 1
+d 6 1
+f 2 2
+e 6 2
+g 2 3
+o 6 3
+k 0 5
+n 2 5
+m 6 5
+r 8 5
+p 0 7
+w 2 7
+y 6 7
+z 8 7
+##end
+v 4 7
+a-b
+a-c
+a-d
+b-c
+c-d
+b-f
+f-g
+g-n
+n-k
+k-p
+p-w
+w-v
+v-y
+y-z
+z-r
+r-m
+m-o
+o-e
+e-d
+e-e
