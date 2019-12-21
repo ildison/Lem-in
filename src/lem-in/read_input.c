@@ -6,7 +6,7 @@
 /*   By: vmormont <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:37:03 by cormund           #+#    #+#             */
-/*   Updated: 2019/12/14 20:25:32 by vmormont         ###   ########.fr       */
+/*   Updated: 2019/12/21 14:36:31 by vmormont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int				check_line(char *line)
 			return (LI_START);
 		if (ft_strequ(line, "##end"))
 			return (LI_END);
-		if (line[0] == '#' && line[1] == '#')
-			error(LI_ERROR_NOT_VALID_COMMAND);
 		return (LI_COMMENT);
 	}
 	if (*line == ' ' || *line == '\n' || *line == '\0')
